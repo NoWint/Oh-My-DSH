@@ -48,7 +48,10 @@ class DiscoveryCliTests(unittest.TestCase):
             env_file.write_text("DSH_DISCOVERY_TIMEOUT_SECONDS=10\n", encoding="utf-8")
             os.chmod(env_file, 0o600)
             module = _load_cli_module()
-            result = module.main(["--repo", str(root)], environ={"DSH_DISCOVERY_ENV_FILE": str(env_file)})
+            class FakeSource:
+                def __init__(self, client, credentials=None): pass
+                def discover(self): return type("Result", (), {"source": "fake", "status": type("Status", (), {"value": "ok"})(), "hits": (), "message": ""})()
+            result = module.main(["--repo", str(root)], environ={"DSH_DISCOVERY_ENV_FILE": str(env_file)}, source_classes=(FakeSource,))
             self.assertEqual(result, 0)
             self.assertTrue((root / "var/dsh-discovery-state.json").exists())
             self.assertTrue((root / "var/dsh-discovery-report.json").exists())
