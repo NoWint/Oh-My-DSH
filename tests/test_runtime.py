@@ -70,14 +70,40 @@ class GitOpsTests(unittest.TestCase):
             self.assertIn(("add", "--", "README.md", "data/dsh-discovery.json"), runner.calls)
             self.assertIn(("push", "origin", "HEAD:main"), runner.calls)
             self.assertNotIn(("add", "--", "var/dsh-discovery-state.json"), runner.calls)
+    def test_commit_skips_push_when_only_controlled_runtime_files_changed(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            runner = _RecordingRunner({
+                ("status", "--porcelain=v1"): "?? var/dsh-discovery-state.json\n?? var/dsh-discovery-report.json\n",
+            })
+
+            pushed = GitOps(Path(directory), runner=runner).commit_and_push("No catalog update")
+
+            self.assertFalse(pushed)
+            self.assertIn(("fetch", "origin", "main"), runner.calls)
+            self.assertNotIn(("push", "origin", "HEAD:main"), runner.calls)
+
+    def test_prepare_refuses_branch_behind_origin_main(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            runner = _RecordingRunner({
+                ("status", "--porcelain=v1"): "",
+                ("merge-base", "--is-ancestor", "origin/main", "HEAD"): (1, "", ""),
+            })
+
+            with self.assertRaisesRegex(GitSafetyError, "non-fast-forward"):
+                GitOps(Path(directory), runner=runner).prepare()
+
+            self.assertIn(("fetch", "origin", "main"), runner.calls)
 
 
 class _RecordingRunner:
-    def __init__(self, outputs: dict[tuple[str, ...], str]) -> None:
+    def __init__(self, outputs: dict[tuple[str, ...], str | tuple[int, str, str]]) -> None:
         self.outputs = outputs
         self.calls: list[tuple[str, ...]] = []
 
     def __call__(self, arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
         command = tuple(arguments[1:])
         self.calls.append(command)
-        return subprocess.CompletedProcess(arguments, 0, self.outputs.get(command, ""), "")
+        output = self.outputs.get(command, "")
+        if isinstance(output, tuple):
+            return subprocess.CompletedProcess(arguments, *output)
+        return subprocess.CompletedProcess(arguments, 0, output, "")
