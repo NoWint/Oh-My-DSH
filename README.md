@@ -498,6 +498,23 @@ pip install deepseek-harness-sdk
 
 ---
 
+## Hourly Discovery Operations
+
+The stdlib-only discovery job writes local state and a structured report below `var/`. Preview a bounded fixture run or a no-write run with:
+
+```sh
+python3 scripts/dsh_discovery.py --repo "$(pwd)" --fixtures
+python3 scripts/dsh_discovery.py --repo "$(pwd)" --dry-run
+```
+
+Both modes acquire the overlap lock but never write README/state/report and never commit or push. A normal run uses the guarded Git wrapper: it requires a clean `main` checkout at the fetched `origin/main` tip, stages only approved catalog files, never force-pushes, and skips a push without material README/data changes.
+
+Copy `.env.example` to `.env`, set only needed tokens, and make it private: `chmod 600 .env`. Check, install, or uninstall the macOS LaunchAgent with `scripts/install-hourly-discovery.sh check|install|uninstall`; installation is explicit, uses a 3600-second interval, and never changes shell profiles.
+
+Discovery is intentionally bounded to the configured source adapters and their request budgets. The catalog is curated rather than exhaustive; source outages, private repositories, changed APIs, and evidence rules can leave valid projects uncovered.
+
+---
+
 ## 📊 Ecosystem Stats / 生态统计
 
 | Metric / 指标 | Value / 数值 |
