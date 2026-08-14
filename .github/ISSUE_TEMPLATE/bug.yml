@@ -1,0 +1,29 @@
+---
+name: 🐛 Bug Report / Bug 报告
+about: Report a bug in the discovery pipeline or catalog rendering
+title: "[BUG] "
+labels: "bug"
+assignees: ""
+---
+
+**Describe the bug / 问题描述**
+<!-- A clear and concise description of what the bug is. -->
+
+**To Reproduce / 复现步骤**
+<!-- Steps to reproduce the behavior: -->
+1. Run `python3 scripts/dsh_discovery.py ...`
+2. ...
+
+**Expected behavior / 期望行为**
+<!-- A clear and concise description of what you expected to happen. -->
+
+**Environment / 环境**
+- OS: [e.g. macOS 15, Ubuntu 24.04]
+- Python: [e.g. 3.11.4]
+- Branch: [e.g. main]
+
+**Screenshots / 截图**
+<!-- If applicable, add screenshots to help explain your problem. -->
+
+**Additional context / 补充信息**
+<!-- Add any other context about the problem here. -->

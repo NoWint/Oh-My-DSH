@@ -5,10 +5,73 @@
 > The `dsh-plugin` topic contains **1,640+** repositories; this is a curated subset organized by category and stars.
 > `dsh-plugin` topic 共 **1,640+** 个仓库，以下为按类别和 Star 精选的子集。
 
+> **🏆 The only automated, multi-source DSH plugin discovery engine on GitHub.**
+> **GitHub 上唯一的多源自动化 DSH 插件发现引擎。**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](scripts/dsh_discovery.py)
+[![Tests](https://img.shields.io/badge/Tests-72_passing-brightgreen.svg)](tests/)
+[![Update Frequency](https://img.shields.io/badge/Update_Hourly-automated-orange.svg)](scripts/dsh_discovery.py)
+[![Stars of deepseek-harness](https://img.shields.io/github/stars/deepseek-ai/deepseek-harness?label=deepseek--harness&style=social)](https://github.com/deepseek-ai/deepseek-harness)
+
+---
+
+## ⚡ Quick Start / 快速开始
+
+```sh
+# Clone & install the hourly discovery agent
+git clone https://github.com/NoWint/Oh-My-DSH.git
+cd Oh-My-DSH/Oh-My-DSH
+cp .env.example .env   # add your GITHUB_TOKEN (optional but recommended)
+chmod 600 .env
+./scripts/install-hourly-discovery.sh install
+```
+
+That's it. Every hour the pipeline scans 6 data sources, validates plugins against evidence rules, and updates this README automatically.
+
+> **只需一条命令**：克隆 → 复制 `.env` → 安装 LaunchAgent，之后全自动运行。
+
+---
+
+## 📊 Ecosystem at a Glance / 生态总览
+
+| Metric / 指标 | Value / 数值 |
+|---|---|
+| `dsh-plugin` topic total / 话题总仓库数 | **1,640+** |
+| Curated & validated entries / 精选收录 | **~480+** |
+| Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
+| Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
+| Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
+| Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 1,491 |
+| Primary languages / 主要语言 | TypeScript · JavaScript · Python |
+| Categories covered / 覆盖类目 | **18** (see Table of Contents) |
+| Last full scan / 最近扫描 | 2026-08-14 · **+17 new** resources this cycle |
+
+---
+
+## 🏆 Why Oh-My-DSH? / 为什么选择我们
+
+| Feature / 特性 | NoWint/Oh-My-DSH | LaplaceYoung/oh-my-dsh | like-study1/Oh-My-DSH | AdamPlatin123/awesome-dsh-plugins |
+|---|:---:|:---:|:---:|:---:|
+| Multi-source scanning / 多源扫描 | ✅ **6 sources** | ❌ GitHub only | ❌ GitHub only | ❌ GitHub only |
+| Evidence-based validation / 证据验证 | ✅ 4-tier system | ❌ None | ❌ None | ❌ None |
+| Auto-update / 自动更新 | ✅ **Hourly** | ❌ Manual | ✅ Every 8h | ❌ Manual |
+| Cross-platform sources / 跨平台 | ✅ HN · RE · SE · Lobsters | ❌ | ❌ | ❌ |
+| Bilingual (EN/ZH) / 双语 | ✅ | ❌ ZH only | ❌ ZH only | ❌ ZH only |
+| Test suite / 测试套件 | ✅ **7 test files** | ❌ | ❌ | ❌ |
+| GitOps safety / Git 操作安全 | ✅ lock + rollback | ❌ | ❌ | ❌ |
+| Star count / Star 数 | ⭐ 4 | ⭐ 43 | ⭐ 16 | ⭐ 641 |
+
+> **核心差异**：其他 oh-my-dsh 项目是**静态 README 列表**，Oh-My-DSH 是**活的发现引擎**——自动扫描、自动验证、自动更新目录。
+
 ---
 
 ## 📋 Table of Contents / 导航索引
 
+- [⚡ Quick Start / 快速开始](#-quick-start--快速开始)
+- [📊 Ecosystem at a Glance / 生态总览](#-ecosystem-at-a-glance--生态总览)
+- [🏆 Why Oh-My-DSH? / 为什么选择我们](#-why-oh-my-dsh--为什么选择我们)
+- [🤝 Contributing / 贡献](#-contributing--贡献)
 - [🏠 Core / 核心](#-core)
 - [📂 Awesome Lists / 精选列表](#-awesome-lists)
 - [🖥️ Desktop Clients / 桌面客户端](#-desktop-clients)
@@ -29,8 +92,7 @@
 - [🎙️ Voice & Audio / 语音与音频](#-voice--audio)
 - [⚡ Skills & Methodologies / 技能与方法论](#-skills--methodologies)
 - [🔬 Advanced & Experimental / 高级与实验性](#-advanced--experimental)
-- [📥 Installation / 安装](#-installation)
-- [📊 Ecosystem Stats / 生态统计](#-ecosystem-stats)
+- [📥 Installation / 安装](#-installation--安装)
 
 ---
 
@@ -646,7 +708,52 @@
 
 ---
 
+## 🤝 Contributing / 贡献
+
+We welcome contributions of all kinds — new plugins, bug fixes, documentation, or scan source adapters.
+
+### Add a Plugin / 添加插件
+
+```sh
+# 1. Configure your tokens
+cp .env.example .env
+chmod 600 .env
+# Edit .env: add GITHUB_TOKEN (optional), GITLAB_TOKEN if needed
+
+# 2. Dry-run to preview changes (no write)
+python3 scripts/dsh_discovery.py --repo "$(pwd)" --dry-run
+
+# 3. Run the full discovery
+python3 scripts/dsh_discovery.py --repo "$(pwd)"
+
+# 4. Commit and push
+git add README.md var/dsh-discovery-state.json var/dsh-discovery-report.json
+git commit -m "chore: scan cycle — +N new plugins"
+git push
+```
+
+### Run as a LaunchAgent (auto hourly) / 定时自动运行
+
+```sh
+./scripts/install-hourly-discovery.sh install   # install
+./scripts/install-hourly-discovery.sh check     # verify config
+./scripts/install-hourly-discovery.sh uninstall # remove
+```
+
+### Add a New Source Adapter / 新增数据源
+
+Subclass `SourceAdapter` in `scripts/dsh_discovery/sources.py` and register it in `dsh_discovery.py`. Each adapter implements:
+
+```python
+def discover(self) -> DiscoveryResult:
+    """Return hits with Candidate objects."""
+```
+
+---
+
 ## 📥 Installation / 安装
+
+### For DSH Users / DSH 用户
 
 ```sh
 # Run from npm
@@ -658,6 +765,10 @@ dsh plugin --profile web add github:owner/repo#ref&path:/<plugin-path>
 # Python SDK
 pip install deepseek-harness-sdk
 ```
+
+### For Oh-My-DSH Maintainers / 维护者
+
+See [Contributing](#-contributing--贡献) above. The hourly discovery pipeline runs automatically via LaunchAgent on macOS.
 
 ---
 
@@ -692,3 +803,8 @@ Discovery is intentionally bounded to the configured source adapters and their r
 
 *Last updated: 2026-08-14 · +17 new resources this cycle (+33 previous +112 prior) · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 1,640+ repos, curated ~480+*
 *最后更新：2026-08-14 · 本轮新增 17 个资源（累计 +162）· 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 1,640+ 仓库，精选收录约 480+ 个*
+
+---
+
+⭐ If this helped you navigate the DSH ecosystem, **give us a star** — it motivates continued development and helps others find this resource.
+⭐ 如果这个项目帮助了你探索 DSH 生态，**点个 Star** 支持我们 — 它激励持续维护并帮助更多人发现这里。

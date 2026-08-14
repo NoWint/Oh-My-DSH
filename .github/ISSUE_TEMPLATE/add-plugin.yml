@@ -1,0 +1,36 @@
+---
+name: 📦 Add Plugin / 添加插件
+about: Propose a new plugin to be added to the curated catalog
+title: "[PLUGIN] "
+labels: "plugin-add"
+assignees: ""
+---
+
+## Plugin Information / 插件信息
+
+| Field | Value |
+|---|---|
+| Repository URL | <!-- e.g. https://github.com/owner/repo --> |
+| Stars (current) | <!-- e.g. 500 --> |
+| Language | <!-- e.g. TypeScript --> |
+| Category | <!-- Which category? See README Table of Contents --> |
+
+## Description / 描述
+
+**English:**
+<!-- One-line description in English -->
+
+**中文：**
+<!-- 一行中文描述 -->
+
+## Evidence / 证据
+
+<!-- Check all that apply / 勾选所有适用的项 -->
+- [ ] Repository description explicitly mentions DSH / DeepSeek Harness plugin
+- [ ] Repository uses `deepseek-harness` or `dsh-plugin` in code/docs
+- [ ] README links to or references the DSH plugin system
+- [ ] Other: <!-- explain -->
+
+## Why should this be included? / 为什么应该收录？
+
+<!-- Briefly explain why this plugin is valuable to the DSH ecosystem. -->
