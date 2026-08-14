@@ -33,7 +33,7 @@ class ValidationResult:
 _DSH = r"(?:DeepSeek[\s_-]+Harness|\bDSH\b)"
 _NEGATIVE_EVIDENCE = re.compile(r"\b(?:not supported|does not support|no support|without support|unrelated to|mentions?|comparison|compare)\b", re.IGNORECASE)
 _AFFIRMATIVE_EVIDENCE = re.compile(
-    rf"(?:\b(?:provides?|implements?|integrates?|installs?|adds?|extends?)\b[^.\n]{{0,100}}{_DSH}|{_DSH}[^.\n]{{0,100}}\b(?:plugin|integration|extension)\b)",
+    rf"(?:\b(?:provides?|implements?|integrates?|installs?|adds?|extends?)\b[^.\n]{{0,100}}{_DSH}|{_DSH}[^.\n]{{0,100}}\b(?:plugin|integration|extension)(?=\s|$|[.,;:!?]))",
     re.IGNORECASE,
 )
 
