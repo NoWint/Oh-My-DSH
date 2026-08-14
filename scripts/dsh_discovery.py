@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run the bounded DSH discovery pipeline safely."""
 from __future__ import annotations
-import argparse, fcntl, os, stat, sys, time
+import argparse, fcntl, os, re, stat, sys, time
 from datetime import datetime, timezone
 from pathlib import Path
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +30,7 @@ def _load_env(path: Path) -> dict[str, str]:
 
 
 _CATALOG_CATEGORY = "## 🔧 Utility Toolkit / 实用工具集"
+_CJK_CHARACTER = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 
 
 def _catalog_entry(result):
@@ -41,7 +42,7 @@ def _catalog_entry(result):
     if not isinstance(stars, int) or isinstance(stars, bool) or stars < 0 or not isinstance(description, str):
         return None
     english, separator, chinese = description.partition(" / ")
-    if not separator or not english.strip() or not chinese.strip() or " / " in chinese:
+    if not separator or not english.strip() or not chinese.strip() or " / " in chinese or not _CJK_CHARACTER.search(chinese):
         return None
     return CatalogEntry(result.candidate, result.classification.value, _CATALOG_CATEGORY, stars, english, chinese)
 
@@ -62,7 +63,7 @@ def run_discovery(repo: Path, env: dict[str, str], *, client=None, source_classe
         if monotonic() >= deadline:
             validation_deadline_skipped = len(unique[:config.max_validation_candidates]) - index
             break
-        validated.append(validator.validate(candidate))
+        validated.append(validator.validate(candidate, deadline=deadline, monotonic=monotonic))
     validation_budget_skipped = max(0, len(unique) - config.max_validation_candidates)
     entries = [entry for result in validated if (entry := _catalog_entry(result)) is not None]
     readme_changed = False
@@ -78,6 +79,9 @@ def run_discovery(repo: Path, env: dict[str, str], *, client=None, source_classe
             try:
                 readme.write_text(updated, encoding="utf-8")
                 pushed = publisher.commit_and_push("chore: update discovery catalog")
+                if not pushed:
+                    readme.write_text(original, encoding="utf-8")
+                    readme_changed = False
             except Exception:
                 readme.write_text(original, encoding="utf-8")
                 raise

@@ -48,7 +48,7 @@ class _Validator:
         self.results = dict(results)
         self.calls = []
 
-    def validate(self, candidate):
+    def validate(self, candidate, *, deadline=None, monotonic=None):
         self.calls.append(candidate)
         return self.results[candidate.coordinate.as_key()]
 
@@ -94,6 +94,49 @@ class DiscoveryPipelineTests(unittest.TestCase):
         self.assertTrue(outcome["readme_changed"])
         self.assertTrue(outcome["pushed"])
         self.assertIn("Verified DeepSeek Harness plugin. / 已验证的 DeepSeek Harness 插件。", (repo / "README.md").read_text(encoding="utf-8"))
+
+    def test_catalogue_rejects_non_cjk_chinese_description_part(self):
+        candidate = _candidate(1)
+        _FakeSource.candidates = (candidate,)
+        validator = _Validator({candidate.coordinate.as_key(): ValidationResult(candidate, EvidenceClass.VALIDATED, "verified", verified_metadata={"stars": 1, "description": "foo / bar"})})
+
+        class RecordingGitOps:
+            def prepare(self):
+                pass
+
+            def commit_and_push(self, message):
+                return True
+
+        repo = self.repository()
+        outcome = self.module.run_discovery(repo, {}, source_classes=(_FakeSource,), validator=validator, gitops=RecordingGitOps())
+
+        self.assertEqual(outcome["validated"], 0)
+        self.assertFalse(outcome["readme_changed"])
+
+    def test_inflight_validation_request_uses_only_remaining_deadline_budget(self):
+        from scripts.dsh_discovery.sources import HttpClient
+
+        candidate = _candidate(1)
+        _FakeSource.candidates = (candidate,)
+        now = [0.0]
+        timeouts = []
+
+        def slow_transport(request, timeout):
+            timeouts.append(timeout)
+            now[0] += timeout
+            raise TimeoutError("slow response")
+
+        outcome = self.module.run_discovery(
+            self.repository(),
+            {},
+            source_classes=(_FakeSource,),
+            client=HttpClient(transport=slow_transport, timeout=500, max_retries=2),
+            monotonic=lambda: now[0],
+        )
+
+        self.assertEqual(timeouts, [120.0])
+        self.assertEqual(now[0], 120.0)
+        self.assertEqual(outcome["validation_deadline_skipped"], 0)
 
     def test_validation_budget_caps_global_candidates_and_records_skipped_count(self):
         candidates = tuple(_candidate(number) for number in range(25))
@@ -168,6 +211,26 @@ class DiscoveryPipelineTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "push refused"):
             self.module.run_discovery(repo, {}, source_classes=(_FakeSource,), validator=validator, gitops=RefusingGitOps())
         self.assertEqual((repo / "README.md").read_bytes(), before)
+
+    def test_commit_and_push_false_restores_readme_byte_identical(self):
+        candidate = _candidate(1)
+        _FakeSource.candidates = (candidate,)
+        validator = _Validator({candidate.coordinate.as_key(): ValidationResult(candidate, EvidenceClass.VALIDATED, "verified", verified_metadata={"stars": 1, "description": "English. / 中文。"})})
+
+        class RefusingGitOps:
+            def prepare(self):
+                pass
+
+            def commit_and_push(self, message):
+                return False
+
+        repo = self.repository()
+        before = (repo / "README.md").read_bytes()
+        outcome = self.module.run_discovery(repo, {}, source_classes=(_FakeSource,), validator=validator, gitops=RefusingGitOps())
+
+        self.assertEqual((repo / "README.md").read_bytes(), before)
+        self.assertFalse(outcome["readme_changed"])
+        self.assertFalse(outcome["pushed"])
 
 
 if __name__ == "__main__":

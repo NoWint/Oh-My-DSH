@@ -193,6 +193,39 @@ class RuntimeReportTests(unittest.TestCase):
                 with self.subTest(expected=expected), self.assertRaisesRegex(GitSafetyError, expected):
                     GitOps(Path(directory), runner=_RecordingRunner(outputs)).prepare()
 
+    def test_push_failure_restores_head_index_and_status(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            repo = root / "repo"
+            repo.mkdir()
+            remote = root / "remote.git"
+            _git(repo, "init", "-b", "main")
+            _git(repo, "config", "user.email", "test@example.com")
+            _git(repo, "config", "user.name", "Test User")
+            (repo / "README.md").write_text("before\n", encoding="utf-8")
+            _git(repo, "add", "README.md")
+            _git(repo, "commit", "-m", "initial")
+            remote.mkdir()
+            _git(remote, "init", "--bare")
+            _git(repo, "remote", "add", "origin", str(remote))
+            _git(repo, "push", "-u", "origin", "main")
+            (repo / "README.md").write_text("after\n", encoding="utf-8")
+            before_head = _git(repo, "rev-parse", "HEAD").stdout.strip()
+            before_index = (repo / ".git" / "index").read_bytes()
+            before_status = _git(repo, "status", "--porcelain=v1").stdout
+
+            def fail_push(arguments, *, cwd):
+                if arguments[1:3] == ["push", "origin"]:
+                    return subprocess.CompletedProcess(arguments, 1, "", "push refused")
+                return subprocess.run(arguments, cwd=cwd, text=True, capture_output=True, check=False)
+
+            with self.assertRaisesRegex(GitSafetyError, "push refused"):
+                GitOps(repo, runner=fail_push).commit_and_push("catalog update")
+
+            self.assertEqual(_git(repo, "rev-parse", "HEAD").stdout.strip(), before_head)
+            self.assertEqual((repo / ".git" / "index").read_bytes(), before_index)
+            self.assertEqual(_git(repo, "status", "--porcelain=v1").stdout, before_status)
+
 
 class _RecordingRunner:
     def __init__(self, outputs: dict[tuple[str, ...], str | tuple[int, str, str]]) -> None:
@@ -214,3 +247,7 @@ class _RecordingRunner:
         if isinstance(output, tuple):
             return subprocess.CompletedProcess(arguments, *output)
         return subprocess.CompletedProcess(arguments, 0, output, "")
+
+
+def _git(repo: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(["git", *arguments], cwd=repo, text=True, capture_output=True, check=True)

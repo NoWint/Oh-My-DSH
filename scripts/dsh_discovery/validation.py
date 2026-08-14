@@ -58,15 +58,21 @@ class RepositoryValidator:
             kept.append(candidate)
         return tuple(kept), tuple(duplicates)
 
-    def validate(self, candidate: Candidate) -> ValidationResult:
-        coordinate = candidate.coordinate
-        if coordinate is None:
-            return self._rejected(candidate, "repository URL is not canonical")
-        if coordinate.host == "github.com":
-            return self._validate_github(candidate, coordinate)
-        if coordinate.host == "gitlab.com":
-            return self._validate_gitlab(candidate, coordinate)
-        return self._rejected(candidate, "unsupported repository host")
+    def validate(self, candidate: Candidate, *, deadline: float | None = None, monotonic=None) -> ValidationResult:
+        if deadline is not None:
+            self.client.set_deadline(deadline, monotonic=monotonic)
+        try:
+            coordinate = candidate.coordinate
+            if coordinate is None:
+                return self._rejected(candidate, "repository URL is not canonical")
+            if coordinate.host == "github.com":
+                return self._validate_github(candidate, coordinate)
+            if coordinate.host == "gitlab.com":
+                return self._validate_gitlab(candidate, coordinate)
+            return self._rejected(candidate, "unsupported repository host")
+        finally:
+            self.client.clear_deadline()
+
 
     def _validate_github(self, candidate: Candidate, coordinate: RepositoryCoordinate) -> ValidationResult:
         endpoint = f"https://api.github.com/repos/{quote(coordinate.owner, safe='')}/{quote(coordinate.repository, safe='')}"

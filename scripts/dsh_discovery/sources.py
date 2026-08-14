@@ -49,6 +49,16 @@ class HttpClient:
         self.max_retry_delay = max(0.0, float(max_retry_delay))
         self.sleep = sleep
         self.last_attempts = 0
+        self._deadline: float | None = None
+        self._monotonic: Callable[[], float] = time.monotonic
+
+    def set_deadline(self, deadline: float, *, monotonic: Callable[[], float] | None = None) -> None:
+        self._deadline = float(deadline)
+        self._monotonic = monotonic or time.monotonic
+
+    def clear_deadline(self) -> None:
+        self._deadline = None
+        self._monotonic = time.monotonic
 
     def get(self, url: str, *, headers: Mapping[str, str] | None = None, max_attempts: int | None = None) -> HttpResponse:
         return self.request(url, headers=headers, max_attempts=max_attempts)
@@ -60,21 +70,37 @@ class HttpClient:
         attempts = min(self.max_retries + 1, max(1, max_attempts or self.max_retries + 1))
         for attempt in range(attempts):
             self.last_attempts = attempt + 1
+            remaining = self._remaining_deadline()
+            if remaining is not None and remaining <= 0:
+                raise HttpError("request deadline exceeded")
             try:
-                response = self.transport(request, self.timeout)
+                response = self.transport(request, min(self.timeout, remaining) if remaining is not None else self.timeout)
                 status, body, response_headers = self._unpack(response)
                 if self._retryable(status, response_headers) and attempt + 1 < attempts:
-                    self.sleep(self._retry_delay(response_headers, attempt))
+                    self._sleep_within_deadline(self._retry_delay(response_headers, attempt))
                     continue
                 if status >= 400:
                     raise HttpError(f"HTTP status {status}")
                 return HttpResponse(status, body, response_headers)
             except (urllib.error.URLError, TimeoutError, OSError) as exc:
                 if attempt + 1 < attempts:
-                    self.sleep(min(self.max_retry_delay, float(2**attempt)))
+                    self._sleep_within_deadline(min(self.max_retry_delay, float(2**attempt)))
                     continue
                 raise HttpError(f"request failed: {type(exc).__name__}") from None
         raise HttpError("request failed")
+
+    def _remaining_deadline(self) -> float | None:
+        return None if self._deadline is None else self._deadline - self._monotonic()
+
+    def _sleep_within_deadline(self, delay: float) -> None:
+        remaining = self._remaining_deadline()
+        if remaining is not None:
+            if remaining <= 0:
+                raise HttpError("request deadline exceeded")
+            delay = min(delay, remaining)
+        self.sleep(delay)
+        if (remaining := self._remaining_deadline()) is not None and remaining <= 0:
+            raise HttpError("request deadline exceeded")
 
     @staticmethod
     def _unpack(response: Any) -> tuple[int, bytes, Mapping[str, str]]:

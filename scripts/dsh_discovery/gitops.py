@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
+import tempfile
 from pathlib import Path
 from typing import Callable, Sequence
 
@@ -45,13 +47,44 @@ class GitOps:
         publishable = sorted(path for path in dirty if path in self.PUBLISHABLE)
         if not publishable:
             return False
+        before_head = self._output("rev-parse", "HEAD").strip()
+        index_backup = self._backup_index()
         self._command("add", "--", *publishable)
         staged = self._output("diff", "--cached", "--name-only").splitlines()
         if not staged or any(path not in self.PUBLISHABLE for path in staged):
             raise GitSafetyError("staged files are outside the discovery publication whitelist")
         self._command("commit", "-m", message)
-        self._command("push", "origin", "HEAD:main")
+        try:
+            self._command("push", "origin", "HEAD:main")
+        except Exception:
+            self._command("reset", "--mixed", before_head)
+            self._restore_index(index_backup)
+            raise
+        finally:
+            if index_backup is not None and index_backup.exists():
+                index_backup.unlink()
         return True
+
+    def _backup_index(self) -> Path | None:
+        index = self.repo / ".git" / "index"
+        if not index.exists():
+            return None
+        descriptor, name = tempfile.mkstemp(prefix="dsh-discovery-index-", dir=index.parent)
+        backup = Path(name)
+        try:
+            with os.fdopen(descriptor, "wb") as destination:
+                if index.exists():
+                    destination.write(index.read_bytes())
+                destination.flush()
+                os.fsync(destination.fileno())
+        except Exception:
+            backup.unlink(missing_ok=True)
+            raise
+        return backup
+
+    def _restore_index(self, backup: Path | None) -> None:
+        if backup is not None:
+            os.replace(backup, self.repo / ".git" / "index")
 
     def _dirty_paths(self) -> list[str]:
         result = self._output("status", "--porcelain=v1")
