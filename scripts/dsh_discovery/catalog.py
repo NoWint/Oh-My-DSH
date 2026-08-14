@@ -55,7 +55,7 @@ def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: s
     if notice_date is not None:
         _validate_notice_date(notice_date)
         notice_patterns = (_NOTICE_EN, _NOTICE_CN, _FOOTER_EN, _FOOTER_CN)
-        if not all(pattern.search(updated) for pattern in notice_patterns):
+        if any(len(pattern.findall(updated)) != 1 for pattern in notice_patterns):
             raise CatalogStructureError("automation notice structure drift")
         noticed = updated
         for pattern in notice_patterns:
@@ -92,6 +92,8 @@ def _validate_entry(entry: CatalogEntry, categories: dict[str, int]) -> None:
         raise CatalogStructureError("candidate must have a canonical repository URL")
     if entry.category not in categories:
         raise CatalogStructureError("unknown category")
+    if not isinstance(entry.stars, int) or isinstance(entry.stars, bool) or entry.stars < 0:
+        raise CatalogStructureError("stars must be a non-negative integer")
     if not entry.english_description.strip() or not entry.chinese_description.strip():
         raise CatalogStructureError("explicit bilingual descriptions are required")
     if " / " in entry.english_description or " / " in entry.chinese_description:
