@@ -28,6 +28,7 @@ class ValidationResult:
     classification: EvidenceClass
     reason: str
     evidence: tuple[str, ...] = ()
+    verified_metadata: dict[str, Any] | None = None
 
 
 _DSH = r"(?:DeepSeek[\s_-]+Harness|\bDSH\b)"
@@ -82,7 +83,13 @@ class RepositoryValidator:
         if text is None:
             return self._rejected(candidate, "README malformed")
         if _has_affirmative_integration_evidence(text):
-            return ValidationResult(candidate, EvidenceClass.VALIDATED, "explicit DSH integration evidence", ("README",))
+            return ValidationResult(
+                candidate,
+                EvidenceClass.VALIDATED,
+                "explicit DSH integration evidence",
+                ("README",),
+                _verified_metadata(payload),
+            )
         return ValidationResult(candidate, EvidenceClass.LEAD, "no explicit DSH integration evidence")
 
     def _validate_gitlab(self, candidate: Candidate, coordinate: RepositoryCoordinate) -> ValidationResult:
@@ -159,6 +166,18 @@ class RepositoryValidator:
     @staticmethod
     def _rejected(candidate: Candidate, reason: str) -> ValidationResult:
         return ValidationResult(candidate, EvidenceClass.REJECTED, reason)
+
+
+def _verified_metadata(payload: dict[str, Any]) -> dict[str, Any]:
+    """Return only repository facts supplied by the canonical public API."""
+    metadata: dict[str, Any] = {}
+    description = payload.get("description")
+    if isinstance(description, str):
+        metadata["description"] = description
+    stars = payload.get("stargazers_count")
+    if isinstance(stars, int) and not isinstance(stars, bool) and stars >= 0:
+        metadata["stars"] = stars
+    return metadata
 
 
 def _has_affirmative_integration_evidence(text: str) -> bool:

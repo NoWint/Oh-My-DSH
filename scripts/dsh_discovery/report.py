@@ -14,11 +14,11 @@ from typing import Any, Callable, Mapping, Sequence
 
 _REPORT_VERSION = 1
 _MODES = {"live", "dry-run", "fixtures"}
-_SOURCE_KEYS = {"source", "status", "hits", "message"}
+_SOURCE_KEYS = {"source", "status", "hits", "message", "skipped_hits"}
 _STATUS = {"ok", "error", "skipped"}
 _SECRET_KEYS = re.compile(r"(?:token|secret|password|authorization|api[_-]?key|credential|private[_-]?key)", re.I)
 _SECRET_VALUES = re.compile(r"(?:gh[pousr]_\w+|github_pat_[A-Za-z0-9_]+|glpat-[A-Za-z0-9_-]+|authorization\s+(?:basic|bearer)\s+\S+|bearer\s+\S+|(?:token|secret|password|api[_-]?key)\s*[:=]\s*\S+)", re.I)
-_ACTION_KEYS = {"readme_updated", "pushed", "state_updated", "report_written", "degraded"}
+_ACTION_KEYS = {"readme_updated", "pushed", "state_updated", "report_written", "degraded", "validation_budget_skipped", "validation_deadline_skipped"}
 _UNSUPPORTED_DIRECTORY_FSYNC_ERRORS = {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP}
 
 
@@ -44,10 +44,17 @@ class DiscoveryReport:
                 raise ValueError("report source schema is invalid")
             if not isinstance(result["source"], str) or result["status"] not in _STATUS or type(result["hits"]) is not int or result["hits"] < 0:
                 raise ValueError("report source values are invalid")
+            if "skipped_hits" in result and (type(result["skipped_hits"]) is not int or result["skipped_hits"] < 0):
+                raise ValueError("report source skipped-hit count is invalid")
             if "message" in result and (not isinstance(result["message"], str) or len(result["message"]) > 500):
                 raise ValueError("report source message must be a bounded string")
             sources.append(_redact(dict(result)))
-        if set(self.actions) - _ACTION_KEYS or not all(type(value) is bool for value in self.actions.values()):
+        if set(self.actions) - _ACTION_KEYS:
+            raise ValueError("report action schema is invalid")
+        skipped_counts = {"validation_budget_skipped", "validation_deadline_skipped"}
+        if any(type(value) is not int or value < 0 for key, value in self.actions.items() if key in skipped_counts):
+            raise ValueError("report skipped-count values are invalid")
+        if any(type(value) is not bool for key, value in self.actions.items() if key not in skipped_counts):
             raise ValueError("report action schema is invalid")
         return {
             "version": _REPORT_VERSION,

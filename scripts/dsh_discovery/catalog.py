@@ -34,8 +34,8 @@ _FOOTER_CN = re.compile(r"(\*最后更新：)\d{4}-\d{2}-\d{2}")
 _CONTROL = re.compile(r"[|\x00-\x1f\x7f]")
 
 
-def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: str | None = None) -> bool:
-    original = path.read_text(encoding="utf-8")
+def render_readme(original: str, entries: Iterable[CatalogEntry], *, notice_date: str | None = None) -> str:
+    """Produce a catalog update without mutating the README on disk."""
     lines = original.splitlines(keepends=True)
     categories = _table_boundaries(lines)
     changed = False
@@ -62,9 +62,16 @@ def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: s
             noticed = pattern.sub(r"\g<1>" + notice_date, noticed, count=1)
         changed = changed or noticed != updated
         updated = noticed
-    if changed:
-        path.write_text(updated, encoding="utf-8")
-    return changed
+    return updated
+
+
+def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: str | None = None) -> bool:
+    original = path.read_text(encoding="utf-8")
+    updated = render_readme(original, entries, notice_date=notice_date)
+    if updated == original:
+        return False
+    path.write_text(updated, encoding="utf-8")
+    return True
 
 
 def _table_boundaries(lines: list[str]) -> dict[str, int]:

@@ -120,6 +120,7 @@ class SourceResult:
     status: SourceStatus
     hits: tuple[DiscoveryHit, ...] = ()
     message: str = ""
+    skipped_hits: int = 0
 
 
 @dataclass(frozen=True)
@@ -210,14 +211,17 @@ class HackerNewsSource(_Source):
 
 class LobstersSource(_Source):
     name = "lobsters"
+    max_items = 20
+
     def discover(self) -> SourceResult:
         try:
             root = ET.fromstring(self._request("https://lobste.rs/rss").body)
+            items = root.findall(".//item")
             hits = []
-            for item in root.findall(".//item"):
+            for item in items[:self.max_items]:
                 hit = self._hit(name=item.findtext("title", ""), description=item.findtext("description", ""), url=item.findtext("link", ""))
                 if hit: hits.append(hit)
-            return SourceResult(self.name, SourceStatus.OK, tuple(hits))
+            return SourceResult(self.name, SourceStatus.OK, tuple(hits), skipped_hits=max(0, len(items) - self.max_items))
         except (HttpError, ET.ParseError, ValueError, TypeError, AttributeError) as exc: return self._error(exc)
 
 

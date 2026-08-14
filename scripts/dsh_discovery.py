@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Run the bounded DSH discovery pipeline safely."""
 from __future__ import annotations
-import argparse, fcntl, os, stat, sys
+import argparse, fcntl, os, stat, sys, time
 from datetime import datetime, timezone
 from pathlib import Path
 _REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(_REPOSITORY_ROOT) not in sys.path: sys.path.insert(0, str(_REPOSITORY_ROOT))
-from scripts.dsh_discovery.catalog import CatalogEntry, update_readme
+from scripts.dsh_discovery.catalog import CatalogEntry, render_readme
 from scripts.dsh_discovery.config import DiscoveryConfig
 from scripts.dsh_discovery.gitops import GitOps
 from scripts.dsh_discovery.report import DiscoveryReport, save_report
@@ -29,7 +29,24 @@ def _load_env(path: Path) -> dict[str, str]:
     return values
 
 
-def run_discovery(repo: Path, env: dict[str, str], *, client=None, source_classes=None, validator=None, gitops=None) -> dict:
+_CATALOG_CATEGORY = "## 🔧 Utility Toolkit / 实用工具集"
+
+
+def _catalog_entry(result):
+    if result.classification != EvidenceClass.VALIDATED:
+        return None
+    metadata = result.verified_metadata or {}
+    stars = metadata.get("stars")
+    description = metadata.get("description")
+    if not isinstance(stars, int) or isinstance(stars, bool) or stars < 0 or not isinstance(description, str):
+        return None
+    english, separator, chinese = description.partition(" / ")
+    if not separator or not english.strip() or not chinese.strip() or " / " in chinese:
+        return None
+    return CatalogEntry(result.candidate, result.classification.value, _CATALOG_CATEGORY, stars, english, chinese)
+
+
+def run_discovery(repo: Path, env: dict[str, str], *, client=None, source_classes=None, validator=None, gitops=None, monotonic=time.monotonic) -> dict:
     config = DiscoveryConfig.from_env(env)
     client = client or HttpClient(timeout=config.request_timeout_seconds)
     credentials = SourceCredentials(github_token=config.github_token, gitlab_token=config.gitlab_token)
@@ -38,24 +55,33 @@ def run_discovery(repo: Path, env: dict[str, str], *, client=None, source_classe
     hits = [hit.candidate for result in results for hit in result.hits]
     unique, _ = RepositoryValidator.deduplicate(hits)
     validator = validator or RepositoryValidator(client)
-    validated = [validator.validate(candidate) for candidate in unique]
-    entries = []
-    for result in validated:
-        metadata = result.candidate.metadata or {}
-        if result.classification != EvidenceClass.VALIDATED: continue
-        category, stars, english, chinese = metadata.get("category"), metadata.get("stars"), metadata.get("english_description"), metadata.get("chinese_description")
-        if isinstance(category, str) and isinstance(stars, int) and stars >= 0 and isinstance(english, str) and isinstance(chinese, str) and english.strip() and chinese.strip():
-            entries.append(CatalogEntry(result.candidate, result.classification.value, category, stars, english, chinese))
-    readme = repo / "README.md"
-    previous = Path.cwd()
-    try:
-        os.chdir(repo)
-        readme_changed = update_readme(readme, entries, notice_date=datetime.now(timezone.utc).date().isoformat()) if entries else False
-    finally: os.chdir(previous)
+    deadline = monotonic() + config.validation_deadline_seconds
+    validated = []
+    validation_deadline_skipped = 0
+    for index, candidate in enumerate(unique[:config.max_validation_candidates]):
+        if monotonic() >= deadline:
+            validation_deadline_skipped = len(unique[:config.max_validation_candidates]) - index
+            break
+        validated.append(validator.validate(candidate))
+    validation_budget_skipped = max(0, len(unique) - config.max_validation_candidates)
+    entries = [entry for result in validated if (entry := _catalog_entry(result)) is not None]
+    readme_changed = False
     pushed = False
-    if readme_changed:
-        pushed = (gitops or GitOps(repo)).commit_and_push("chore: update discovery catalog")
-    return {"results": results, "readme_changed": readme_changed, "pushed": pushed, "validated": len(entries)}
+    if entries:
+        readme = repo / "README.md"
+        original = readme.read_text(encoding="utf-8")
+        updated = render_readme(original, entries, notice_date=datetime.now(timezone.utc).date().isoformat())
+        readme_changed = updated != original
+        if readme_changed:
+            publisher = gitops or GitOps(repo)
+            publisher.prepare()
+            try:
+                readme.write_text(updated, encoding="utf-8")
+                pushed = publisher.commit_and_push("chore: update discovery catalog")
+            except Exception:
+                readme.write_text(original, encoding="utf-8")
+                raise
+    return {"results": results, "readme_changed": readme_changed, "pushed": pushed, "validated": len(entries), "validation_budget_skipped": validation_budget_skipped, "validation_deadline_skipped": validation_deadline_skipped}
 
 
 def main(argv: list[str] | None = None, *, environ: dict[str, str] | None = None, source_classes=None) -> int:
@@ -73,7 +99,7 @@ def main(argv: list[str] | None = None, *, environ: dict[str, str] | None = None
             save_state(repo / "var/dsh-discovery-state.json", DiscoveryState(updated_at=now))
             previous = Path.cwd()
             try:
-                os.chdir(repo); save_report(Path("var/dsh-discovery-report.json"), DiscoveryReport(now, datetime.now(timezone.utc), "live", [{"source": r.source, "status": r.status.value, "hits": len(r.hits), "message": r.message} for r in outcome["results"]], {"readme_updated": outcome["readme_changed"], "pushed": outcome["pushed"], "state_updated": True, "report_written": True}))
+                os.chdir(repo); save_report(Path("var/dsh-discovery-report.json"), DiscoveryReport(now, datetime.now(timezone.utc), "live", [{"source": r.source, "status": r.status.value, "hits": len(r.hits), "message": r.message, "skipped_hits": getattr(r, "skipped_hits", 0)} for r in outcome["results"]], {"readme_updated": outcome["readme_changed"], "pushed": outcome["pushed"], "state_updated": True, "report_written": True, "validation_budget_skipped": outcome["validation_budget_skipped"], "validation_deadline_skipped": outcome["validation_deadline_skipped"]}))
             finally: os.chdir(previous)
             return 0
         finally: fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
