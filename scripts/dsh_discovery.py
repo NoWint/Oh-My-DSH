@@ -6,8 +6,13 @@ from __future__ import annotations
 import argparse
 import fcntl
 import os
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
+
+_REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+if str(_REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPOSITORY_ROOT))
 
 from scripts.dsh_discovery.report import DiscoveryReport, save_report
 from scripts.dsh_discovery.state import DiscoveryState, save_state

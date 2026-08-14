@@ -9,7 +9,15 @@ from pathlib import Path
 
 
 class DiscoveryCliTests(unittest.TestCase):
-    def test_dry_run_never_writes_runtime_files_or_pushes(self) -> None:
+    def test_direct_script_dry_run_works_from_repo_root(self) -> None:
+        repo = Path(__file__).parents[1]
+        result = subprocess.run(
+            ["python3", "-B", "scripts/dsh_discovery.py", "--dry-run", "--fixtures"],
+            cwd=repo,
+            text=True,
+            capture_output=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
         import importlib.util
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
