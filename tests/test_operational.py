@@ -66,7 +66,18 @@ class DiscoveryCliTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "0600"):
                 _load_cli_module().main(["--repo", str(root)], environ={"DSH_DISCOVERY_ENV_FILE": str(env_file)})
 
-    def test_check_rejects_non_private_env_file_without_installing(self) -> None:
+    def test_check_accepts_private_ampersand_path_without_mutation(self) -> None:
+        import os
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory) / "env&safe"
+            root.mkdir()
+            env_file = root / ".env"
+            env_file.write_text("GITHUB_TOKEN=test\n", encoding="utf-8")
+            os.chmod(env_file, 0o600)
+            script = Path(__file__).parents[1] / "scripts/install-hourly-discovery.sh"
+            result = subprocess.run([str(script), "check", str(env_file)], text=True, capture_output=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertFalse((Path.home() / "Library/LaunchAgents/com.oh-my-dsh.discovery.plist").exists())
         import os
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
