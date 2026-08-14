@@ -18,7 +18,20 @@ class DiscoveryCliTests(unittest.TestCase):
             capture_output=True,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        import importlib.util
+
+    def test_direct_script_dry_run_works_from_tmp(self) -> None:
+        repo = Path(__file__).parents[1]
+        result = subprocess.run(["python3", "-B", str(repo / "scripts/dsh_discovery.py"), "--dry-run", "--fixtures", "--repo", str(repo)], cwd="/tmp", text=True, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_dry_run_creates_no_lock_or_runtime_files(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            module = _load_cli_module()
+            self.assertEqual(module.main(["--dry-run", "--repo", str(root)]), 0)
+            self.assertFalse((root / "var").exists())
+
+    def test_dry_run_never_writes_runtime_files_or_pushes(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "var").mkdir()

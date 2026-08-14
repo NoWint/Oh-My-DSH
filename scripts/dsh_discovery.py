@@ -25,6 +25,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--fixtures", action="store_true")
     arguments = parser.parse_args(argv)
     repo = arguments.repo.resolve()
+    if arguments.dry_run or arguments.fixtures:
+        return 0
     lock_path = repo / "var/dsh-discovery.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     with lock_path.open("a+") as lock:
@@ -33,9 +35,7 @@ def main(argv: list[str] | None = None) -> int:
         except BlockingIOError:
             return 0
         try:
-            mode = "dry-run" if arguments.dry_run else "fixtures" if arguments.fixtures else "live"
-            if arguments.dry_run or arguments.fixtures:
-                return 0
+            mode = "live"
             now = datetime.now(timezone.utc)
             old = Path.cwd()
             try:
