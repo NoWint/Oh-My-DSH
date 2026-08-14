@@ -13,7 +13,7 @@ _STRONG_RE = re.compile(
     r"(?:deepseek[\s_-]+harness|deepseek-harness|dsh[\s_-]+plugin|dsh[\s_-]+native|dsh[\s_-]+web)",
     re.IGNORECASE,
 )
-_GITLAB_PAGE_SEGMENTS = frozenset({"issues", "merge_requests", "commits", "pipelines", "wikis"})
+_GITLAB_CONTENT_PAGE_ACTIONS = frozenset({"blob", "raw", "tree"})
 
 
 def redact_token(token: str | None) -> str | None:
@@ -56,7 +56,7 @@ def _normalize_gitlab_path(path: str) -> RepositoryCoordinate | None:
     if "-" in parts:
         separator = parts.index("-")
         page_parts = parts[separator + 1 :]
-        if page_parts and page_parts[0] in _GITLAB_PAGE_SEGMENTS:
+        if page_parts and page_parts[0] not in _GITLAB_CONTENT_PAGE_ACTIONS:
             return None
         parts = parts[:separator]
     if len(parts) < 2:

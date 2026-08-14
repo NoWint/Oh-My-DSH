@@ -36,7 +36,7 @@ class DiscoveryState:
         expected_keys = {"version", "seen_fingerprints", "updated_at"}
         if set(payload) != expected_keys:
             raise ValueError("discovery state has an invalid schema")
-        if payload["version"] != _STATE_VERSION:
+        if type(payload["version"]) is not int or payload["version"] != _STATE_VERSION:
             raise ValueError(f"unsupported discovery state version: {payload['version']}")
         fingerprints = payload["seen_fingerprints"]
         if not isinstance(fingerprints, list) or not all(isinstance(item, str) for item in fingerprints):

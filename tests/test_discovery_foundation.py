@@ -71,6 +71,22 @@ class NormalizationTests(unittest.TestCase):
         self.assertIsNone(
             normalize_repository_url("https://gitlab.com/group/subgroup/project/-/issues/1")
         )
+        self.assertIsNone(
+            normalize_repository_url("https://gitlab.com/group/subgroup/project/-/unknown-action")
+        )
+
+    def test_gitlab_recognizes_only_safe_content_page_actions(self) -> None:
+        coordinate = RepositoryCoordinate(
+            host="gitlab.com", owner="group/subgroup", repository="project"
+        )
+        for action in ("blob", "raw", "tree"):
+            with self.subTest(action=action):
+                self.assertEqual(
+                    normalize_repository_url(
+                        f"https://gitlab.com/group/subgroup/project/-/{action}/main/readme.md"
+                    ),
+                    coordinate,
+                )
 
     def test_redacts_short_and_long_tokens(self) -> None:
         self.assertEqual(redact_token(None), None)
@@ -108,6 +124,7 @@ class NormalizationTests(unittest.TestCase):
 class StateTests(unittest.TestCase):
     def test_rejects_invalid_state_schema_and_version(self) -> None:
         invalid_payloads = (
+            {"version": True, "seen_fingerprints": [], "updated_at": "2026-08-14T00:00:00+00:00"},
             {"version": 2, "seen_fingerprints": [], "updated_at": "2026-08-14T00:00:00+00:00"},
             {"version": 1, "seen_fingerprints": "abc", "updated_at": "2026-08-14T00:00:00+00:00"},
             {"version": 1, "seen_fingerprints": ["ok", 3], "updated_at": "2026-08-14T00:00:00+00:00"},
