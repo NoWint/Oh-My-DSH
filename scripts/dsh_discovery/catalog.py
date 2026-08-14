@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from typing import Iterable
 
@@ -28,6 +29,9 @@ class CatalogEntry:
 _TABLE_HEADER = "| Stars | Repo | Description / 描述 |"
 _NOTICE_EN = re.compile(r"(> \*\*Data source:\*\*.*?as of )\d{4}-\d{2}-\d{2}")
 _NOTICE_CN = re.compile(r"(> \*\*数据来源：\*\*.*?截至 )\d{4}-\d{2}-\d{2}")
+_FOOTER_EN = re.compile(r"(\*Last updated: )\d{4}-\d{2}-\d{2}")
+_FOOTER_CN = re.compile(r"(\*最后更新：)\d{4}-\d{2}-\d{2}")
+_CONTROL = re.compile(r"[|\x00-\x1f\x7f]")
 
 
 def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: str | None = None) -> bool:
@@ -35,20 +39,27 @@ def update_readme(path: Path, entries: Iterable[CatalogEntry], *, notice_date: s
     lines = original.splitlines(keepends=True)
     categories = _table_boundaries(lines)
     changed = False
+    existing_coordinates = _catalog_coordinates(original)
     for entry in entries:
         _validate_entry(entry, categories)
-        if _contains_coordinate(original, entry.candidate):
+        assert entry.candidate.coordinate is not None
+        coordinate_key = entry.candidate.coordinate.as_key()
+        if coordinate_key in existing_coordinates:
             continue
         insert_at = categories[entry.category]
         lines.insert(insert_at, _format_row(entry))
+        existing_coordinates.add(coordinate_key)
         categories = _table_boundaries(lines)
         changed = True
     updated = "".join(lines)
     if notice_date is not None:
-        if not _NOTICE_EN.search(updated) or not _NOTICE_CN.search(updated):
+        _validate_notice_date(notice_date)
+        notice_patterns = (_NOTICE_EN, _NOTICE_CN, _FOOTER_EN, _FOOTER_CN)
+        if not all(pattern.search(updated) for pattern in notice_patterns):
             raise CatalogStructureError("automation notice structure drift")
-        noticed = _NOTICE_EN.sub(r"\g<1>" + notice_date, updated, count=1)
-        noticed = _NOTICE_CN.sub(r"\g<1>" + notice_date, noticed, count=1)
+        noticed = updated
+        for pattern in notice_patterns:
+            noticed = pattern.sub(r"\g<1>" + notice_date, noticed, count=1)
         changed = changed or noticed != updated
         updated = noticed
     if changed:
@@ -85,16 +96,26 @@ def _validate_entry(entry: CatalogEntry, categories: dict[str, int]) -> None:
         raise CatalogStructureError("explicit bilingual descriptions are required")
     if " / " in entry.english_description or " / " in entry.chinese_description:
         raise CatalogStructureError("descriptions must be supplied as separate languages")
+    if _CONTROL.search(entry.english_description) or _CONTROL.search(entry.chinese_description):
+        raise CatalogStructureError("descriptions contain table-breaking characters")
 
 
-def _contains_coordinate(contents: str, candidate: Candidate) -> bool:
-    assert candidate.coordinate is not None
-    expected = candidate.coordinate.as_key()
+def _validate_notice_date(value: str) -> None:
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise CatalogStructureError("notice date must be ISO YYYY-MM-DD")
+    try:
+        date.fromisoformat(value)
+    except ValueError as exc:
+        raise CatalogStructureError("notice date must be ISO YYYY-MM-DD") from exc
+
+
+def _catalog_coordinates(contents: str) -> set[str]:
+    coordinates: set[str] = set()
     for url in re.findall(r"https?://[^)\s]+", contents):
         coordinate = normalize_repository_url(url)
-        if coordinate is not None and coordinate.as_key() == expected:
-            return True
-    return False
+        if coordinate is not None:
+            coordinates.add(coordinate.as_key())
+    return coordinates
 
 
 def _format_row(entry: CatalogEntry) -> str:

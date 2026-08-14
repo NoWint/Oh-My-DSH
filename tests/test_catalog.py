@@ -31,7 +31,36 @@ class ReadmeUpdaterTests(unittest.TestCase):
             self.assertIn("[acme/dsh-safe](https://github.com/acme/dsh-safe)", contents)
             self.assertIn("Safe utility integration for DeepSeek Harness. / 用于 DeepSeek Harness 的安全实用工具集成。", contents)
             self.assertIn("as of 2026-08-14", contents)
+            self.assertIn("截至 2026-08-14", contents)
+            self.assertIn("Last updated: 2026-08-14", contents)
+            self.assertIn("最后更新：2026-08-14", contents)
             self.assertLess(contents.index("[omdsh-dev/dsh-toolkit]"), contents.index("[acme/dsh-safe]"))
+
+    def test_deduplicates_repeated_coordinate_within_one_update_batch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "README.md"
+            shutil.copyfile(Path(__file__).resolve().parents[1] / "README.md", path)
+            first = CatalogEntry(Candidate(RepositoryCoordinate("github.com", "acme", "dsh-safe"), "dsh-safe"), "validated", "## 🔧 Utility Toolkit / 实用工具集", 1, "First explicit integration.", "第一个明确集成。")
+            duplicate = CatalogEntry(Candidate(RepositoryCoordinate("github.com", "Acme", "DSH-SAFE"), "dsh-safe"), "validated", "## 🔧 Utility Toolkit / 实用工具集", 2, "Second explicit integration.", "第二个明确集成。")
+
+            self.assertTrue(update_readme(path, (first, duplicate)))
+
+            self.assertEqual(path.read_text(encoding="utf-8").count("https://github.com/acme/dsh-safe"), 1)
+
+    def test_rejects_table_breaking_descriptions_and_invalid_notice_dates(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "README.md"
+            shutil.copyfile(Path(__file__).resolve().parents[1] / "README.md", path)
+            base = dict(candidate=Candidate(RepositoryCoordinate("github.com", "acme", "dsh-safe"), "dsh-safe"), classification="validated", category="## 🔧 Utility Toolkit / 实用工具集", stars=1, chinese_description="中文。")
+            for description in ("has | delimiter", "line\nbreak", "line\rbreak", "control\x1fchar"):
+                with self.subTest(description=repr(description)):
+                    with self.assertRaises(CatalogStructureError):
+                        update_readme(path, (CatalogEntry(english_description=description, **base),))
+            for invalid_date in ("2026-8-14", "2026-02-30", "not-a-date"):
+                with self.subTest(invalid_date=invalid_date):
+                    with self.assertRaises(CatalogStructureError):
+                        update_readme(path, (), notice_date=invalid_date)
+
 
     def test_rejects_unvalidated_missing_description_unknown_category_and_existing_url(self):
         with tempfile.TemporaryDirectory() as directory:
