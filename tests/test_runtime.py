@@ -226,6 +226,42 @@ class RuntimeReportTests(unittest.TestCase):
             self.assertEqual((repo / ".git" / "index").read_bytes(), before_index)
             self.assertEqual(_git(repo, "status", "--porcelain=v1").stdout, before_status)
 
+    def test_push_failure_restores_linked_worktree_index_byte_identically(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            primary = root / "primary"
+            primary.mkdir()
+            remote = root / "remote.git"
+            _git(primary, "init", "-b", "base")
+            _git(primary, "config", "user.email", "test@example.com")
+            _git(primary, "config", "user.name", "Test User")
+            (primary / "README.md").write_text("before\n", encoding="utf-8")
+            _git(primary, "add", "README.md")
+            _git(primary, "commit", "-m", "initial")
+            remote.mkdir()
+            _git(remote, "init", "--bare")
+            _git(primary, "remote", "add", "origin", str(remote))
+            linked = root / "linked"
+            _git(primary, "worktree", "add", "-b", "main", str(linked))
+            _git(linked, "push", "-u", "origin", "main")
+            (linked / "README.md").write_text("after\n", encoding="utf-8")
+            before_head = _git(linked, "rev-parse", "HEAD").stdout.strip()
+            index_path = Path(_git(linked, "rev-parse", "--git-path", "index").stdout.strip())
+            before_index = index_path.read_bytes()
+            before_status = _git(linked, "status", "--porcelain=v1").stdout
+
+            def fail_push(arguments, *, cwd):
+                if arguments[1:3] == ["push", "origin"]:
+                    return subprocess.CompletedProcess(arguments, 1, "", "push refused")
+                return subprocess.run(arguments, cwd=cwd, text=True, capture_output=True, check=False)
+
+            with self.assertRaisesRegex(GitSafetyError, "push refused"):
+                GitOps(linked, runner=fail_push).commit_and_push("catalog update")
+
+            self.assertEqual(_git(linked, "rev-parse", "HEAD").stdout.strip(), before_head)
+            self.assertEqual(index_path.read_bytes(), before_index)
+            self.assertEqual(_git(linked, "status", "--porcelain=v1").stdout, before_status)
+
 
 class _RecordingRunner:
     def __init__(self, outputs: dict[tuple[str, ...], str | tuple[int, str, str]]) -> None:

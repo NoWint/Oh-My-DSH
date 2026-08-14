@@ -61,13 +61,15 @@ class GitOps:
             self._restore_index(index_backup)
             raise
         finally:
-            if index_backup is not None and index_backup.exists():
-                index_backup.unlink()
+            if index_backup is not None:
+                _, backup = index_backup
+                if backup.exists():
+                    backup.unlink()
         return True
 
-    def _backup_index(self) -> Path | None:
-        index = self.repo / ".git" / "index"
-        if not index.exists():
+    def _backup_index(self) -> tuple[Path, Path] | None:
+        index = self._index_path()
+        if index is None:
             return None
         descriptor, name = tempfile.mkstemp(prefix="dsh-discovery-index-", dir=index.parent)
         backup = Path(name)
@@ -80,11 +82,22 @@ class GitOps:
         except Exception:
             backup.unlink(missing_ok=True)
             raise
-        return backup
+        return index, backup
 
-    def _restore_index(self, backup: Path | None) -> None:
-        if backup is not None:
-            os.replace(backup, self.repo / ".git" / "index")
+    def _restore_index(self, index_backup: tuple[Path, Path] | None) -> None:
+        if index_backup is not None:
+            index, backup = index_backup
+            os.replace(backup, index)
+
+    def _index_path(self) -> Path | None:
+        result = self._command("rev-parse", "--git-path", "index", check=False)
+        location = result.stdout.strip()
+        if result.returncode != 0 or not location:
+            return None
+        index = Path(location)
+        if not index.is_absolute():
+            index = self.repo / index
+        return index if index.exists() else None
 
     def _dirty_paths(self) -> list[str]:
         result = self._output("status", "--porcelain=v1")
