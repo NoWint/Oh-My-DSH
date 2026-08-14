@@ -1,3 +1,10 @@
-
 # Local linked worktrees
 .worktrees/
+
+# Discovery runtime state and local secrets
+var/
+.env
+
+# Python bytecode
+__pycache__/
+*.py[cod]
