@@ -6,10 +6,15 @@ PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 ENV_FILE=${2:-"$ROOT/.env"}
 check_env() {
   [ -f "$ENV_FILE" ] && [ ! -L "$ENV_FILE" ] || { echo "env file must be regular" >&2; exit 1; }
-  uid=$(stat -f '%u' "$ENV_FILE")
-  mode=$(stat -f '%Lp' "$ENV_FILE")
-  [ "$uid" = "$(id -u)" ] || { echo "env file must be owned by current user" >&2; exit 1; }
-  [ "$mode" = 600 ] || { echo "env file must be mode 0600" >&2; exit 1; }
+  # Cross-platform: use python3 for stat (macOS stat -f differs from Linux stat -c)
+  python3 -c "
+import os, sys
+p = sys.argv[1]
+uid = os.stat(p).st_uid
+mode = os.stat(p).st_mode & 0o777
+assert uid == os.getuid(), 'env file must be owned by current user'
+assert mode == 0o600, 'env file must have mode 0600'
+" "$ENV_FILE" || { echo "env file validation failed" >&2; exit 1; }
 }
 case "${1:-check}" in
  check) check_env; echo ok ;;
