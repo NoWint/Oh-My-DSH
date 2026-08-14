@@ -40,9 +40,29 @@ class DiscoveryCliTests(unittest.TestCase):
             self.assertEqual(result, 0)
             self.assertFalse((root / "var/dsh-discovery-state.json").exists())
             self.assertFalse((root / "var/dsh-discovery-report.json").exists())
+    def test_normal_mode_loads_env_and_persists_report_and_state(self) -> None:
+        import os
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            env_file = root / ".env"
+            env_file.write_text("DSH_DISCOVERY_TIMEOUT_SECONDS=10\n", encoding="utf-8")
+            os.chmod(env_file, 0o600)
+            module = _load_cli_module()
+            result = module.main(["--repo", str(root)], environ={"DSH_DISCOVERY_ENV_FILE": str(env_file)})
+            self.assertEqual(result, 0)
+            self.assertTrue((root / "var/dsh-discovery-state.json").exists())
+            self.assertTrue((root / "var/dsh-discovery-report.json").exists())
 
+    def test_normal_mode_rejects_non_private_env_file(self) -> None:
+        import os
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            env_file = root / ".env"
+            env_file.write_text("GITHUB_TOKEN=x\n", encoding="utf-8")
+            os.chmod(env_file, 0o644)
+            with self.assertRaisesRegex(ValueError, "0600"):
+                _load_cli_module().main(["--repo", str(root)], environ={"DSH_DISCOVERY_ENV_FILE": str(env_file)})
 
-class InstallerTests(unittest.TestCase):
     def test_check_rejects_non_private_env_file_without_installing(self) -> None:
         import os
         with tempfile.TemporaryDirectory() as directory:
