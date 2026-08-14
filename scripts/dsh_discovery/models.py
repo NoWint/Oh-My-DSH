@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from copy import deepcopy
+from dataclasses import dataclass, field
 from typing import Any
 
 
@@ -22,7 +23,11 @@ class Candidate:
     name: str
     description: str = ""
     source: str = ""
-    metadata: dict[str, Any] | None = None
+    metadata: dict[str, Any] | None = field(default=None)
+
+    def __post_init__(self) -> None:
+        if self.metadata is not None:
+            object.__setattr__(self, "metadata", deepcopy(self.metadata))
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -34,5 +39,5 @@ class Candidate:
             "name": self.name,
             "description": self.description,
             "source": self.source,
-            "metadata": self.metadata or {},
+            "metadata": deepcopy(self.metadata) if self.metadata is not None else {},
         }

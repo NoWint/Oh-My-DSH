@@ -18,6 +18,18 @@ python3 -m unittest discover -s tests -t . -v
 
 Result: 8 tests passed.
 
+## Review-fix verification
+
+Focused review-fix tests were added before implementation and initially failed for noncanonical URL handling, malformed state, non-positive/non-finite timeouts, and mutable candidate metadata.
+
+Final verification command:
+
+```sh
+python3 -B -m unittest discover -s tests -t . -v
+```
+
+Result: 21 tests passed.
+
 ## Changed files
 
 - `.env.example`

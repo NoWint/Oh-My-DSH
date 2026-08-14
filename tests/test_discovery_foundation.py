@@ -52,6 +52,26 @@ class NormalizationTests(unittest.TestCase):
         self.assertIsNone(normalize_repository_url("https://example.com/org/repo"))
         self.assertIsNone(normalize_repository_url("https://github.com/owner"))
 
+    def test_github_accepts_only_canonical_repository_path(self) -> None:
+        self.assertIsNone(normalize_repository_url("https://github.com/owner/repo/issues/1"))
+        self.assertIsNone(normalize_repository_url("https://github.com/owner/repo/tree/main"))
+
+    def test_gitlab_ignores_dash_page_paths_but_rejects_issue_pages(self) -> None:
+        coordinate = RepositoryCoordinate(
+            host="gitlab.com", owner="group/subgroup", repository="project"
+        )
+        self.assertEqual(
+            normalize_repository_url("https://gitlab.com/group/subgroup/project/-/tree/main"),
+            coordinate,
+        )
+        self.assertEqual(
+            normalize_repository_url("https://gitlab.com/group/subgroup/project/-/"),
+            coordinate,
+        )
+        self.assertIsNone(
+            normalize_repository_url("https://gitlab.com/group/subgroup/project/-/issues/1")
+        )
+
     def test_redacts_short_and_long_tokens(self) -> None:
         self.assertEqual(redact_token(None), None)
         self.assertEqual(redact_token("abc"), "***")
@@ -86,6 +106,21 @@ class NormalizationTests(unittest.TestCase):
 
 
 class StateTests(unittest.TestCase):
+    def test_rejects_invalid_state_schema_and_version(self) -> None:
+        invalid_payloads = (
+            {"version": 2, "seen_fingerprints": [], "updated_at": "2026-08-14T00:00:00+00:00"},
+            {"version": 1, "seen_fingerprints": "abc", "updated_at": "2026-08-14T00:00:00+00:00"},
+            {"version": 1, "seen_fingerprints": ["ok", 3], "updated_at": "2026-08-14T00:00:00+00:00"},
+            {"version": 1, "seen_fingerprints": [], "updated_at": "2026-08-14T00:00:00"},
+        )
+        for payload in invalid_payloads:
+            with self.subTest(payload=payload):
+                with tempfile.TemporaryDirectory() as directory:
+                    path = Path(directory) / "state.json"
+                    path.write_text(json.dumps(payload), encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        load_state(path)
+
     def test_round_trips_state_with_atomic_replace(self) -> None:
         state = DiscoveryState(
             seen_fingerprints={"abc123"},
@@ -102,6 +137,25 @@ class StateTests(unittest.TestCase):
     def test_missing_state_returns_empty_state(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             self.assertEqual(load_state(Path(directory) / "missing.json"), DiscoveryState())
+
+
+class CandidateTests(unittest.TestCase):
+    def test_metadata_is_copied_and_to_dict_returns_deep_copy(self) -> None:
+        metadata = {"labels": ["dsh"], "nested": {"score": 1}}
+        candidate = Candidate(coordinate=None, name="repo", metadata=metadata)
+        metadata["labels"].append("mutated")
+        exported = candidate.to_dict()
+        exported["metadata"]["nested"]["score"] = 99
+        self.assertEqual(candidate.metadata, {"labels": ["dsh"], "nested": {"score": 1}})
+        self.assertNotEqual(exported, candidate.to_dict())
+
+
+class ConfigValidationTests(unittest.TestCase):
+    def test_rejects_non_positive_or_non_finite_timeout(self) -> None:
+        for value in ("0", "-1", "nan", "inf", "-inf"):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    DiscoveryConfig.from_env({"DSH_DISCOVERY_TIMEOUT_SECONDS": value})
 
 
 if __name__ == "__main__":

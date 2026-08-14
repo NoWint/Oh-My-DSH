@@ -4,16 +4,16 @@ from __future__ import annotations
 
 import hashlib
 import re
-from urllib.parse import unquote, urlsplit
+from urllib.parse import urlsplit
 
 from .models import Candidate, RepositoryCoordinate
 
-_TOKEN_RE = re.compile(r"[A-Za-z0-9_\-]{8,}")
 _DSH_EXACT_RE = re.compile(r"(?<![a-z0-9])dsh(?![a-z0-9])", re.IGNORECASE)
 _STRONG_RE = re.compile(
     r"(?:deepseek[\s_-]+harness|deepseek-harness|dsh[\s_-]+plugin|dsh[\s_-]+native|dsh[\s_-]+web)",
     re.IGNORECASE,
 )
+_GITLAB_PAGE_SEGMENTS = frozenset({"issues", "merge_requests", "commits", "pipelines", "wikis"})
 
 
 def redact_token(token: str | None) -> str | None:
@@ -33,16 +33,41 @@ def normalize_repository_url(value: str) -> RepositoryCoordinate | None:
         host = parsed.hostname or ""
         path = parsed.path
     host = host.lower().rstrip(".")
-    if host not in {"github.com", "gitlab.com"}:
-        return None
+    if host == "github.com":
+        return _normalize_github_path(path)
+    if host == "gitlab.com":
+        return _normalize_gitlab_path(path)
+    return None
+
+
+def _normalize_github_path(path: str) -> RepositoryCoordinate | None:
     parts = [part for part in path.strip("/").split("/") if part]
+    if len(parts) != 2:
+        return None
+    owner, repository = parts
+    repository = repository.removesuffix(".git")
+    if not owner or not repository:
+        return None
+    return RepositoryCoordinate(host="github.com", owner=owner, repository=repository)
+
+
+def _normalize_gitlab_path(path: str) -> RepositoryCoordinate | None:
+    parts = [part for part in path.strip("/").split("/") if part]
+    if "-" in parts:
+        separator = parts.index("-")
+        page_parts = parts[separator + 1 :]
+        if page_parts and page_parts[0] in _GITLAB_PAGE_SEGMENTS:
+            return None
+        parts = parts[:separator]
     if len(parts) < 2:
         return None
-    parts[-1] = parts[-1].removesuffix(".git")
-    if not parts[-1]:
+    *owner_parts, repository = parts
+    repository = repository.removesuffix(".git")
+    if not owner_parts or not repository:
         return None
-    owner = "/".join(parts[:-1])
-    return RepositoryCoordinate(host=host, owner=owner, repository=parts[-1])
+    return RepositoryCoordinate(
+        host="gitlab.com", owner="/".join(owner_parts), repository=repository
+    )
 
 
 def is_dsh_relevant(*, name: str, description: str = "", topics: tuple[str, ...] = ()) -> bool:

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 import os
 from dataclasses import dataclass
 from pathlib import Path
@@ -21,6 +22,8 @@ class DiscoveryConfig:
     def from_env(cls, environ: Mapping[str, str] | None = None) -> "DiscoveryConfig":
         env = os.environ if environ is None else environ
         timeout = float(env.get("DSH_DISCOVERY_TIMEOUT_SECONDS", "20"))
+        if not math.isfinite(timeout) or timeout <= 0:
+            raise ValueError("DSH_DISCOVERY_TIMEOUT_SECONDS must be a finite positive number")
         return cls(
             state_path=Path(env.get("DSH_DISCOVERY_STATE_PATH", "var/dsh-discovery-state.json")),
             github_token=env.get("GITHUB_TOKEN") or None,
