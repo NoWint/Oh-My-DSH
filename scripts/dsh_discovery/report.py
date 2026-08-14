@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import errno
 import json
 import os
 import re
@@ -16,7 +17,9 @@ _MODES = {"live", "dry-run", "fixtures"}
 _SOURCE_KEYS = {"source", "status", "hits", "message"}
 _STATUS = {"ok", "error", "skipped"}
 _SECRET_KEYS = re.compile(r"(?:token|secret|password|authorization|api[_-]?key|credential|private[_-]?key)", re.I)
-_SECRET_VALUES = re.compile(r"(?:gh[pousr]_[A-Za-z0-9_]+|glpat-[A-Za-z0-9_-]+|bearer\s+\S+|(?:token|secret|password|api[_-]?key)\s*[:=]\s*\S+)", re.I)
+_SECRET_VALUES = re.compile(r"(?:gh[pousr]_\w+|github_pat_[A-Za-z0-9_]+|glpat-[A-Za-z0-9_-]+|authorization\s+(?:basic|bearer)\s+\S+|bearer\s+\S+|(?:token|secret|password|api[_-]?key)\s*[:=]\s*\S+)", re.I)
+_ACTION_KEYS = {"readme_updated", "pushed", "state_updated", "report_written", "degraded"}
+_UNSUPPORTED_DIRECTORY_FSYNC_ERRORS = {errno.EINVAL, errno.ENOTSUP, errno.EOPNOTSUPP}
 
 
 @dataclass(frozen=True)
@@ -41,7 +44,11 @@ class DiscoveryReport:
                 raise ValueError("report source schema is invalid")
             if not isinstance(result["source"], str) or result["status"] not in _STATUS or type(result["hits"]) is not int or result["hits"] < 0:
                 raise ValueError("report source values are invalid")
+            if "message" in result and (not isinstance(result["message"], str) or len(result["message"]) > 500):
+                raise ValueError("report source message must be a bounded string")
             sources.append(_redact(dict(result)))
+        if set(self.actions) - _ACTION_KEYS or not all(type(value) is bool for value in self.actions.values()):
+            raise ValueError("report action schema is invalid")
         return {
             "version": _REPORT_VERSION,
             "started_at": self.started_at.isoformat(),
@@ -74,8 +81,9 @@ def save_report(path: Path, report: DiscoveryReport, *, runtime_root: Path = Pat
         os.replace(temporary, destination)
         try:
             _sync_directory(destination.parent, directory_fsync)
-        except OSError:
-            pass
+        except OSError as error:
+            if error.errno not in _UNSUPPORTED_DIRECTORY_FSYNC_ERRORS:
+                raise
     except Exception:
         try:
             os.unlink(temporary)

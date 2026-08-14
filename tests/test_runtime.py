@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import errno
 import subprocess
 import tempfile
 import unittest
@@ -36,17 +37,15 @@ class RuntimeReportTests(unittest.TestCase):
             self.assertEqual(json.loads((root / path).read_text(encoding="utf-8"))["version"], 1)
             self.assertFalse(list((root / "var").glob(".report.json.*.tmp")))
 
-    def test_report_redacts_nested_secrets_and_secret_shaped_values(self) -> None:
+    def test_report_redacts_secret_shaped_message_values(self) -> None:
         report = DiscoveryReport(
             started_at=datetime(2026, 8, 14, tzinfo=timezone.utc),
             finished_at=datetime(2026, 8, 14, 1, tzinfo=timezone.utc),
             mode="live",
-            source_results=[{"source": "github", "status": "ok", "hits": 1, "message": {"api_token": "ghp_abcdefghijklmnopqrstuvwxyz", "note": "safe"}}],
-            actions={"pushed": False, "readme_updated": False},
+            source_results=[{"source": "github", "status": "error", "hits": 1, "message": "token=ghp_abcdefghijklmnopqrstuvwxyz"}],
+            actions={"readme_updated": False, "pushed": False},
         )
-        payload = report.to_dict()
-        self.assertEqual(payload["source_results"][0]["message"]["api_token"], "[REDACTED]")
-        self.assertEqual(payload["source_results"][0]["message"]["note"], "safe")
+        self.assertEqual(report.to_dict()["source_results"][0]["message"], "[REDACTED]")
 
     def test_report_rejects_invalid_v1_mode_and_schema(self) -> None:
         base = dict(started_at=datetime(2026, 8, 14, tzinfo=timezone.utc), finished_at=datetime(2026, 8, 14, 1, tzinfo=timezone.utc), source_results=[], actions={})
@@ -84,13 +83,41 @@ class RuntimeReportTests(unittest.TestCase):
             try:
                 import os
                 os.chdir(root)
-                save_report(Path("var/report.json"), report, directory_fsync=lambda _: (_ for _ in ()).throw(OSError("unsupported")))
+                save_report(Path("var/report.json"), report, directory_fsync=lambda _: (_ for _ in ()).throw(OSError(errno.EINVAL, "unsupported")))
                 self.assertTrue((root / "var/report.json").exists())
             finally:
                 os.chdir(old)
+    def test_report_rejects_unallowlisted_message_and_action_shapes(self) -> None:
+        base = dict(started_at=datetime.now(timezone.utc), finished_at=datetime.now(timezone.utc), mode="live")
+        with self.assertRaises(ValueError):
+            DiscoveryReport(source_results=[{"source": "github", "status": "ok", "hits": 1, "message": {"nested": "no"}}], actions={}, **base).to_dict()
+        with self.assertRaises(ValueError):
+            DiscoveryReport(source_results=[], actions={"pushed": "false"}, **base).to_dict()
+        with self.assertRaises(ValueError):
+            DiscoveryReport(source_results=[], actions={"unexpected": True}, **base).to_dict()
 
+    def test_report_redacts_github_pat_and_basic_authorization(self) -> None:
+        report = DiscoveryReport(
+            datetime.now(timezone.utc), datetime.now(timezone.utc), "live",
+            source_results=[{"source": "github", "status": "error", "hits": 0, "message": "Authorization: Basic Zm9vOmJhcg== github_pat_ABCDEFGHIJKLMNOPQRSTUVWXYZ123456"}],
+            actions={"pushed": False, "readme_updated": False},
+        )
+        self.assertEqual(report.to_dict()["source_results"][0]["message"], "[REDACTED]")
 
-class GitOpsTests(unittest.TestCase):
+    def test_report_fails_for_unexpected_directory_fsync_error(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "var").mkdir()
+            report = DiscoveryReport(datetime.now(timezone.utc), datetime.now(timezone.utc), "live")
+            old = Path.cwd()
+            try:
+                import os
+                os.chdir(root)
+                with self.assertRaisesRegex(OSError, "disk failure"):
+                    save_report(Path("var/report.json"), report, directory_fsync=lambda _: (_ for _ in ()).throw(OSError("disk failure")))
+            finally:
+                os.chdir(old)
+
     def test_prepare_refuses_uncontrolled_dirty_file(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)
