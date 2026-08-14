@@ -12,6 +12,7 @@ from scripts.dsh_discovery.sources import (
     LobstersSource,
     RedditSource,
     SourceStatus,
+    SourceCredentials,
     StackExchangeSource,
     GitLabSource,
     HttpClient,
@@ -46,11 +47,11 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(result.hits, ())
 
     def test_hacker_news_rate_limit_retries_once_without_secret_logging(self):
-        transport = FakeTransport([FakeResponse(429, {"error": "token-secret-value"}), FakeResponse(200, [101]), FakeResponse(200, []), FakeResponse(200, [])])
+        transport = FakeTransport([FakeResponse(429, {"error": "token-secret-value"}), FakeResponse(200, [101]), FakeResponse(200, {"title": "DeepSeek Harness DSH plugin", "text": "release", "url": "https://example.test"}), FakeResponse(200, []), FakeResponse(200, [])])
         client = HttpClient(transport=transport, max_retries=1)
         result = HackerNewsSource(client).discover()
         self.assertEqual(result.status, SourceStatus.OK)
-        self.assertEqual(len(transport.calls), 4)
+        self.assertEqual(len(transport.calls), 5)
         self.assertNotIn("token-secret-value", result.message)
 
     def test_lobsters_parses_rss(self):
@@ -77,13 +78,59 @@ class SourceTests(unittest.TestCase):
         self.assertEqual(result.status, SourceStatus.OK)
         self.assertEqual(len(transport.calls), 2)
 
+    def test_http_client_rejects_non_positive_or_non_finite_timeout(self):
+        for timeout in (0, -1, float("nan"), float("inf"), float("-inf")):
+            with self.subTest(timeout=timeout):
+                with self.assertRaises(ValueError):
+                    HttpClient(timeout=timeout)
+
     def test_http_client_retries_only_retryable_statuses(self):
-        transport = FakeTransport([FakeResponse(403, {"error": "secret"})] * 4)
+        transport = FakeTransport([FakeResponse(403, {"error": "secret"}, {"X-RateLimit-Remaining": "0"})] * 4)
         result = GitHubSource(HttpClient(transport=transport, max_retries=2)).discover()
         self.assertEqual(result.status, SourceStatus.ERROR)
-        self.assertEqual(len(transport.calls), 3)
+        self.assertEqual(len(transport.calls), 2)
         self.assertNotIn("secret", result.message)
 
+    def test_source_budget_caps_retries_as_physical_attempts(self):
+        transport = FakeTransport([FakeResponse(429, {}, {"Retry-After": "1"})] * 4)
+        delays = []
+        result = GitHubSource(
+            HttpClient(transport=transport, max_retries=2, sleep=delays.append),
+            pages=2,
+        ).discover()
+        self.assertEqual(result.status, SourceStatus.ERROR)
+        self.assertEqual(len(transport.calls), 2)
+        self.assertEqual(delays, [1.0])
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_403_retries_only_with_rate_limit_evidence(self):
+        plain = FakeTransport([FakeResponse(403, {})])
+        result = GitHubSource(HttpClient(transport=plain, max_retries=2), pages=1).discover()
+        self.assertEqual(result.status, SourceStatus.ERROR)
+        self.assertEqual(len(plain.calls), 1)
+
+        limited = FakeTransport([FakeResponse(403, {}, {"X-RateLimit-Remaining": "0"}), FakeResponse(200, {"items": []})])
+        result = GitHubSource(HttpClient(transport=limited, max_retries=1), pages=1).discover()
+        self.assertEqual(result.status, SourceStatus.OK)
+        self.assertEqual(len(limited.calls), 2)
+
+    def test_all_sources_filter_irrelevant_hits_and_hn_fetches_metadata(self):
+        github = GitHubSource(HttpClient(transport=FakeTransport([FakeResponse(200, {"items": [{"name": "dsh-plugin", "description": "DeepSeek harness plugin", "html_url": "https://github.com/a/dsh-plugin"}, {"name": "dsh", "description": "data helper", "html_url": "https://github.com/a/dsh"}]})]), max_retries=0), pages=1)
+        self.assertEqual([hit.candidate.name for hit in github.discover().hits], ["dsh-plugin"])
+
+        hn_transport = FakeTransport([FakeResponse(200, [1]), FakeResponse(200, {"title": "DeepSeek Harness DSH plugin", "text": "release", "url": "https://example.test"}), FakeResponse(200, []), FakeResponse(200, [])])
+        result = HackerNewsSource(HttpClient(transport=hn_transport, max_retries=0)).discover()
+        self.assertEqual([hit.candidate.name for hit in result.hits], ["DeepSeek Harness DSH plugin"])
+        self.assertEqual(len(hn_transport.calls), 4)
+
+    def test_credentials_are_injected_without_environment_lookup(self):
+        transport = FakeTransport([FakeResponse(200, {"items": []})])
+        source = GitHubSource(
+            HttpClient(transport=transport, max_retries=0), pages=1,
+            credentials=SourceCredentials(github_token="injected-token"),
+        )
+        with patch.dict(os.environ, {"GITHUB_TOKEN": "environment-token"}, clear=True):
+            source.discover()
+        self.assertEqual(transport.calls[0][0].get_header("Authorization"), "Bearer injected-token")
+
+    def test_query_budget_is_removed_in_favor_of_explicit_request_budget(self):
+        self.assertFalse(hasattr(GitHubSource, "query_budget"))
