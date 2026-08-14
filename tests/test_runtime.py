@@ -101,7 +101,10 @@ class GitOpsTests(unittest.TestCase):
             with self.assertRaisesRegex(GitSafetyError, "uncontrolled changes"):
                 GitOps(repo, runner=runner).prepare()
 
-            self.assertEqual(runner.calls, [("status", "--porcelain=v1")])
+            self.assertEqual(
+                runner.calls,
+                [("diff", "--cached", "--quiet"), ("branch", "--show-current"), ("status", "--porcelain=v1")],
+            )
 
     def test_commit_stages_only_generated_whitelist_and_pushes_material_update(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -135,13 +138,33 @@ class GitOpsTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             runner = _RecordingRunner({
                 ("status", "--porcelain=v1"): "",
-                ("merge-base", "--is-ancestor", "origin/main", "HEAD"): (1, "", ""),
+                ("rev-parse", "HEAD"): "old-tip\n",
+                ("rev-parse", "origin/main"): "new-tip\n",
             })
 
-            with self.assertRaisesRegex(GitSafetyError, "non-fast-forward"):
+            with self.assertRaisesRegex(GitSafetyError, "does not match"):
                 GitOps(Path(directory), runner=runner).prepare()
 
             self.assertIn(("fetch", "origin", "main"), runner.calls)
+    def test_prepare_refuses_pre_existing_staged_changes(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            runner = _RecordingRunner({
+                ("diff", "--cached", "--quiet"): (1, "", ""),
+            })
+
+            with self.assertRaisesRegex(GitSafetyError, "staged changes"):
+                GitOps(Path(directory), runner=runner).prepare()
+
+            self.assertEqual(runner.calls, [("diff", "--cached", "--quiet")])
+
+    def test_prepare_refuses_non_main_branch_or_divergent_tip(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            for outputs, expected in (
+                ({("diff", "--cached", "--quiet"): (0, "", ""), ("branch", "--show-current"): "feature\n"}, "main branch"),
+                ({("diff", "--cached", "--quiet"): (0, "", ""), ("branch", "--show-current"): "main\n", ("status", "--porcelain=v1"): "", ("rev-parse", "HEAD"): "local\n", ("rev-parse", "origin/main"): "remote\n"}, "does not match"),
+            ):
+                with self.subTest(expected=expected), self.assertRaisesRegex(GitSafetyError, expected):
+                    GitOps(Path(directory), runner=_RecordingRunner(outputs)).prepare()
 
 
 class _RecordingRunner:
@@ -152,7 +175,15 @@ class _RecordingRunner:
     def __call__(self, arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
         command = tuple(arguments[1:])
         self.calls.append(command)
-        output = self.outputs.get(command, "")
+        output = self.outputs.get(command)
+        if output is None:
+            defaults = {
+                ("diff", "--cached", "--quiet"): (0, "", ""),
+                ("branch", "--show-current"): "main\n",
+                ("rev-parse", "HEAD"): "tip\n",
+                ("rev-parse", "origin/main"): "tip\n",
+            }
+            output = defaults.get(command, "")
         if isinstance(output, tuple):
             return subprocess.CompletedProcess(arguments, *output)
         return subprocess.CompletedProcess(arguments, 0, output, "")

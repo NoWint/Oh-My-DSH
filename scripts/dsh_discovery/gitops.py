@@ -25,14 +25,19 @@ class GitOps:
         self.runner = runner or self._run
 
     def prepare(self) -> None:
+        if self._command("diff", "--cached", "--quiet", check=False).returncode != 0:
+            raise GitSafetyError("pre-existing staged changes are not permitted")
+        if self._output("branch", "--show-current").strip() != "main":
+            raise GitSafetyError("publication requires the main branch")
         dirty = self._dirty_paths()
         uncontrolled = [path for path in dirty if not self._is_controlled(path)]
         if uncontrolled:
             raise GitSafetyError("uncontrolled changes in worktree: " + ", ".join(uncontrolled))
         self._command("fetch", "origin", "main")
-        result = self._command("merge-base", "--is-ancestor", "origin/main", "HEAD", check=False)
-        if result.returncode != 0:
-            raise GitSafetyError("local branch is behind origin/main; refusing non-fast-forward update")
+        head = self._output("rev-parse", "HEAD").strip()
+        remote = self._output("rev-parse", "origin/main").strip()
+        if not head or head != remote:
+            raise GitSafetyError("local main tip does not match fetched origin/main")
 
     def commit_and_push(self, message: str) -> bool:
         self.prepare()
