@@ -16,7 +16,9 @@ from scripts.dsh_discovery.report import DiscoveryReport, save_report
 class RuntimeReportTests(unittest.TestCase):
     def test_atomic_report_records_structured_run_outcome(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory) / "report.json"
+            root = Path(directory)
+            (root / "var").mkdir()
+            path = Path("var/report.json")
             report = DiscoveryReport(
                 started_at=datetime(2026, 8, 14, tzinfo=timezone.utc),
                 finished_at=datetime(2026, 8, 14, 1, tzinfo=timezone.utc),
@@ -24,21 +26,68 @@ class RuntimeReportTests(unittest.TestCase):
                 source_results=[{"source": "github", "status": "ok", "hits": 2}],
                 actions={"readme_updated": False, "pushed": False},
             )
+            old = Path.cwd()
+            try:
+                import os
+                os.chdir(root)
+                save_report(path, report)
+            finally:
+                os.chdir(old)
+            self.assertEqual(json.loads((root / path).read_text(encoding="utf-8"))["version"], 1)
+            self.assertFalse(list((root / "var").glob(".report.json.*.tmp")))
 
-            save_report(path, report)
+    def test_report_redacts_nested_secrets_and_secret_shaped_values(self) -> None:
+        report = DiscoveryReport(
+            started_at=datetime(2026, 8, 14, tzinfo=timezone.utc),
+            finished_at=datetime(2026, 8, 14, 1, tzinfo=timezone.utc),
+            mode="live",
+            source_results=[{"source": "github", "status": "ok", "hits": 1, "message": {"api_token": "ghp_abcdefghijklmnopqrstuvwxyz", "note": "safe"}}],
+            actions={"pushed": False, "readme_updated": False},
+        )
+        payload = report.to_dict()
+        self.assertEqual(payload["source_results"][0]["message"]["api_token"], "[REDACTED]")
+        self.assertEqual(payload["source_results"][0]["message"]["note"], "safe")
 
-            self.assertEqual(
-                json.loads(path.read_text(encoding="utf-8")),
-                {
-                    "actions": {"pushed": False, "readme_updated": False},
-                    "finished_at": "2026-08-14T01:00:00+00:00",
-                    "mode": "dry-run",
-                    "source_results": [{"hits": 2, "source": "github", "status": "ok"}],
-                    "started_at": "2026-08-14T00:00:00+00:00",
-                    "version": 1,
-                },
-            )
-            self.assertFalse(list(Path(directory).glob(".report.json.*.tmp")))
+    def test_report_rejects_invalid_v1_mode_and_schema(self) -> None:
+        base = dict(started_at=datetime(2026, 8, 14, tzinfo=timezone.utc), finished_at=datetime(2026, 8, 14, 1, tzinfo=timezone.utc), source_results=[], actions={})
+        with self.assertRaises(ValueError):
+            DiscoveryReport(mode="unknown", **base).to_dict()
+        with self.assertRaises(ValueError):
+            DiscoveryReport(mode="live", source_results=[{"source": "github", "status": "bad", "hits": 1}], actions={}, **{key: value for key, value in base.items() if key not in ("source_results", "actions")}).to_dict()
+        with self.assertRaises(ValueError):
+            DiscoveryReport(mode="live", source_results=[{"source": "github", "status": "ok", "hits": 1, "unexpected": True}], actions={}, **{key: value for key, value in base.items() if key not in ("source_results", "actions")}).to_dict()
+
+    def test_report_rejects_absolute_traversal_and_symlink_escape(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "var").mkdir()
+            report = DiscoveryReport(datetime.now(timezone.utc), datetime.now(timezone.utc), "live")
+            old = Path.cwd()
+            try:
+                import os
+                os.chdir(root)
+                for path in (Path("../escape.json"), Path("/tmp/escape.json")):
+                    with self.assertRaises(ValueError):
+                        save_report(path, report)
+                (root / "var" / "link").symlink_to(root / "outside", target_is_directory=False)
+                with self.assertRaises(ValueError):
+                    save_report(Path("var/link/report.json"), report)
+            finally:
+                os.chdir(old)
+
+    def test_report_replace_fsync_failure_is_tolerated(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "var").mkdir()
+            report = DiscoveryReport(datetime.now(timezone.utc), datetime.now(timezone.utc), "live")
+            old = Path.cwd()
+            try:
+                import os
+                os.chdir(root)
+                save_report(Path("var/report.json"), report, directory_fsync=lambda _: (_ for _ in ()).throw(OSError("unsupported")))
+                self.assertTrue((root / "var/report.json").exists())
+            finally:
+                os.chdir(old)
 
 
 class GitOpsTests(unittest.TestCase):
