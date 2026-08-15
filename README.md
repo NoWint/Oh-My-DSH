@@ -38,7 +38,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~747+** |
+| Curated & validated entries / 精选收录 | **~752+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
@@ -212,6 +212,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 10 | [Kelai141/dsh-mobile-apk](https://github.com/Kelai141/dsh-mobile-apk) | Android APK shell with WebView UI + Termux runtime snapshot — runs on device without root. / Android APK 壳：WebView UI + Termux 运行时，免 ROOT 可直接运行。 |
 | ⭐ 2 | [qiannianhuanxiang/DSHA](https://github.com/qiannianhuanxiang/DSHA) | Android launcher for DeepSeek Harness with proot+Ubuntu, one-click setup without root or Termux. / DSH 安卓启动器：内置 proot+Ubuntu，免 ROOT 免 Termux 一键运行。 |
 | ⭐ 1 | [thness/dsh-mobile](https://github.com/thness/dsh-mobile) | DeepSeek Harness Android — bundled Node.js runtime + official Web UI, standalone app out of the box. / DSH Android 版：内嵌 Node.js 运行时 + 官方 Web UI 开箱即用。 |
+| ⭐ 2 | [YiYan129600/dsh-mobile-access](https://github.com/YiYan129600/dsh-mobile-access) | One-page mobile access setup: Tailscale/LAN detection, offline QR code scan-to-open, insecure-origin polyfill for safe remote DSH on phone. / DSH 手机端一键接入插件：Tailscale/LAN 检测、扫码离线打开、不安全来源 polyfill。 |
 | ⭐ 1 | [Bernardxu123/dsh-mobile-gate](https://github.com/Bernardxu123/dsh-mobile-gate) | LAN mobile gateway for DSH: first-visit approval, per-device tokens, rate limiting, mobile layout. / DSH 局域网手机网关：本机审批、设备令牌、限流、手机端适配。 |
 | ⭐ 0 | [nolimit368/dsh-win-launcher](https://github.com/nolimit368/dsh-win-launcher) | Windows silent launcher for DeepSeek Harness — auto-starts dsh web with minimized tray icon on boot; zero console popup. / DSH Windows 静默启动器：开机自启，最小化托盘图标，零控制台弹窗。 |
 | ⭐ 2 | [RAFOLIE/dsh-desktop-windowos](https://github.com/RAFOLIE/dsh-desktop-windowos) | DSH Windows desktop shell — Tauri v2, tray resident, native webchat in shell window, task-done system toasts, single portable exe (~4.4 MB). / DSH Windows 桌面壳：Tauri v2，托盘常驻，原生 webchat 内嵌窗口，任务完成 toast 通知，单文件便携 exe。 |
@@ -302,6 +303,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 |-------|------|---------------------|
 | ⭐ 2.4k | [whiteguo233/OpenBiliClaw](https://github.com/whiteguo233/OpenBiliClaw) | Local-first cross-platform AI content discovery agent (Bilibili, XHS, Douyin, YouTube, X, Zhihu, Reddit) — supports DSH plugin. / 本地优先跨平台 AI 内容发现 Agent，支持 DSH 插件。 |
 | ⭐ 126 | [Lum1104/dsh-browser](https://github.com/Lum1104/dsh-browser) | Chrome sidebar extension: let DSH operate your browser directly — no vision capabilities required. / Chrome 侧边栏扩展：DSH 直接操作浏览器，无需视觉能力。 |
+| ⭐ 4 | [huey1in/trio](https://github.com/huey1in/trio) | DSH 全家桶：browser automation + MCP server + GitHub integration — one install, three superpowers. / 浏览器自动化 + MCP Server + GitHub 集成，一条命令安装。 |
 | ⭐ 2 | [wqty123/dsh-browser](https://github.com/wqty123/dsh-browser) | Shared real browser plugin for DeepSeek Harness — persistent profile with human-in-the-loop login and safe agent browser tools. / DSH 共享真实浏览器插件：持久化登录态 + 人审登录 + 安全浏览器工具。 |
 | ⭐ 2 | [Tianyu209/dsh-browser-companion](https://github.com/Tianyu209/dsh-browser-companion) | Personal DSH browser plugin: persistent profile, visible window, human-in-the-loop login, and safe agent browser tools. / 个人 DSH 浏览器插件：持久化配置、可见窗口、人审登录与安全浏览器工具。 |
 | ⭐ 2.4k | [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) | Web UI plugin & skin collection: task board, Git graph, right panel, mobile UI, pet, live token stats, skin center. / Web UI 插件与皮肤合集：任务板、Git 图、右侧面板、移动端 UI、宠物、token 统计、皮肤中心。 |
@@ -362,6 +364,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [MashedPotato817/dsh-git-plugin](https://github.com/MashedPotato817/dsh-git-plugin) | Git workflow plugin: slash commands + read-only git tools. / Git workflow 插件：slash 命令 + 只读 git 工具。 |
 | ⭐ 2 | [kingjly/dsh-plugin-builder](https://github.com/kingjly/dsh-plugin-builder) | Agent Skill that turns a capability into an installable DSH plugin. / 把能力做成可安装 dsh 插件的 Agent Skill。 |
 | ⭐ 2 | [PerryLink/dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide) | Everything you need to build DSH plugins: official docs archive, Cordis primer, 15-repo deep-dive. / DSH 插件构建完全指南：EN/ZH 文档 + Cordis 入门。 |
+| ⭐ 3 | [jkrandom-sudo/dsh-ci-doctor](https://github.com/jkrandom-sudo/dsh-ci-doctor) | CI failure diagnosed before you open the logs: watches GitHub Actions for new failures, turns raw logs into structured diagnosis cards with recurrence detection. / CI 失败诊断：监视 GitHub Actions 新失败，原始日志转结构化诊断卡，签名账本识别复发问题。 |
 | ⭐ 3 | [PerryLink/dsh-output-styles](https://github.com/PerryLink/dsh-output-styles) | Claude Code outputStyles for DSH — session-scoped, durable, runtime-switchable model output styles via /style command and output_style storage domain. / DSH Claude Code 风格输出样式插件：会话级、持久化、运行时可切换模型输出风格。 |
 | ⭐ 2 | [kaziii/dsh-github-connector](https://github.com/kaziii/dsh-github-connector) | GitHub connector: one-click connect, create/review/merge PRs from the conversation. / GitHub 连接器：一键连接，创建/审查/合并 PR。 |
 | ⭐ 1 | [PangYiMing/dsh-bisect-debug](https://github.com/PangYiMing/dsh-bisect-debug) | Bisect bugs (code/boundary/commit) to find root cause. / 二分法定位 bug 根因（代码/边界/commit）。 |
@@ -936,6 +939,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [JoukoPuro/dsh-prompt-polish](https://github.com/JoukoPuro/dsh-prompt-polish) | Icon-only composer button that rewrites prompts via connected LLM with balanced/concise/detailed/code styles. / 仅图标 composer 按钮，通过连接的 LLM 以均衡/简洁/详细/代码风格改写提示词。 |
 | ⭐ 1 | [Jesse-njx/dsh-skillport](https://github.com/Jesse-njx/dsh-skillport) | Every skill you already have — Claude Code, Codex, Cursor, Gemini CLI — works in DSH: Agent Skills Sync. / 你已有的所有技能（Claude Code/Codex/Cursor/Gemini CLI）在 DSH 中运行：Agent 技能同步。 |
 | ⭐ 2 | [sulfide2085/dsh-skill-manager](https://github.com/sulfide2085/dsh-skill-manager) | Unified skill manager for DSH/Codex/Claude: hot toggle, GitHub skill-market one-click install, local ZIP import, conflict detection. / 跨工具统一技能管理器：DSH/Codex/Claude 技能热启停、GitHub 市场一键安装、本地 ZIP 导入。 |
+| ⭐ 2 | [Inspireason/dsh-skill-organizer](https://github.com/Inspireason/dsh-skill-organizer) | Skill organizer for DSH: conflict detection, dependency tracking, batch enable/disable, organized by feature area. / DSH 技能整理器：冲突检测、依赖追踪、批量启停、按功能分类组织。 |
 | ⭐ 1 | [cheshireez/dsh-skill-hub](https://github.com/cheshireez/dsh-skill-hub) | DeepSeek Harness Web GUI skill hub: browse/search full local skill directory, enable/disable, view source, diagnose, create new skills. / DSH Web GUI 技能中枢：浏览/搜索完整本地技能目录、启用/禁用、查看正文、排查诊断、新建技能。 |
 | ⭐ 1 | [lywusichen/dsh-skill-panel](https://github.com/lywusichen/dsh-skill-panel) | DeepSeek Harness skill floating panel plugin: sidebar skill button, one-click view loaded skills and open local directory. / DSH 技能悬浮窗插件：侧边栏技能按钮，一键查看已加载技能并打开本地目录。 |
 | ⭐ 1 | [winterhuan/dsh-skills-viewer](https://github.com/winterhuan/dsh-skills-viewer) | Read-only Skills settings page plugin for DeepSeek Harness Web. / DSH Web 只读技能设置页插件。 |
@@ -1150,15 +1154,15 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| **Curated收录** | **~747+** |
+| **Curated收录** | **~752+** |
 | Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.4k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-15 · +28 new resources across 9 categories, ~6 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~747+*
-*最后更新：2026-08-15 · 本轮新增 28 个资源，覆盖 9 个类别，~6 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 747+ 个*
+*Last updated: 2026-08-15 · +5 new resources across 5 categories, ~6 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~752+*
+*最后更新：2026-08-15 · 本轮新增 5 个资源，覆盖 5 个类别，~6 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 752+ 个*
 
 ---
 
