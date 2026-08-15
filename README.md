@@ -38,11 +38,11 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~719+** |
+| Curated & validated entries / 精选收录 | **~747+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
-| Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.1k |
+| Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.4k |
 | Primary languages / 主要语言 | TypeScript · JavaScript · Python |
 | Categories covered / 覆盖类目 | **19** (see Table of Contents) |
 | Last full scan / 最近扫描 | 2026-08-15 · **+12 new** resources across 9 categories, **~12** star counts refreshed |
@@ -229,6 +229,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [InkWord01/DeepSeekHarness----Desktop](https://github.com/InkWord01/DeepSeekHarness----Desktop) | DeepSeek Harness desktop client: double-click to use, bundled backend, tray resident, sync with official releases. / DSH 桌面客户端：双击即用，内置后端，托盘常驻。 |
 | ⭐ 27 | [RongleCat/deepseek-app](https://github.com/RongleCat/deepseek-app) | Desktop workbench for DeepSeek Harness — Grok App visual shell with unofficial DSH engine integration. / DSH 桌面工作台：Grok App 视觉外壳，非官方 DSH 引擎集成。 |
 | ⭐ 26 | [ipfred/deepseek-harness-app](https://github.com/ipfred/deepseek-harness-app) | Package the DSH Web UI (127.0.0.1:3080) into a native cross-platform desktop app via Pake/Tauri — macOS, Windows, Linux builds. / 用 Pake/Tauri 将 DSH Web UI 打包为跨平台原生桌面应用（macOS/Windows/Linux）。 |
+| ⭐ 9 | [qyqy-1109/deepseek-harness-desktop](https://github.com/qyqy-1109/deepseek-harness-desktop) | Self-contained Windows desktop shell for DeepSeek Harness — auto-starts dsh web, plus a subtle Codex-flavored theme plugin. / 自包含 Windows 桌面壳：自动启动 dsh web，附带 Codex 风格主题插件。 |
+| ⭐ 1 | [abab996/dsh-desktop-little](https://github.com/abab996/dsh-desktop-little) | Ultra-lightweight DSH desktop app (Python + PyWebview) — only 18 MB, no bundled browser required. / 超轻量 DSH 桌面端（Python + PyWebview），仅 18MB，无需捆绑浏览器。 |
 ---
 
 ## ⌨️ Terminal TUI / 终端 TUI
@@ -302,7 +304,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 126 | [Lum1104/dsh-browser](https://github.com/Lum1104/dsh-browser) | Chrome sidebar extension: let DSH operate your browser directly — no vision capabilities required. / Chrome 侧边栏扩展：DSH 直接操作浏览器，无需视觉能力。 |
 | ⭐ 2 | [wqty123/dsh-browser](https://github.com/wqty123/dsh-browser) | Shared real browser plugin for DeepSeek Harness — persistent profile with human-in-the-loop login and safe agent browser tools. / DSH 共享真实浏览器插件：持久化登录态 + 人审登录 + 安全浏览器工具。 |
 | ⭐ 2 | [Tianyu209/dsh-browser-companion](https://github.com/Tianyu209/dsh-browser-companion) | Personal DSH browser plugin: persistent profile, visible window, human-in-the-loop login, and safe agent browser tools. / 个人 DSH 浏览器插件：持久化配置、可见窗口、人审登录与安全浏览器工具。 |
-| ⭐ 2.1k | [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) | Web UI plugin & skin collection: task board, Git graph, right panel, mobile UI, pet, live token stats, skin center. / Web UI 插件与皮肤合集：任务板、Git 图、右侧面板、移动端 UI、宠物、token 统计、皮肤中心。 |
+| ⭐ 2.4k | [zhu1090093659/dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) | Web UI plugin & skin collection: task board, Git graph, right panel, mobile UI, pet, live token stats, skin center. / Web UI 插件与皮肤合集：任务板、Git 图、右侧面板、移动端 UI、宠物、token 统计、皮肤中心。 |
 | ⭐ 833 | [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | Complete sidebar workspace: third-party tab extensions, file editing, terminal, Git, sub-agents. / 完整侧边栏工作台：三方 Tab 扩展、文件编辑/终端/Git/子代理。 |
 | ⭐ 82 | [liustack/modsearch](https://github.com/liustack/modsearch) | Web search plugin: ask the web or X, get structured JSON evidence with citations. / Web 插件：Ask the web or X，返回结构化 JSON 证据（搜索、引用）。 |
 | ⭐ 24 | [hanelalo/browser-bridge](https://github.com/hanelalo/browser-bridge) | Let your agent truly操控 your browser window like a human. / 让 Agent 像人一样操控浏览器窗口。 |
@@ -621,7 +623,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
-| ⭐ 293 | [NanmiCoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | AgentTeams plugin for multi-agent collaboration in DeepSeek Harness. / AgentTeams 插件：多 Agent 协作。 |
+| ⭐ 296 | [NanmiCoder/dsh-agent-teams](https://github.com/NanmiCoder/dsh-agent-teams) | AgentTeams plugin for multi-agent collaboration in DeepSeek Harness. / AgentTeams 插件：多 Agent 协作。 |
 | ⭐ 114 | [hewzhew/dsh-agent-rp](https://github.com/hewzhew/dsh-agent-rp) | SillyTavern migration and next-generation Agent RP for DSH. / SillyTavern 迁移与下一代 DSH Agent RP。 |
 | ⭐ 5 | [R3alloc/dsh-session-deeplink](https://github.com/R3alloc/dsh-session-deeplink) | DeepSeek Harness plugin for shareable session deep links — generate and share persistent session URLs. / DSH 会话深链接插件：生成并分享持久化会话 URL。 |
 | ⭐ 25 | [zenx0x/allinluna](https://github.com/zenx0x/allinluna) | Resource-aware multi-agent orchestration for Codex and DeepSeek Harness (All in Flash DSH plugin). / 资源感知多 Agent 编排，支持 Codex 与 DSH（All in Flash DSH 插件）。 |
@@ -661,7 +663,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
 | ⭐ 552 | [Small-tailqwq/dsh-deep-whale](https://github.com/Small-tailqwq/dsh-deep-whale) | Whale girl skin series (Deep Sea Maid Atelier), CC BY-NC-SA 4.0. / 鲸鱼娘皮肤系列（深海女仆工坊），CC BY-NC-SA 4.0。 |
-| ⭐ 153 | [vlln/whale-girl](https://github.com/vlln/whale-girl) | Desktop pet (QQ pet style): draggable/feeding/playing, accumulation-type companion. / 桌面宠物插件（QQ 宠物形态）：拖拽/投喂/玩耍，积累型伙伴。 |
+| ⭐ 157 | [vlln/whale-girl](https://github.com/vlln/whale-girl) | Desktop pet (QQ pet style): draggable/feeding/playing, accumulation-type companion. / 桌面宠物插件（QQ 宠物形态）：拖拽/投喂/玩耍，积累型伙伴。 |
 | ⭐ 17 | [lhh010/dsh-ui-whale](https://github.com/lhh010/dsh-ui-whale) | Hand-drawn pixel whale companion: blinking, tail-waving, water-spouting, heart-bubbles, sleeping. / 全手绘像素鲸鱼伙伴：眨眼/摆尾/喷水/冒爱心/睡觉。 |
 | ⭐ 86 | [Nagi-ovo/dsh-visualize](https://github.com/Nagi-ovo/dsh-visualize) | In-chat generative UI: interactive HTML cards streamed into conversation, whale-blue theme. / 对话内生成式 UI：交互式 HTML 卡片流式渲染，鲸鱼蓝主题跟随。 |
 | ⭐ 373 | [Nagi-ovo/dsh-ads](https://github.com/Nagi-ovo/dsh-ads) | 2005-style Chinese web sidebar ads / in-chat info stream / corner popups (fictional assets). / 2005 年中文站点风格侧栏广告 / 角落弹窗（虚构素材）。 |
@@ -699,8 +701,17 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [LucasN0820/dsh-skin-claude-code](https://github.com/LucasN0820/dsh-skin-claude-code) | Claude Code-inspired skin for the DeepSeek Harness web GUI — replicates CC's dark layout and typography. / 复刻 Claude Code 深色布局与字体的 DSH 皮肤插件。 |
 | ⭐ 1 | [Lzh-12/dsh-skin-picker](https://github.com/Lzh-12/dsh-skin-picker) | 10 preset skin themes (light/dark dual palette) for DSH Web GUI with in-settings switching and cross-device settings.yaml sync. / DSH 换肤插件：10 套预设皮肤（亮暗双色板），设置页行内切换，settings.yaml 跨设备同步。 |
 | ⭐ 4 | [cyanfish-x/dsh-live2d-pets](https://github.com/cyanfish-x/dsh-live2d-pets) | Live2D desktop companion for DeepSeek Harness — mirrors agent state in real time, interactive pet with permissively licensed preset models. / DSH Live2D 桌宠：实时镜像 Agent 状态，互动陪伴，内置宽松许可预设模型。 |
+| ⭐ 33 | [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) | Full pipeline desktop pet plugin for DSH — AI prompt → green screen video → transparent animation → installable plugin. Complete reproducible asset chain. / DSH 桌面宠物插件全流程生成链：AI 提示词 → 绿幕视频 → 透明动画 → 可安装插件。 |
+| ⭐ 28 | [liyupi/dsh-kun-like-pet](https://github.com/liyupi/dsh-kun-like-pet) | Kun-like desktop pet for DSH — 9 state-driven actions with completion sound effect 「你干嘛~哎哟」. / 「鸡哥」桌宠：9 种动作状态 + 任务完成播放经典语音。 |
+| ⭐ 21 | [dancingmemory/dskin](https://github.com/dancingmemory/dskin) | DSKIN · DSH cartoon pixel skin plugin — walking, blinking pixel pets; original UI untouched. / DSH 卡通像素皮肤插件：散步眨眼像素宠物，不改动原始界面。 |
 | ⭐ 3 | [NoNameLeGo/dsh-catppuccin](https://github.com/NoNameLeGo/dsh-catppuccin) | Catppuccin themes for DSH Web GUI — Latte / Frappé / Macchiato / Mocha four themes one-click switch. / DSH Web GUI Catppuccin 主题插件：Latte / Frappé / Macchiato / Mocha 四种主题一键切换。 |
 | ⭐ 1 | [BorisShaw6/dsh-cyber-pet](https://github.com/BorisShaw6/dsh-cyber-pet) | "Cyber Whale" pet for DSH Web: hover, feedable, color-customizable, shows token usage/limits/context/quota/dialog counts in real time, with emotion system and growth levels. / DSH Cyber 鲸鱼桌宠：悬浮可喂食、实时显示 token/余额/上下文用量，含情感系统与成长等级。 |
+| ⭐ 12 | [oil-oil/dsh-theme](https://github.com/oil-oil/dsh-theme) | Live theme editor for DeepSeek Harness: curated palettes, typography controls, and real-time preview. / DSH 实时主题编辑器：精选配色板、字体控制、实时预览。 |
+| ⭐ 11 | [KinGao294/dsh-skin](https://github.com/KinGao294/dsh-skin) | Skin switcher + custom wallpaper for DSH: --dsw-alias-* palettes, translucent wallpaper with opacity/blur controls, persisted per browser. / DSH 换肤与壁纸插件：--dsw-alias-* 配色、透明壁纸（透明度/模糊），浏览器级持久化。 |
+| ⭐ 10 | [suzike/freestyle-dsh-theme](https://github.com/suzike/freestyle-dsh-theme) | DSH theme experience plugin: OKLCH color-space proposals + theme designer with cross-restart persistence. / DSH 主题体验插件：OKLCH 色彩空间提案 + 主题设计器，跨重启持久化。 |
+| ⭐ 4 | [zhijun-dai/Catppuccin-dsh-theme](https://github.com/zhijun-dai/Catppuccin-dsh-theme) | Soothing pastel Catppuccin theme for DeepSeek Harness Web GUI. / 柔和马卡龙色系 Catppuccin 主题，专为 DSH Web GUI 打造。 |
+| ⭐ 4 | [nevertoday/dsh-theme-plugin](https://github.com/nevertoday/dsh-theme-plugin) | Chinese traditional color palette as a DSH theme pack. / 中国传统色主题包，一套主题内嵌多种经典色。 |
+| ⭐ 4 | [drfccv/dsh-theme-neko](https://github.com/drfccv/dsh-theme-neko) | Nachoneko (甘城猫猫) themed skin for the DeepSeek Harness web GUI. / 甘城猫猫主题皮肤，专为 DSH Web GUI。 |
 
 ---
 
@@ -756,6 +767,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [Liu-ty/dsh-balance-display](https://github.com/Liu-ty/dsh-balance-display) | DeepSeek API balance overlay for DeepSeek Harness. / DeepSeek API 余额叠加层。 |
 | ⭐ 5 | [juhe291/dsh-token-panel](https://github.com/juhe291/dsh-token-panel) | A corner HUD for DeepSeek Harness that shows your session's token pressure, per-model cost, and trend curves. / DSH 角落 Token 面板：会话级 token 用量、按模型费用与趋势曲线。 |
 | ⭐ 11 | [feiyang-dev/dsh-usage-plugin](https://github.com/feiyang-dev/dsh-usage-plugin) | DeepSeek Harness usage & cost plugin — per-call token count, cache-hit stats, peak/off-peak billing, balance check, CSV/JSON/PNG export. Desktop one-click install. / DSH 用量消耗插件：逐次调用 token 统计、缓存命中、峰谷计费、余额查询，支持 CSV/JSON/PNG 导出。 |
+| ⭐ 6 | [Nanki-nn/dsh-answer-pet](https://github.com/Nanki-nn/dsh-answer-pet) | Answer pet: animated companion that responds to DSH agent interactions with contextual feedback. / 回答宠物：随 DSH Agent 交互做出响应反馈的动画陪伴。 |
 | ⭐ 4 | [Smalldy/godot-bridge](https://github.com/Smalldy/godot-bridge) | DSH plugin that launches and drives a running Godot 4.x game through it — agent-controlled game automation. / DSH 与 Godot 4.x 游戏桥接：通过 DSH Agent 启动并控制运行中的 Godot 游戏。 |
 | ⭐ 2 | [LemCAE/dsh-balance](https://github.com/LemCAE/dsh-balance) | Account balance + session cost estimation for DeepSeek Harness. / DSH 账户余额与会话费用估算插件。 |
 | ⭐ 1 | [ArcanePivot/dsh-api-balance](https://github.com/ArcanePivot/dsh-api-balance) | DeepSeek API balance widget for DSH Web UI — view balance from the host side. / DSH Web UI API 余额组件：从主机侧查看 DeepSeek API 余额。 |
@@ -883,6 +895,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
 | ⭐ 4 | [dhicoc/dsh-reverse-skill](https://github.com/dhicoc/dsh-reverse-skill) | Complete reverse-skill (85 SKILL.md) as a DSH Cordis plugin — offline/air-gapped skill pack for any DSH environment. / DSH Cordis 插件版逆向技能：85 个 SKILL.md，离线可用，适配任意 DSH 环境。 |
+| ⭐ 2 | [wellorbetter/dsh-product-delivery-workflow](https://github.com/wellorbetter/dsh-product-delivery-workflow) | 100% AI-native product delivery workflow: research → PRD → OpenSpec → parallel multi-agent → review loops → tests → release audit, fully closed-loop. / 100% AI 原生产品交付工作流：从研究到发布全流程闭环，自带闭环验证。 |
 | ⭐ 3 | [Relistencode/dsh-extension-hub](https://github.com/Relistencode/dsh-extension-hub) | CLI + settings-page UI for managing DSH skills and MCP servers with zh/en i18n and Claude/Codex import compatibility. / DSH 技能与 MCP 服务器管理面板：CLI + 设置页 UI，中英双语，支持 Claude/Codex 导入。 |
 | ⭐ 1 | [KiWi233333/dsh-creator](https://github.com/KiWi233333/dsh-creator) | Build verified extensions for DeepSeek Harness with an installable agent skill — craft plugins via natural language. / 用可安装 Agent 技能构建验证通过的 DSH 扩展：通过自然语言创建插件。 |
 | ⭐ 1 | [Suida/dsh-skills](https://github.com/Suida/dsh-skills) | Curated DSH agent skills collection with categorized templates for common development and automation workflows. / 精选 DSH Agent 技能集：按工作流分类的模板集合，覆盖常用开发场景。 |
@@ -944,7 +957,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
-| ⭐ 581 | [sandbaseai/sandbase-harness](https://github.com/sandbaseai/sandbase-harness) | Open-source CMA-compatible agent runtime for any model — MCP tools, sandboxed sessions, audit/replay, local console. DSH bundle included. / 开源 CMA 兼容 agent 运行时，含 MCP 工具/沙箱会话/审计回放，内置 DSH bundle。 |
+| ⭐ 584 | [sandbaseai/sandbase-harness](https://github.com/sandbaseai/sandbase-harness) | Open-source CMA-compatible agent runtime for any model — MCP tools, sandboxed sessions, audit/replay, local console. DSH bundle included. / 开源 CMA 兼容 agent 运行时，含 MCP 工具/沙箱会话/审计回放，内置 DSH bundle。 |
 | ⭐ 1 | [jorinyang/dsh-clawshell](https://github.com/jorinyang/dsh-clawshell) | ClawShell vision as DSH plugins: self-perception, closed-loop self-adaptation, trust/niche swarm, insight mining, knowledge genome. / ClawShell 视觉作为 DSH 插件：自我感知、闭环自适应、信任/利基蜂群、洞察挖掘、知识基因组。 |
 | ⭐ 2 | [ottotheagent/otto-dsh](https://github.com/ottotheagent/otto-dsh) | Book real flights, hotels & cars with Otto from DeepSeek Harness — the otto-travel MCP connector as a dsh plugin. / 通过 DSH 使用 Otto 预订航班/酒店/租车。 |
 | ⭐ 2 | [yuhui-sama/dsh-agentsoul](https://github.com/yuhui-sama/dsh-agentsoul) | Local personality, memory and distillation layer for DSH — SOUL/IDENTITY/USER/STATE persona files, cross-session memory, auto-loaded on startup. / DSH 本地人格与记忆蒸馏层：SOUL/IDENTITY/USER/STATE 人格文件，跨会话记忆，启动时自动加载。 |
@@ -1137,15 +1150,15 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| **Curated收录** | **~707+** |
-| Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.1k |
+| **Curated收录** | **~747+** |
+| Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.4k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-15 · +9 new resources added across 6 categories, ~8 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~728+*
-*最后更新：2026-08-15 · 本轮新增 9 个资源，覆盖 6 个类别，~8 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 728+ 个*
+*Last updated: 2026-08-15 · +28 new resources across 9 categories, ~6 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~747+*
+*最后更新：2026-08-15 · 本轮新增 28 个资源，覆盖 9 个类别，~6 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 747+ 个*
 
 ---
 
