@@ -38,14 +38,14 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~707+** |
+| Curated & validated entries / 精选收录 | **~719+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
 | Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.1k |
 | Primary languages / 主要语言 | TypeScript · JavaScript · Python |
 | Categories covered / 覆盖类目 | **19** (see Table of Contents) |
-| Last full scan / 最近扫描 | 2026-08-15 · **+7 new** resources across 5 categories, **~10** star counts refreshed |
+| Last full scan / 最近扫描 | 2026-08-15 · **+12 new** resources across 9 categories, **~12** star counts refreshed |
 
 ---
 
@@ -210,6 +210,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [thness/dsh-mobile](https://github.com/thness/dsh-mobile) | DeepSeek Harness Android — bundled Node.js runtime + official Web UI, standalone app out of the box. / DSH Android 版：内嵌 Node.js 运行时 + 官方 Web UI 开箱即用。 |
 | ⭐ 1 | [Bernardxu123/dsh-mobile-gate](https://github.com/Bernardxu123/dsh-mobile-gate) | LAN mobile gateway for DSH: first-visit approval, per-device tokens, rate limiting, mobile layout. / DSH 局域网手机网关：本机审批、设备令牌、限流、手机端适配。 |
 | ⭐ 0 | [nolimit368/dsh-win-launcher](https://github.com/nolimit368/dsh-win-launcher) | Windows silent launcher for DeepSeek Harness — auto-starts dsh web with minimized tray icon on boot; zero console popup. / DSH Windows 静默启动器：开机自启，最小化托盘图标，零控制台弹窗。 |
+| ⭐ 2 | [RAFOLIE/dsh-desktop-windowos](https://github.com/RAFOLIE/dsh-desktop-windowos) | DSH Windows desktop shell — Tauri v2, tray resident, native webchat in shell window, task-done system toasts, single portable exe (~4.4 MB). / DSH Windows 桌面壳：Tauri v2，托盘常驻，原生 webchat 内嵌窗口，任务完成 toast 通知，单文件便携 exe。 |
 
 
 | ⭐ 5 | [majiayu000/dsh-desk](https://github.com/majiayu000/dsh-desk) | Installable Tauri desktop distribution for DeepSeek Harness with bundled runtime — one-click setup, no Node.js needed. / 可安装 Tauri 桌面版 DSH：内置运行时，一键部署无需 Node.js。 |
@@ -353,11 +354,14 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [MashedPotato817/dsh-git-plugin](https://github.com/MashedPotato817/dsh-git-plugin) | Git workflow plugin: slash commands + read-only git tools. / Git workflow 插件：slash 命令 + 只读 git 工具。 |
 | ⭐ 2 | [kingjly/dsh-plugin-builder](https://github.com/kingjly/dsh-plugin-builder) | Agent Skill that turns a capability into an installable DSH plugin. / 把能力做成可安装 dsh 插件的 Agent Skill。 |
 | ⭐ 2 | [PerryLink/dsh-plugin-guide](https://github.com/PerryLink/dsh-plugin-guide) | Everything you need to build DSH plugins: official docs archive, Cordis primer, 15-repo deep-dive. / DSH 插件构建完全指南：EN/ZH 文档 + Cordis 入门。 |
+| ⭐ 3 | [PerryLink/dsh-output-styles](https://github.com/PerryLink/dsh-output-styles) | Claude Code outputStyles for DSH — session-scoped, durable, runtime-switchable model output styles via /style command and output_style storage domain. / DSH Claude Code 风格输出样式插件：会话级、持久化、运行时可切换模型输出风格。 |
 | ⭐ 2 | [kaziii/dsh-github-connector](https://github.com/kaziii/dsh-github-connector) | GitHub connector: one-click connect, create/review/merge PRs from the conversation. / GitHub 连接器：一键连接，创建/审查/合并 PR。 |
 | ⭐ 1 | [PangYiMing/dsh-bisect-debug](https://github.com/PangYiMing/dsh-bisect-debug) | Bisect bugs (code/boundary/commit) to find root cause. / 二分法定位 bug 根因（代码/边界/commit）。 |
 | ⭐ 1 | [CrazyShout/dsh-ssh-remote](https://github.com/CrazyShout/dsh-ssh-remote) | SSH remote workspaces: browse/read/write remote files, run remote commands. / SSH 远程工作区：浏览/读写远程文件，运行远程命令。 |
 | ⭐ 1 | [Simon314620/dsh-turn-index](https://github.com/Simon314620/dsh-turn-index) | Sidebar conversation turn index plugin. / 侧边栏对话轮次索引插件。 |
+| ⭐ 0 | [Apageoflove/DSH-changeproof](https://github.com/Apageoflove/DSH-changeproof) | ChangeProof for DSH: after code changes, verifies the modified lines are actually covered by tests — line-level coverage check with evidence binding. / DSH 变更证明插件：代码改动后逐行核对测试覆盖，证据绑定代码指纹，未覆盖不给 VERIFIED。 |
 | ⭐ 1 | [zhouzhencheng07/dsh-tavily-search](https://github.com/zhouzhencheng07/dsh-tavily-search) | Free keyless Tavily web search tool. / 免费 keyless Tavily web search 工具。 |
+| ⭐ 2 | [xiaohj233/dsh-tavily-search-provider](https://github.com/xiaohj233/dsh-tavily-search-provider) | Tavily search provider for DSH with full search-control mapping, credential-backed API key UI, and guarded rc.6 compatibility patches. / DSH Tavily 搜索 Provider：完整搜索参数映射、凭据密钥 UI、兼容 rc.6 补丁。 |
 | ⭐ 1 | [qingtian3a/dsh-event-auditor](https://github.com/qing3a/dsh-event-auditor) | Event stream audit panel: observe event types, dispatch patterns, counts, recent events. / 事件流审计面板：观察事件类型/分发模式/计数/最近事件。 |
 | ⭐ 1 | [xilin3/dsh-prompt-persona](https://github.com/xilin3/dsh-prompt-persona) | Edit system prompt from Settings page with live preview. / 从设置页编辑 system prompt，实时预览。 |
 | ⭐ 1 | [Jesse-njx/dsh-cowork](https://github.com/Jesse-njx/dsh-cowork) | Read + write office documents & notebooks (xlsx, pdf, docx, pptx, ipynb) + MCP server. / Office 文档读写：xlsx/pdf/docx/pptx/ipynb + MCP server。 |
@@ -569,6 +573,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 6 | [hxyz486/dsh-archived-conversations](https://github.com/hxyz486/dsh-archived-conversations) | Archived conversation viewer for DSH: view, restore, and delete archived sessions from the Settings page. / DSH 归档对话查看器：在设置页查看、恢复与删除归档会话。 |
 | ⭐ 5 | [vlln/dsh-paste-input](https://github.com/vlln/dsh-paste-input) | Ctrl+V paste + drag-and-drop file input enhancement for DSH. / Ctrl+V 粘贴 + 拖拽文件输入增强。 |
 | ⭐ 439 | [mnemon-dev/mnemon](https://github.com/mnemon-dev/mnemon) | Complete local memory system: runtime memory, searchable archives, supervised memory. / 完备本地记忆系统：运行时记忆/可检索档案/受监督记忆体。 |
+| ⭐ 1 | [wjabanjj/aifp-mcp](https://github.com/wjabanjj/aifp-mcp) | AiFP memory-perception system — shared MCP service for agents with narrative chains, semantic error correction, and Chinese-language perception graphs. Compatible with DSH, Claude Code, Cursor, Codex. / AiFP 记忆感知系统：面向中文的 Agent 感知记忆 MCP 服务，支持叙事链/语义纠错/感知图扩散，多客户端兼容。 |
 | ⭐ 2 | [nowledge-co/nowledge-mem-deepseek-harness](https://github.com/nowledge-co/nowledge-mem-deepseek-harness) | Nowledge Mem community plugin bundle for DeepSeek Harness. / Nowledge Mem 社区插件 bundle。 |
 | ⭐ 1 | [RealAlexandreAI/dsh-nocturne-memory](https://github.com/RealAlexandreAI/dsh-nocturne-memory) | Nocturne Memory client for DeepSeek Harness. / Nocturne Memory 客户端。 |
 | ⭐ 1 | [PerryLink/dsh-memento](https://github.com/PerryLink/dsh-memento) | Bounded, layered, approval-gated, auditable cross-session memory: ctx.memory + SQLite provider. / 有界分层审批审计跨会话记忆：ctx.memory + SQLite provider。 |
@@ -654,6 +659,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 4 | [01Virex/dsh-status-rotator](https://github.com/01Virex/dsh-status-rotator) | Rainbow gradient typewriter-animated status phrases, configurable from JSON. / 彩虹渐变打字机动画状态文字，JSON 配置。 |
 | ⭐ 4 | [lhh010/dsh-ui-progress](https://github.com/lhh010/dsh-ui-progress) | Session progress bar: todos real progress / token rate / interrupt orange state. / 会话进度条：todos 真实进度 / token 速率 / 中断橘红态。 |
 | ⭐ 4 | [vlln/dsh-navbar](https://github.com/vlln/dsh-navbar) | Conversation node navbar: quick-jump to user messages from right edge. / 对话节点导航条：右缘节点串快速跳转 user 消息。 |
+| ⭐ 2 | [liliuCourier/dsh-chat-outline](https://github.com/liliuCourier/dsh-chat-outline) | Persistent left-sidebar conversation outline for DSH Web: jump to any user question or last assistant reply with keyboard shortcuts and keyword filter. / DSH 对话栏左侧常驻大纲：按轮次列出提问与回复，点击跳转、Ctrl/Shift 切轨迹视图、关键词过滤。 |
 | ⭐ 4 | [vlln/dsh-task-status](https://github.com/vlln/dsh-task-status) | Background task status bar: task progress + real-time output tail. / 后台任务状态条：任务进度 + 实时输出 tail。 |
 | ⭐ 3 | [LaplaceYoung/dsh-qq2006](https://github.com/LaplaceYoung/dsh-qq2006) | QQ2006 skin plugin: register qq2006 theme, mirror body[data-ds-skin], global skin table. / QQ2006 皮肤插件：注册主题、镜像 body、全局皮肤表。 |
 | ⭐ 3 | [147228/dsh-xiaoyao-skins](https://github.com/147228/dsh-xiaoyao-skins) | XiXiaoYao × DSH Web skin collection + installer + community creation toolkit. / 夕小瑶 × DSH Web 皮肤合集 + 安装器。 |
@@ -682,6 +688,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [LucasN0820/dsh-skin-claude-code](https://github.com/LucasN0820/dsh-skin-claude-code) | Claude Code-inspired skin for the DeepSeek Harness web GUI — replicates CC's dark layout and typography. / 复刻 Claude Code 深色布局与字体的 DSH 皮肤插件。 |
 | ⭐ 1 | [Lzh-12/dsh-skin-picker](https://github.com/Lzh-12/dsh-skin-picker) | 10 preset skin themes (light/dark dual palette) for DSH Web GUI with in-settings switching and cross-device settings.yaml sync. / DSH 换肤插件：10 套预设皮肤（亮暗双色板），设置页行内切换，settings.yaml 跨设备同步。 |
 | ⭐ 4 | [cyanfish-x/dsh-live2d-pets](https://github.com/cyanfish-x/dsh-live2d-pets) | Live2D desktop companion for DeepSeek Harness — mirrors agent state in real time, interactive pet with permissively licensed preset models. / DSH Live2D 桌宠：实时镜像 Agent 状态，互动陪伴，内置宽松许可预设模型。 |
+| ⭐ 3 | [NoNameLeGo/dsh-catppuccin](https://github.com/NoNameLeGo/dsh-catppuccin) | Catppuccin themes for DSH Web GUI — Latte / Frappé / Macchiato / Mocha four themes one-click switch. / DSH Web GUI Catppuccin 主题插件：Latte / Frappé / Macchiato / Mocha 四种主题一键切换。 |
+| ⭐ 1 | [BorisShaw6/dsh-cyber-pet](https://github.com/BorisShaw6/dsh-cyber-pet) | "Cyber Whale" pet for DSH Web: hover, feedable, color-customizable, shows token usage/limits/context/quota/dialog counts in real time, with emotion system and growth levels. / DSH Cyber 鲸鱼桌宠：悬浮可喂食、实时显示 token/余额/上下文用量，含情感系统与成长等级。 |
 
 ---
 
@@ -712,6 +720,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
+| ⭐ 5 | [bpc-oss/dsh-web-billing](https://github.com/bpc-oss/dsh-web-billing) | RMB/USD token-billing plugin for DSH web: official-policy auto pricing (incl. peak/off-peak), per-message ledger, account balance display, locale-driven currency. / DSH 人民币/美元 token 计费插件：官方政策自动计价（含峰谷），逐条消息记账，浏览器端实时余额显示。 |
 | ⭐ 6 | [AnacondaKC/dsh-stock-market](https://github.com/AnacondaKC/dsh-stock-market) | Stock market analysis plugin. / 股票市场分析插件。 |
 | ⭐ 8 | [HuanLinOTO/dsh-plugin-mineru](https://github.com/HuanLinOTO/dsh-plugin-mineru) | MinerU document parsing: PDF/images/DOCX/PPTX/XLSX → structured Markdown/JSON. / MinerU 文档解析：PDF/图片/DOCX/PPTX/XLSX → Markdown/JSON。 |
 | ⭐ 2 | [83079Vermont/dsh-mineru-parse-plugin](https://github.com/83079Vermont/dsh-mineru-parse-plugin) | Standalone MinerU document parsing plugin for DSH: registers a global model tool — drop a PDF/image and get structured Markdown/JSON output. / DSH 独立插件版 MinerU 文档解析：注册全局模型工具，输入 PDF/图片输出结构化 Markdown/JSON。 |
@@ -748,6 +757,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Stars | Repo | Description / 描述 |
 |-------|------|---------------------|
 | ⭐ 8 | [hellodigua/dsh-emoji](https://github.com/hellodigua/dsh-emoji) | Auto-add emoji to AI replies. / AI 回复自动添加表情。 |
+| ⭐ 18 | [hellodigua/dsh-share](https://github.com/hellodigua/dsh-share) | DSH conversation share plugin: select single or multiple Q&A pairs, export as PNG image or Markdown, with width/font adjustments. / DSH 对话分享插件：支持多选问答组，导出为图片（可调宽度/字号）或 Markdown。 |
+| ⭐ 1 | [lucky8197/dsh-devquest](https://github.com/lucky8197/dsh-devquest) | Gamify your DSH development: XP for turns/tools/todos, 27+ achievement badges, levels, seasons — pure-function scoring engine driven by DSH event stream. / 把开发变成 RPG：回合/工具/todo 积累 XP、27+ 成就徽章、等级与赛季，纯函数计分引擎由 DSH 事件流驱动。 |
 | ⭐ 7 | [lhh010/dsh-minigames](https://github.com/lhh010/dsh-minigames) | 18 offline mini-games: Dino jump, Tetris, Tank, Minesweeper, 2048, Sudoku, Pac-Man. / 18 款离线小游戏：恐龙跳一跳/俄罗斯方块/坦克大战/扫雷/2048/数独/吃豆人。 |
 | ⭐ 7 | [omdsh-dev/dsh-gomoku](https://github.com/omdsh-dev/dsh-gomoku) | Play Gomoku with AI, or let two AIs battle each other. / 与 AI 下五子棋，也可让 AI 对局。 |
 | ⭐ 4 | [SenmuuuuW/dsh-whale-report](https://github.com/SenmuuuuW/dsh-whale-report) | 🐋 Whale notebook — your Agent's annual report: daily/weekly/monthly/yearly summaries from session event logs, any time range, read-only. / 鲸鱼记事本：从会话事件日志生成日报/周报/月报/年报，任意区间、只读不改写。 |
@@ -796,6 +807,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 |-------|------|---------------------|
 | ⭐ 1 | [CloudyMountain/dsh-path-guard](https://github.com/CloudyMountain/dsh-path-guard) | Path guard plugin for DSH: deny agent tool access to configured sensitive paths, layered filesystem protection. / DSH 路径守护插件：阻止 agent 工具访问配置的敏感路径，分层文件系统保护。 |
 | ⭐ 2 | [cdxiaodong/dsh-guardian](https://github.com/cdxiaodong/dsh-guardian) | DSH guardian plugin: automated safety monitoring and intervention for agent operations — intercept risky tool calls. / DSH 守护者插件：自动化安全监控与 agent 操作干预，拦截高风险工具调用。 |
+| ⭐ 2 | [wenzetan/dsh-llm-newapi](https://github.com/wenzetan/dsh-llm-newapi) | NewAPI (OpenAI-compatible gateway) LLM provider plugin for DSH: chat-only model discovery + Web settings section. Zero dsh modifications. / DSH NewAPI 模型提供商插件：OpenAI 兼容网关，对话模型发现 + 设置页，零侵入。 |
 | ⭐ 1 | [LeslieWylie/dsh-fleet-audit](https://github.com/LeslieWylie/dsh-fleet-audit) | Agent fleet hygiene audit for DSH: credential-file permissions, embedded git-token leak detection, security posture checks. / DSH Agent 舰队卫生审计：凭证文件权限检查、嵌入 git token 泄漏检测、安全态势评估。 |
 | ⭐ 0 | [runseal-labs/dsh-tool-runseal](https://github.com/runseal-labs/dsh-tool-runseal) | RunSeal sandbox plugin for DSH: OS-native policy execution boundary for untrusted code (Windows/macOS/Linux). / DSH RunSeal 沙盒插件：为 dsh 提供 OS 原生策略执行边界（Windows/macOS/Linux）。 |
 | ⭐ 1 | [LouisHaoL/dsh-homerail-dag](https://github.com/LouisHaoL/dsh-homerail-dag) | HomeRail-style DAG orchestration plugin for DSH: YAML-defined workflows with detection triggers and state machines. / DSH HomeRail 风格 DAG 编排插件：YAML 定义工作流+检测触发+状态机。 |
@@ -1115,8 +1127,8 @@ Discovery is intentionally bounded to the configured source adapters and their r
 
 ---
 
-*Last updated: 2026-08-15 · +7 new resources added across 5 categories · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~707+*
-*最后更新：2026-08-15 · 本轮新增 7 个资源，覆盖 5 个类别 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 707+ 个*
+*Last updated: 2026-08-15 · +12 new resources added across 9 categories · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~719+*
+*最后更新：2026-08-15 · 本轮新增 12 个资源，覆盖 9 个类别 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 719+ 个*
 
 ---
 
