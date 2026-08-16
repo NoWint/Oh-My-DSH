@@ -38,7 +38,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~857+** |
+| Curated & validated entries / 精选收录 | **~873+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
@@ -388,6 +388,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 30 | [Nwflower/dsh-chat-import](https://github.com/Nwflower/dsh-chat-import) | Import history from Claude Code, Codex, Reasonix and continue in DSH. / 从 Claude Code / Codex / Reasonix 导入历史消息。 |
 | ⭐ 24 | [cpj-dev/dsh-plugin-cc](https://github.com/cpj-dev/dsh-plugin-cc) | Bridge DeepSeek-Harness into Claude Code for review, critique, delegation, and session import. / 桥接 DSH 至 Claude Code：审查、质疑、委派、会话导入。 |
 | ⭐ 6 | [tsrigo/dsh-from-scratch](https://github.com/tsrigo/dsh-from-scratch) | Runnable TypeScript tutorial: build a minimal DeepSeek-style agent harness from scratch. / 可运行的 TypeScript 教程：从零构建最小化 DeepSeek 风格 Agent Harness。 |
+| ⭐ 8 | [huey1in/reef](https://github.com/huey1in/reef) | DSH plugin all-in-one: browser automation + MCP Server + GitHub/GitLab auto-review + native embedded panels — one install, five capabilities. / DSH 插件全家桶：浏览器自动化 + MCP 服务器 + GitHub/GitLab 自动评审 + 原生嵌入面板，一键安装五合一。 |
+| ⭐ 3 | [sjh9714/dsh-movein](https://github.com/sjh9714/dsh-movein) | Move your entire Claude Code setup into DeepSeek Harness with one command — skills, rules, hooks, commands, permissions, sub-agents all ported. / 一条命令把你的 Claude Code 配置全套迁移进 DSH。 |
 | ⭐ 1 | [Dis2017/dsh-run-guard](https://github.com/Dis2017/dsh-run-guard) | Run guard for DSH: validates tool commands before execution to prevent accidental destructive operations. / DSH 运行守卫：执行前验证工具命令，防止误删误改。 |
 | ⭐ 0 | [binsarjr/dsh-codex-media](https://github.com/binsarjr/dsh-codex-media) | Image & document analysis tools for DSH, powered by a local OpenAI Codex CLI — zero deps, 3 transports. / DSH 图像与文档分析工具：由本地 OpenAI Codex CLI 驱动，零依赖、三种传输方式。 |
 | ⭐ 1396 | [yjh051108/dsh-routing-suite](https://github.com/yjh051108/dsh-routing-suite) | Task-aware reasoning-mode router for DSH: runtime injector + preset with measured P1-P23 performance bands across spec/mixed/react phases. / DSH 任务感知推理模式路由器：运行时注入器 + 预设，覆盖 spec/mixed/react 三档性能。 |
@@ -641,6 +643,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [cmfok/dsh-feishucard](https://github.com/cmfok/dsh-feishucard) | DSH ↔ Feishu streaming reply card bridge: real-time message cards with interactive buttons and live updates. / DSH 飞书流式回复卡片桥接：实时消息卡片带交互按钮与实时更新。 |
 | ⭐ 0 | [sosojust/dsh-messge-channels](https://github.com/sosojust/dsh-messge-channels) | Connect Feishu, DingTalk, and WeCom to DeepSeek Harness — chat-driven agent control across multiple IM platforms. / DSH 多 IM 桥接：连接飞书/钉钉/企微，多平台聊天驱动 Agent。 |
 | ⭐ 0 | [zxz9988/dsh-wechat-bridge](https://github.com/zxz9988/dsh-wechat-bridge) | DSH WeChat bridge plugin: connect mobile WeChat (iLink/ClawBot protocol) to your agent for cross-platform messaging. / DSH 微信桥接插件：连接手机微信（iLink/ClawBot 协议）至 Agent。 |
+| ⭐ 0 | [ShiXiangYu2/dsh-feishu-remote](https://github.com/ShiXiangYu2/dsh-feishu-remote) | Control your DeepSeek Harness agent from Feishu/Lark: DM a task, get results back — async remote orchestration via IM. / 从飞书/Lark 远程控制 DSH Agent：发消息派任务，接收结果，异步远程编排。 |
 | ⭐ 2 | [wly8691-jpg/knowlp-rag](https://github.com/wly8691-jpg/knowlp-rag) | KnowLP-RAG: dual knowledge-graph RAG for Markdown notes — MCP + native Cordis plugin for DeepSeek Harness (dsh) & Claude Code. / KnowLP-RAG：双知识图谱 RAG，用于 Markdown 笔记——DSH 与 Claude Code 的双平台 MCP + 原生插件。 |
 | ⭐ 9 | [zhuiyueya/dsh-im-gateway](https://github.com/zhuiyueya/dsh-im-gateway) | Aggregate IM gateway: connect DSH agents to WeChat, Feishu, Telegram, Discord & 20+ chat platforms from one plugin. / DSH 聚合 IM 网关：一个插件接入微信/飞书/Telegram/Discord 等 20+ 聊天平台。 |
 | ⭐ 0 | [renpengfei1027/dsh-web-notify](https://github.com/renpengfei1027/dsh-web-notify) | Approval attention plugin for DSH Web GUI: pending alerts via chime, tab-title & favicon badge, PWA badge, and OS notify. / DSH Web GUI 审批提醒插件：待审批通过铃声、标签页徽章、PWA 徽标和系统通知。 |
@@ -683,6 +686,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [Culeot/dsh-agent-memory](https://github.com/Culeot/dsh-agent-memory) | Cross-session long-term memory plugin for DeepSeek Harness — durable memory store that persists across agent sessions. / DSH 跨会话长期记忆插件：持久化记忆存储，跨 Agent 会话延续。 |
 | ⭐ 7 | [zhujunpeng12/dsh-memory-system](https://github.com/zhujunpeng12/dsh-memory-system) | Local-first persistent memory for DSH: hot bootstrap, Chinese-BM25 cold recall, lease-lock transactional writes, read-only governance. / DSH 本地优先持久记忆：热启动、中文 BM25 冷召回、租约锁事务写入、只读治理。 |
 | ⭐ 2 | [jonah791/dsh-agent-memory](https://github.com/jonah791/dsh-agent-memory) | Agent-driven long-term memory for DeepSeek Harness: structured fact extraction with edit/forget/rebuild tools. / Agent 驱动的长期记忆：结构化事实提取与编辑/遗忘/重建工具。 |
+| ⭐ 1 | [zouyuanqing/dsh-memory-openviking](https://github.com/zouyuanqing/dsh-memory-openviking) | Native OpenViking memory integration for DeepSeek Harness: host-plane memory service with cross-session recall. / DSH 原生 OpenViking 记忆集成：跨会话回忆的宿主层记忆服务。 |
+| ⭐ 1 | [Zhang-Zhengyuan/dsh-memory-amem](https://github.com/Zhang-Zhengyuan/dsh-memory-amem) | Long-term, agentic memory for DeepSeek Harness — A-MEM with prompt-injection defense, durable structured fact store. / DSH 长期 Agent 记忆：A-MEM 架构，防御提示词注入，持久化结构化事实存储。 |
 | ⭐ 3 | [ZhengQingJing/dsh-session-tree](https://github.com/ZhengQingJing/dsh-session-tree) | Git-like immutable session branching for DeepSeek Harness — branch, merge, and roll back session states. / DSH Git 式不可变会话分支：分支、合并与回滚会话状态。 |
 | ⭐ 280 | [text2future/flowix](https://github.com/text2future/flowix) | Markdown notebook where your words become durable context for AI agents — local-first, multi-agent, MCP & CLI compatible. Notes for you, memory for your agents. / 你的笔记变成 AI Agent 的持久上下文——本地优先、多 Agent、MCP & CLI 兼容。 |
 | ⭐ 133 | [Ariestar/sivtr](https://github.com/Ariestar/sivtr) | Unified agent memory workspace: shared memory layer for human and agent to co-author context across sessions. / 人机共构的统一记忆工作区：跨会话共享记忆层。 |
@@ -730,6 +735,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 138 | [humblebanana/open-record-replay](https://github.com/humblebanana/open-record-replay) | Open-source macOS record-and-replay framework for computer-use agents: captures mouse/keyboard/UI as structured traces so agents can learn and replay real desktop tasks. / 开源 macOS 录制回放框架：结构化捕获鼠标/键盘/UI 事件，供 Agent 学习与重放真实桌面任务。 |
 | ⭐ 5 | [KirschBluteX/engineer-software](https://github.com/KirschBluteX/engineer-software) | Runtime-neutral, evidence-driven software engineering workflow for Codex and DeepSeek Harness. / 运行时中立的证据驱动软件工程工作流，支持 Codex 与 DSH。 |
 | ⭐ 1 | [fangweixuan26-hash/dsh-a2a-agent](https://github.com/fangweixuan26-hash/dsh-a2a-agent) | Expose a DeepSeek Harness agent over the Agent2Agent (A2A) protocol: agent card, JSON-RPC, LLM replies. / 将 DSH Agent 暴露为 A2A 协议服务：agent card、JSON-RPC、LLM 回复。 |
+| ⭐ 2 | [LomoMao/delegate-to-deepseek-harness](https://github.com/LomoMao/delegate-to-deepseek-harness) | Codex Agent Skill: delegate bounded coding work to DeepSeek Harness, then continue independently — cross-agent handoff with session isolation. / Codex Agent 技能：将有限编码任务委托给 DSH，完成后独立继续——跨 Agent 交接与会话隔离。 |
 | ⭐ 8 | [cosyncing/cosyncing](https://github.com/cosyncing/cosyncing) | Synchronize and orchestrate agents from CLI to GUI, across desktop to phone. / 跨桌面到手机同步编排 Agent：CLI 到 GUI 的 Agent 协同。 |
 | ⭐ 0 | [CriscolTheCoder/dsh-workflow-groups](https://github.com/CriscolTheCoder/dsh-workflow-groups) | Workflow groups kanban: each grouped workflow gets an independent tab showing status/stage/subagent/logs in real time. / 分组工作流看板：每个分组 workflow 独立标签页实时展示状态/阶段/子 agent/日志。 |
 | ⭐ 0 | [lisycotana/dsh-workflow-worktree](https://github.com/lisycotana/dsh-workflow-worktree) | Git worktree isolation backend for DSH workflows — implements registerIsolationAdapter() seam. / DSH 工作流 Git worktree 隔离后端。 |
@@ -802,6 +808,9 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 10 | [suzike/freestyle-dsh-theme](https://github.com/suzike/freestyle-dsh-theme) | DSH theme experience plugin: OKLCH color-space proposals + theme designer with cross-restart persistence. / DSH 主题体验插件：OKLCH 色彩空间提案 + 主题设计器，跨重启持久化。 |
 | ⭐ 4 | [zhijun-dai/Catppuccin-dsh-theme](https://github.com/zhijun-dai/Catppuccin-dsh-theme) | Soothing pastel Catppuccin theme for DeepSeek Harness Web GUI. / 柔和马卡龙色系 Catppuccin 主题，专为 DSH Web GUI 打造。 |
 | ⭐ 4 | [nevertoday/dsh-theme-plugin](https://github.com/nevertoday/dsh-theme-plugin) | Chinese traditional color palette as a DSH theme pack. / 中国传统色主题包，一套主题内嵌多种经典色。 |
+| ⭐ 2 | [whyihaveyou/dsh-themes](https://github.com/whyihaveyou/dsh-themes) | DSH theme collection: 151 day/night一体 skins migrated from aionui-themes — Genshin/Honkai/Pokémon/Nintendo characters. / DSH 皮肤合集：迁移自 aionui-themes 的 151 套昼夜一体皮肤（原神/崩铁/宝可梦/任天堂角色）。 |
+| ⭐ 2 | [nzl153/dsh-pet-whale](https://github.com/nzl153/dsh-pet-whale) | Desktop pet whale for DSH Web: switches animation states based on agent activity, zero dependencies, pure DOM. / DSH Web 桌宠小鲸鱼：随 Agent 状态切换动画，纯 DOM 零依赖。 |
+| ⭐ 1 | [zq123123667/dsh-taffy-pet](https://github.com/zq123123667/dsh-taffy-pet) | Taffy voice-command desktop pet for DSH — volcengine Doubao voice synthesis (preset voices + voice cloning). / 塔菲语音播报桌宠：DSH 动态插件，火山引擎豆包语音合成（预置音色 + 声音复刻）。 |
 | ⭐ 4 | [drfccv/dsh-theme-neko](https://github.com/drfccv/dsh-theme-neko) | Nachoneko (甘城猫猫) themed skin for the DeepSeek Harness web GUI. / 甘城猫猫主题皮肤，专为 DSH Web GUI。 |
 | ⭐ 4 | [shaobeichen/dsh-pocket](https://github.com/shaobeichen/dsh-pocket) | Put DeepSeek Harness in your pocket: run dsh web on PC, scan QR to access from phone — LAN + public network, real-time sync. / 把 DSH 装进口袋：电脑跑 web，手机扫码即同步访问，局域网+公网实时同屏。 |
 | ⭐ 4 | [2903077918-lgtm/DeepSeek-phone-harness](https://github.com/2903077918-lgtm/DeepSeek-phone-harness) | Mobile remote control for DeepSeek Harness: conversation/model switch/tool approval/terminal/files, works on 4G/5G. / DSH 手机远程控制：对话/模型切换/工具审批/终端/文件，4G/5G 任意网络可用。 |
@@ -835,6 +844,12 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 0 | [aokamoaki/dsh-notify](https://github.com/aokamoaki/dsh-notify) | Conversation-completion notifications for DSH: Windows toast + sound on turn finish, errors, goal complete, or approval needed. / DSH 会话完成通知：Windows toast + 提示音（回合结束/错误/目标完成/等待审批）。 |
 | ⭐ 0 | [aokamoaki/dsh-startup-guard](https://github.com/aokamoaki/dsh-startup-guard) | Boot-time guard for DSH: repairs corrupt session logs, preflights plugin composition, quarantines crash-causing bundles. / DSH 启动守卫：修复损坏会话日志、预检插件组合、隔离崩溃插件。 |
 | ⭐ 3 | [loongsuite/dsh-plugin](https://github.com/loongsuite/dsh-plugin) | OpenTelemetry tracing for DeepSeek Harness: turns each agent turn into a GenAI span tree — steps, LLM calls with TTFT, tool executions, token usage — exported to Jaeger, Grafana Tempo, SigNoz, Langfuse. / DSH OpenTelemetry 追踪：每回合生成分布式追踪树，支持 Jaeger/Grafana/SigNoz/Langfuse。 |
+| ⭐ 5 | [ltao0829/dsh-task-notify](https://github.com/ltao0829/dsh-task-notify) | DeepSeek Harness task-completion notification plugin: desktop toast + sound on run finish. / DSH 任务完成通知插件：任务结束时桌面 toast + 提示音。 |
+| ⭐ 2 | [Yeqing-y/AgentNotifier-DeepSeek-Harness](https://github.com/Yeqing-y/AgentNotifier-DeepSeek-Harness) | Notification popups for Claude Code and DeepSeek Harness: intervention-required / task-complete dual-event alerts, Windows tray-resident, .NET 8. / 支持 Claude Code 与 DeepSeek Harness 的提醒弹窗：需要介入/任务完成双事件提醒，Windows 桌面常驻。 |
+| ⭐ 1 | [viego-qiin/dsh-loop-detector](https://github.com/viego-qiin/dsh-loop-detector) | Dead-loop / repetition detector for DeepSeek Harness agents — hard-interrupts text-only LLM loops before token waste. / DSH Agent 死循环检测器：在 Token 浪费前硬中断文本模型的重复循环。 |
+| ⭐ 1 | [LongFuXiaoFeng/dsh-task-reminder](https://github.com/LongFuXiaoFeng/dsh-task-reminder) | A DSH Cordis plugin that plays a crisp ding when the agent finishes a task. / DSH Cordis 插件：Agent 完成任务时播放清脆提示音。 |
+| ⭐ 1 | [randerous/dsh-turn-budget](https://github.com/randerous/dsh-turn-budget) | Advisory turn-step budget reminders for DeepSeek Harness — loop convergence guarantees with configurable thresholds. / DSH 回合步数预算提醒：带可配置阈值的循环收敛保障。 |
+| ⭐ 1 | [Codingendless/dsh-prevent-scd](https://github.com/Codingendless/dsh-prevent-scd) | A playful rest-reminder pet plugin for DeepSeek Harness: detects late-night coding sessions and nudges you to take a break. / DSH 趣味休息提醒桌宠插件：检测深夜编码会话，提醒休息。 |
 
 ---
 
@@ -1015,6 +1030,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [Relistencode/dsh-extension-hub](https://github.com/Relistencode/dsh-extension-hub) | CLI + settings-page UI for managing DSH skills and MCP servers with zh/en i18n and Claude/Codex import compatibility. / DSH 技能与 MCP 服务器管理面板：CLI + 设置页 UI，中英双语，支持 Claude/Codex 导入。 |
 | ⭐ 1 | [KiWi233333/dsh-creator](https://github.com/KiWi233333/dsh-creator) | Build verified extensions for DeepSeek Harness with an installable agent skill — craft plugins via natural language. / 用可安装 Agent 技能构建验证通过的 DSH 扩展：通过自然语言创建插件。 |
 | ⭐ 1 | [Suida/dsh-skills](https://github.com/Suida/dsh-skills) | Curated DSH agent skills collection with categorized templates for common development and automation workflows. / 精选 DSH Agent 技能集：按工作流分类的模板集合，覆盖常用开发场景。 |
+| ⭐ 0 | [Arthu77/dsh-skills](https://github.com/Arthu77/dsh-skills) | User-authored DeepSeek Harness skills: harness-compat-notes, distributing-dsh-plugins, and community-curated skill recipes. / 用户撰写的 DSH 技能：harness-compat-notes、distributing-dsh-plugins 及社区技能配方。 |
 | ⭐ 0 | [dhicoc/dsh-wuyun-liuqi](https://github.com/dhicoc/dsh-wuyun-liuqi) | Traditional Chinese medicine AI skill bundle: 31 SKILL.md for 五运六气 (Wu Yun Liu Qi) analysis, wrapped as DSH Cordis plugin. / 中医 AI 技能包：31 个 SKILL.md 封装五运六气（运气学）分析，DSH Cordis 插件。 |
 | ⭐ 2 | [zhn1100/dsh-forge](https://github.com/zhn1100/dsh-forge) | Reproducible DSH plugin development environment with deterministic builds. / 可复现的 DSH 插件开发环境。 |
 | ⭐ 5 | [Mars-Sea/dsh-commandcode-provider](https://github.com/Mars-Sea/dsh-commandcode-provider) | Unofficial DeepSeek Harness LLM provider plugin for Command Code: live model catalog, reasoning-effort support. / Command Code 非官方 DSH LLM 提供商插件：实时模型目录与推理强度支持。 |
@@ -1282,15 +1298,15 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| **Curated收录** | **~857+** |
+| **Curated收录** | **~873+** |
 | Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 2.94k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-16 · +12 new resources across 7 categories, ~8 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~857+*
-*最后更新：2026-08-16 · 本轮新增 12 个资源，覆盖 7 个类别，~8 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 857+ 个*
+*Last updated: 2026-08-16 · +16 new resources across 8 categories, ~8 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~873+*
+*最后更新：2026-08-16 · 本轮新增 16 个资源，覆盖 8 个类别，~8 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 873+ 个*
 
 ---
 
