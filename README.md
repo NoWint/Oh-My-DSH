@@ -214,7 +214,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 5 | [Hotsteel2901/dsh-client-ui-mobile-adapt](https://github.com/Hotsteel2901/dsh-client-ui-mobile-adapt) | Your DSH web UI, rebuilt for the phone in your hand — responsive layout optimized for mobile developers. / 专为手机端重建的 DSH Web UI：响应式布局，面向移动端开发者。 |
 | ⭐ 1 | [tengqi159/harness-mate](https://github.com/tengqi159/harness-mate) | Native macOS companion for DeepSeek Harness — research files, Appshot, scoped Computer Use, desktop-integrated workflow. / DSH 原生 macOS 伴侣：研究文件、Appshot、受限 Computer Use，桌面集成工作流。 |
 | ⭐ 7 | [Lehhair/dsh-mobile](https://github.com/Lehhair/dsh-mobile) | DeepSeek Harness Android standalone app. / DSH Android 独立应用。 |
-| ⭐ 10 | [Kelai141/dsh-mobile-apk](https://github.com/Kelai141/dsh-mobile-apk) | Android APK shell with WebView UI + Termux runtime snapshot — runs on device without root. / Android APK 壳：WebView UI + Termux 运行时，免 ROOT 可直接运行。 |
+| ⭐ 51 | [Kelai141/dsh-mobile-apk](https://github.com/Kelai141/dsh-mobile-apk) | Android APK shell with WebView UI + Termux runtime snapshot — runs on device without root. / Android APK 壳：WebView UI + Termux 运行时，免 ROOT 可直接运行。 |
 | ⭐ 2 | [qiannianhuanxiang/DSHA](https://github.com/qiannianhuanxiang/DSHA) | Android launcher for DeepSeek Harness with proot+Ubuntu, one-click setup without root or Termux. / DSH 安卓启动器：内置 proot+Ubuntu，免 ROOT 免 Termux 一键运行。 |
 | ⭐ 1 | [thness/dsh-mobile](https://github.com/thness/dsh-mobile) | DeepSeek Harness Android — bundled Node.js runtime + official Web UI, standalone app out of the box. / DSH Android 版：内嵌 Node.js 运行时 + 官方 Web UI 开箱即用。 |
 | ⭐ 2 | [YiYan129600/dsh-mobile-access](https://github.com/YiYan129600/dsh-mobile-access) | One-page mobile access setup: Tailscale/LAN detection, offline QR code scan-to-open, insecure-origin polyfill for safe remote DSH on phone. / DSH 手机端一键接入插件：Tailscale/LAN 检测、扫码离线打开、不安全来源 polyfill。 |
@@ -532,7 +532,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [flaqai/deepeseek-harness-guide](https://github.com/flaqai/deepeseek-harness-guide) | Guide for development with DeepSeek Harness. Building plugin for DeepSeek Harness Project. / DSH 插件开发指南。 |
 | ⭐ 1 | [sliverp/DeepSeek-harness-qqbot](https://github.com/sliverp/DeepSeek-harness-qqbot) | QQ Bot text and image channel plugin for DeepSeek Harness. / QQ Bot 文本与图片频道插件。 |
 | ⭐ 1 | [radres/dsh-plugin-call-me](https://github.com/radres/dsh-plugin-call-me) | Your DSH agent rings your actual phone: it asks out loud, you answer out loud, and the conversation continues via voice. / DSH Agent 拨打你的真实手机：语音询问、语音接听、语音继续对话。 |
-| ⭐ 1 | [omdsh-dev/dsh-lark](https://github.com/omdsh-dev/dsh-lark) | Lark/Feishu IM bot channel for DeepSeek Harness: chats drive agents, replies and approvals return. / 飞书 IM Bot 通道：聊天驱动 Agent，回复/审批返回。 |
+| ⭐ 23 | [omdsh-dev/dsh-lark](https://github.com/omdsh-dev/dsh-lark) | Lark/Feishu IM bot channel for DeepSeek Harness: chats drive agents, replies and approvals return. / 飞书 IM Bot 通道：聊天驱动 Agent，回复/审批返回。 |
+| ⭐ 6 | [sugarforever/dsh-lark](https://github.com/sugarforever/dsh-lark) | Lightweight Lark/Feishu plugin for DeepSeek Harness — simple bot channel integration for DSH sessions. / 轻量级飞书/Lark 插件，用于 DSH 会话的机器人通道集成。 |
 | ⭐ 1 | [springbrand-lab/dsh-oauth-mcp-client](https://github.com/springbrand-lab/dsh-oauth-mcp-client) | OAuth 2.1 Streamable HTTP MCP client plugin for DeepSeek Harness. / OAuth 2.1 Streamable HTTP MCP 客户端插件。 |
 | ⭐ 7 | [LiangYin233/dsh-provider-model-configurator](https://github.com/LiangYin233/dsh-provider-model-configurator) | Advanced model configurator: apply pi-ai preset model context, output limits, and reasoning tiers to custom providers in one click. / DSH 高级模型配置器：将 pi-ai 预设模型的上下文、输出上限、推理挡位一键应用到自定义提供商。 |
 | ⭐ 1 | [x118111/prompt-optimizer](https://github.com/x118111/prompt-optimizer) | Dynamic plugin: adds ✨ optimize-prompt button to chat composer — context-aware LLM rewriting with model fallback and visible errors. / 动态插件：为对话输入框添加提示词优化按钮，支持上下文感知改写与模型降级。 |
@@ -593,6 +594,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [kongxiangyiren/dhs-theme-plugin](https://github.com/kongxiangyiren/dhs-theme-plugin) | DSH theme management plugin: browse, install, and switch UI themes from Settings page. / DSH 主题管理插件：浏览/安装/切换 UI 主题。 |
 | ⭐ 1 | [wanghui040127-ui/deepseek-harness-account](https://github.com/wanghui040127-ui/deepseek-harness-account) | Standalone account plugin for DeepSeek Harness: balance display, usage stats, and local token dashboard. / DSH 独立账户插件：余额显示、用量统计与本地 token 看板。 |
 | ⭐ 1 | [linhx1999/dsh-writing-pad](https://github.com/linhx1999/dsh-writing-pad) | Markdown writing pad for the DeepSeek Harness web GUI: per-session editing, preview, and in-session AI-assisted rewrite. / DSH Web GUI Markdown 写作垫：会话级编辑、实时预览与 AI 辅助改写。 |
+| ⭐ 46 | [Ychris12138/dsh-usage-stats](https://github.com/Ychris12138/dsh-usage-stats) | Token usage heatmap, per-model breakdowns, and DeepSeek account balance for DSH Web GUI. / DSH Web GUI token 用量热力图、按模型分项统计与账户余额。 |
 ---
 
 ## 💬 Communications & IM Bridges / 通讯与 IM 桥接
@@ -800,6 +802,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [LucasN0820/dsh-skin-claude-code](https://github.com/LucasN0820/dsh-skin-claude-code) | Claude Code-inspired skin for the DeepSeek Harness web GUI — replicates CC's dark layout and typography. / 复刻 Claude Code 深色布局与字体的 DSH 皮肤插件。 |
 | ⭐ 1 | [Lzh-12/dsh-skin-picker](https://github.com/Lzh-12/dsh-skin-picker) | 10 preset skin themes (light/dark dual palette) for DSH Web GUI with in-settings switching and cross-device settings.yaml sync. / DSH 换肤插件：10 套预设皮肤（亮暗双色板），设置页行内切换，settings.yaml 跨设备同步。 |
 | ⭐ 4 | [cyanfish-x/dsh-live2d-pets](https://github.com/cyanfish-x/dsh-live2d-pets) | Live2D desktop companion for DeepSeek Harness — mirrors agent state in real time, interactive pet with permissively licensed preset models. / DSH Live2D 桌宠：实时镜像 Agent 状态，互动陪伴，内置宽松许可预设模型。 |
+| ⭐ 3 | [Tisitan/dsh-live2d-companion](https://github.com/Tisitan/dsh-live2d-companion) | Live2D monitoring panel & desktop companion for DSH — real-time agent status visualization in a live2D pet widget. / DSH Live2D 监控面板与桌宠：实时 Agent 状态可视化，Live2D 挂件形式呈现。 |
 | ⭐ 33 | [PC2005-cloud/dsh-pet](https://github.com/PC2005-cloud/dsh-pet) | Full pipeline desktop pet plugin for DSH — AI prompt → green screen video → transparent animation → installable plugin. Complete reproducible asset chain. / DSH 桌面宠物插件全流程生成链：AI 提示词 → 绿幕视频 → 透明动画 → 可安装插件。 |
 | ⭐ 28 | [liyupi/dsh-kun-like-pet](https://github.com/liyupi/dsh-kun-like-pet) | Kun-like desktop pet for DSH — 9 state-driven actions with completion sound effect 「你干嘛~哎哟」. / 「鸡哥」桌宠：9 种动作状态 + 任务完成播放经典语音。 |
 | ⭐ 21 | [dancingmemory/dskin](https://github.com/dancingmemory/dskin) | DSKIN · DSH cartoon pixel skin plugin — walking, blinking pixel pets; original UI untouched. / DSH 卡通像素皮肤插件：散步眨眼像素宠物，不改动原始界面。 |
@@ -1301,15 +1304,15 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| **Curated收录** | **~876+** |
+| **Curated收录** | **~885+** |
 | Highest-starred plugin / 最高 Star 插件 | [dsh-web-ui](https://github.com/zhu1090093659/dsh-web-ui) ⭐ 3.15k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-16 · +3 new resources added, ~10 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~876+*
-*最后更新：2026-08-16 · 本轮新增 3 个资源，~10 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 876+ 个*
+*Last updated: 2026-08-16 · +3 new resources added, ~5 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~885+*
+*最后更新：2026-08-16 · 本轮新增 3 个资源，~5 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 885+ 个*
 
 ---
 
