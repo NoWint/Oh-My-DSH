@@ -1227,7 +1227,7 @@ Discovery is intentionally bounded to the configured source adapters and their r
 
 ---
 
-*Last updated: 2026-08-16 · +15 new resources across 8 categories, ~16 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~800+*
+*Last updated: 2026-08-16 · +16 new resources across 8 categories, ~16 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~800+*
 *最后更新：2026-08-16 · 本轮新增 15 个资源，覆盖 8 个类别，~16 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 800+ 个*
 
 ---
