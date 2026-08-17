@@ -558,6 +558,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [radres/dsh-plugin-call-me](https://github.com/radres/dsh-plugin-call-me) | Your DSH agent rings your actual phone: it asks out loud, you answer out loud, and the conversation continues via voice. / DSH Agent 拨打你的真实手机：语音询问、语音接听、语音继续对话。 |
 | ⭐ 23 | [omdsh-dev/dsh-lark](https://github.com/omdsh-dev/dsh-lark) | Lark/Feishu IM bot channel for DeepSeek Harness: chats drive agents, replies and approvals return. / 飞书 IM Bot 通道：聊天驱动 Agent，回复/审批返回。 |
 | ⭐ 6 | [sugarforever/dsh-lark](https://github.com/sugarforever/dsh-lark) | Lightweight Lark/Feishu plugin for DeepSeek Harness — simple bot channel integration for DSH sessions. / 轻量级飞书/Lark 插件，用于 DSH 会话的机器人通道集成。 |
+| ⭐ 0 | [863683348/dsh-feed](https://github.com/863683348/dsh-feed) | Cross-ecosystem aggregation base (聚合的聚合): syncs GitHub dsh-plugin topic + npm into one open JSON index, queried by model tools, CLI (dsh-feed) and a minimal stdio MCP server. / 跨生态聚合基础：同步 GitHub dsh-plugin topic + npm 到统一 JSON 索引，供模型工具/CLI/MCP 查询。 |
+| ⭐ 0 | [863683348/dsh-recipe](https://github.com/863683348/dsh-recipe) | Scenario bundles of dsh plugins (插件界的 dotfiles): recipe tool lists, searches, applies and composes ready-made plugin environments with ordered install sequences. / 插件场景包（插件界的 dotfiles）：按场景组合插件环境，有序安装序列。 |
 | ⭐ 1 | [springbrand-lab/dsh-oauth-mcp-client](https://github.com/springbrand-lab/dsh-oauth-mcp-client) | OAuth 2.1 Streamable HTTP MCP client plugin for DeepSeek Harness. / OAuth 2.1 Streamable HTTP MCP 客户端插件。 |
 | ⭐ 7 | [LiangYin233/dsh-provider-model-configurator](https://github.com/LiangYin233/dsh-provider-model-configurator) | Advanced model configurator: apply pi-ai preset model context, output limits, and reasoning tiers to custom providers in one click. / DSH 高级模型配置器：将 pi-ai 预设模型的上下文、输出上限、推理挡位一键应用到自定义提供商。 |
 | ⭐ 1 | [x118111/prompt-optimizer](https://github.com/x118111/prompt-optimizer) | Dynamic plugin: adds ✨ optimize-prompt button to chat composer — context-aware LLM rewriting with model fallback and visible errors. / 动态插件：为对话输入框添加提示词优化按钮，支持上下文感知改写与模型降级。 |
@@ -1028,7 +1030,6 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [NEXTINDIE/DeepSeek-Harness-for-VS-Code](https://github.com/NEXTINDIE/DeepSeek-Harness-for-VS-Code) | Use DeepSeek Harness in VS Code like ChatGPT/Copilot: @dsh in native chat, standalone views, cross-project sessions, shared via DSH API. Auto-starts server. / 在 VS Code 中使用 DSH：原生对话 @dsh、独立视图、跨项目会话，DSH API 共享，自动启动服务。 |
 | ⭐ 2 | [Edge-Echo/dsh-mcp-bridge](https://github.com/Edge-Echo/dsh-mcp-bridge) | Curated MCP server bundle for DeepSeek Harness: one install brings demo, mcp-list, and verification tools. / DSH 精选 MCP 服务器 bundle：一键安装即可使用演示、列表和验证工具。 |
 | ⭐ 4 | [labmimors/dsh-mcp-lens](https://github.com/labmimors/dsh-mcp-lens) | Shrink MCP schema overhead: 1,000 remote tools behind 2 exact-schema interfaces, plus local calculator and CI budget Action. / 减少 MCP schema 开销：千级远程工具收敛为 2 个精确 schema，附本地计算器与 CI 预算 Action。 |
-| ⭐ 4 | [labmimors/dsh-mcp-lens](https://github.com/labmimors/dsh-mcp-lens) | Shrink MCP schema overhead: 1,000 remote tools behind 2 exact-schema interfaces, plus local calculator and CI budget Action. / 减少 MCP schema 开销：千级远程工具收敛为 2 个精确 schema，附本地计算器与 CI 预算 Action。 |
 | ⭐ 2 | [KYinCode/dsh-project-mcp-bridge](https://github.com/KYinCode/dsh-project-mcp-bridge) | Per-project MCP loading: drop a .dsh/mcp.json into a project and its sessions get MCP tools automatically with live config reload. / 按项目加载 MCP：在项目目录放置 .dsh/mcp.json 即可自动注入 MCP 工具并实时重载配置。 |
 | ⭐ 0 | [863683348/dsh-need-finder](https://github.com/863683348/dsh-need-finder) | Requirement-driven DSH plugin discovery (点菜, not 逛超市): plugin_guide tool matches natural-language needs to a curated plugin directory with reasons and install commands. / 需求驱动 DSH 插件发现：plugin_guide 工具将自然语言需求匹配到精选插件目录，附推荐理由和安装命令。 |
 
@@ -1360,8 +1361,8 @@ Discovery is intentionally bounded to the configured source adapters and their r
 
 ---
 
-*Last updated: 2026-08-17 · +5 new resources added across 4 categories, curated ~923+*
-*最后更新：2026-08-17 · 本轮新增 5 个资源，精选收录约 923+ 个*
+*Last updated: 2026-08-17 · +10 new resources added across 6 categories, ~13 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~928+*
+*最后更新：2026-08-17 · 本轮新增 10 个资源（6 个类目），~13 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 928+ 个*
 
 ---
 
