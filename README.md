@@ -38,7 +38,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~1015+** |
+| Curated & validated entries / 精选收录 | **~1035+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
@@ -269,6 +269,9 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 50 | [bruc3van/dsh-desktop](https://github.com/bruc3van/dsh-desktop) | Independent dsh desktop client: official Web UI untouched, long tasks alive in tray, curated plugins reviewed before install. / 独立桌面客户端：官方 Web UI 原封不动，长任务常驻托盘，精选插件先审查再安装。 |
 | ⭐ 3 | [Huihuisire/harness-hub](https://github.com/Huihuisire/harness-hub) | DeepSeek Harness native desktop client — no CLI needed, double-click to launch with built-in plugin manager and DSH service hosting. / DSH 原生桌面客户端：免命令行，双击即用，内置插件管理器与 dsh 服务托管。 |
 | ⭐ 24 | [woaiys3/deepseek-harness-android-app](https://github.com/woaiys3/deepseek-harness-android-app) | Pack DeepSeek Harness as installable Android APK: native shell + mobile adaptation + Shizuku privileged plugin + system capability plugins. / 将 DSH 打包为可直接安装的 Android APK：原生壳 + 移动端适配 + Shizuku 特权插件 + 系统能力插件。 |
+| ⭐ 2 | [TommyFang2077/dsh-easy-desktop](https://github.com/TommyFang2077/dsh-easy-desktop) | Tauri 2 native desktop shell for DeepSeek Harness — SenseVoice offline voice input, plugin market, vision model config; anchors DeepSeek thinking mode. / Tauri 2 原生桌面壳：SenseVoice 离线语音、插件市场、视觉模型配置，锚定思考模式。 |
+| ⭐ 2 | [LiuJunheng/DeepSeekHarnessGreen](https://github.com/LiuJunheng/DeepSeekHarnessGreen) | All-in-one Windows launcher for DeepSeek Harness — portable install, no C drive pollution, single-folder management. / 绿色整合版一键启动，不污染 C 盘，一个文件夹管理全部。 |
+
 ## ⌨️ Terminal TUI / 终端 TUI
 
 | Stars | Repo | Description / 描述 |
@@ -548,6 +551,9 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 6 | [Ephemeral-AI-Lab/dsh-plugins](https://github.com/Ephemeral-AI-Lab/dsh-plugins) | Dynamic Cordis plugin collection for DSH — section annotations and follow-up追问 (anno), layout naming checker (linsp). / DSH 动态 Cordis 插件集合：选段批示与追问、布局命名检查器。 |
 | ⭐ 5 | [cc19990113/dsh-plugin-codegraph](https://github.com/cc19990113/dsh-plugin-codegraph) | Structural code intelligence for DSH — gives the agent codegraph and codegraph_index tools to find where a symbol is declared, what calls it, and what a change reaches, from a tree-sitter index it builds itself. / DSH 结构性代码智能：通过 tree-sitter 索引提供 codegraph/codegraph_index 工具，追踪符号声明、调用关系与变更范围。 |
 
+| ⭐ 3 | [unclecode/toolshrink](https://github.com/unclecode/toolshrink) | Content-aware tool output reducer — cuts large agent tool output by meaning, not bytes. 9 reducers + DeepSeek Harness plugin. / 内容感知型工具输出裁剪器，按语义而非位置截断长输出，含 9 种裁剪策略 + DSH 插件。 |
+| ⭐ 73 | [Anionex/dsh-turn-rewind](https://github.com/Anionex/dsh-turn-rewind) | Persistent Change Ledger for DSH — rewind conversation and workspace state with full diff history. / DSH 对话与代码状态回退插件，持久化变更账本，支持任意历史节点回滚。 |
+
 ---
 
 ## 🔧 Utility Toolkit / 实用工具集
@@ -673,6 +679,11 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 5 | [No-PRM/dsh-explorer](https://github.com/No-PRM/dsh-explorer) | VS Code-style file-tree explorer for DSH: sidebar file tree + git decorations + preview + diff + drag-to-reference. / DSH VS Code 风格文件树浏览器：侧边栏文件树 + Git 装饰 + 预览 + 差异对比 + 拖拽引用。 |
 | ⭐ 1 | [GitRuozhi/dsh-github-mcp](https://github.com/GitRuozhi/dsh-github-mcp) | DSH-GitHub bridge: direct GitHub access via the official GitHub MCP server, plus a fix for the official bridge's dropped file content. / DSH-GitHub 桥接：通过官方 GitHub MCP 服务器直接访问 GitHub，修复官方桥接的文件内容丢失问题。 |
 | ⭐ 0 | [iqingyoung/search2chart-mcp](https://github.com/iqingyoung/search2chart-mcp) | Agent-native charting: turn search/research/tabular data into inline charts in agent conversations. Native DSH plugin (true inline) + cross-agent MCP server. / Agent 原生图表工具：将搜索/研究/表格数据转为对话内联图表。原生 DSH 插件 + 跨 Agent MCP 服务器。 |
+
+| ⭐ 4 | [pengpengyi92/dsh-quant](https://github.com/pengpengyi92/dsh-quant) | Quantitative tools for DSH agents — market data (Binance public API), technical indicators (SMA/EMA/RSI/MACD/Bollinger/ATR) and MA-crossover backtest. / DSH 量化交易工具：行情数据（币安公开 API）、技术指标（SMA/EMA/RSI/MACD/布林带/ATR）与均线交叉回测。 |
+| ⭐ 0 | [NattoCB/dsh-plugin-memory](https://github.com/NattoCB/dsh-plugin-memory) | Persistent 5-layer memory system for DSH — index+topics split, truncation budget, relevance injection, idle LLM auto-extraction, 6 agent tools. / DSH 持久化 5 层记忆系统：索引+主题分离、截断预算、相关性注入、空闲 LLM 自动提取与 6 个 Agent 工具。 |
+| ⭐ 1 | [eastspire/dsh-plugin-longmem](https://github.com/eastspire/dsh-plugin-longmem) | Durable per-user long-term memory plugin for DeepSeek Harness. / DSH 持久化单用户长期记忆插件。 |
+| ⭐ 4 | [statem-li/Kr-DSH](https://github.com/statem-li/Kr-DSH) | DSH external plugin collection: dsh-usage-skill, dsh-browser, dsh-vision-helper, dsh-session-message-nav, dsh-zh-thinking, dsh-better-markdown, dsh-image-gallery, dsh-tool-summary, dsh-router-standard, dsh-reasoning-effort. / DSH 外部插件集合：用量统计、AI 浏览器、辅助视觉、消息导航、中文思考、流式渲染、生图画廊、工具聚合、推理路由与强度滑块。 |
 
 ---
 
@@ -836,6 +847,12 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [shaobeichen/dsh-im-bridge](https://github.com/shaobeichen/dsh-im-bridge) | Remote DSH control via Feishu / WeChat Work / Telegram: dispatch tasks, receive results, approve dangerous operations from anywhere. / 远程操控 DSH：通过飞书/企业微信/Telegram 派活、接收结果、审批危险操作。 |
 | ⭐ 6 | [y08lin4/dsh-multiagent-modes](https://github.com/y08lin4/dsh-multiagent-modes) | Multi-agent collaboration presets for DeepSeek Harness: subagents do the work, the main agent never loses its train of thought. Balanced & efficient tiers. / DSH 多 Agent 协作预设：子代理执行，主代理思维链不断；均衡/高效两档。 |
 | ⭐ 2 | [ready22race/dsh-team-task](https://github.com/ready22race/dsh-team-task) | Long-horizon multi-agent tasks for DSH: reviewed plan DAG, runtime-owned settlement, event-log truth, resident reconciler. / DSH 长周期多 Agent 任务：审查过的计划 DAG、运行时结算、事件日志真理、常驻协调器。 |
+| ⭐ 0 | [fzs356113-oss/dsh-workflow-symphony](https://github.com/fzs356113-oss/dsh-workflow-symphony) | Multi-agent workflow orchestration library for DSH: parallel research, adversarial review, multi-role code review, progressive compilation, daily digest — 5 built-in workflows + orchestration patterns. / 工作流交响乐团：并行调研/对抗审查/多角色代码评审/渐进编译/每日文摘 5 个开箱即用工作流 + 编排模式文档。 |
+| ⭐ 5 | [YOYOFeelings/DeepSeek-Harness-Android](https://github.com/YOYOFeelings/DeepSeek-Harness-Android) | Android APK shell fork of kelai141/dsh-mobile-apk — WebView UI + Termux runtime snapshot, SAF bridge, watchdog, OTA updates. MIT dual-attribution. / DSH 安卓壳（kelai141 基础上二次开发）：WebView UI + Termux 运行时快照、SAF 目录桥、看门狗、OTA 在线更新。 |
+| ⭐ 0 | [DshMarketPlace/dshmarketplace](https://github.com/DshMarketPlace/dshmarketplace) | Bilingual directory of DSH plugins — 1,004 listings, written detail pages, public API. Next.js on Cloudflare Workers. / DSH 插件双语目录：1,004 条收录、详细页面、公开 API，Next.js + Cloudflare Workers 托管。 |
+| ⭐ 2 | [dingzhenyao/dsh-plugin-directory](https://github.com/dingzhenyao/dsh-plugin-directory) | DSH Web GUI plugin: browsable, searchable, stats-driven directory of GitHub dsh-plugin topic plugins with CDN hot update and live search. / DSH Web GUI 插件：可浏览、可搜索、带统计的 GitHub DSH 插件目录，CDN 热更新与实时搜索。 |
+| ⭐ 0 | [goesByhc/dsh-unity-debug-bridge](https://github.com/goesByhc/dsh-unity-debug-bridge) | DSH ↔ Unity Editor breakpoint debugging bridge — MCP server (stdio) exposes Unity Editor managed-code debugging to DSH agents. / DSH ↔ Unity 编辑器断点调试桥：MCP server（stdio）把 Unity 托管代码调试能力暴露给 DSH Agent。 |
+| ⭐ 1 | [openma-ai/dsh-agents-plugins](https://github.com/openma-ai/dsh-agents-plugins) | Bridge your Codex or Claude Code plugin to DeepSeek Harness. / 将 Codex 或 Claude Code 插件桥接到 DSH。 |
 
 ---
 
@@ -1022,6 +1039,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [xuhaiL/game-ceanter](https://github.com/xuhaiL/game-ceanter) | Mini-games made with DeepSeek Harness. / 使用 DSH 制作的小游戏。 |
 | ⭐ 3 | [JuneLearn/dsh-image2-draw](https://github.com/JuneLearn/dsh-image2-draw) | DeepSeek Harness Image2 image generation plugin — call gpt-image-2 via OpenAI-compatible interface with custom baseURL and API Key. / DSH Image2 生图插件：通过第三方 OpenAI Images 兼容接口调用 gpt-image-2，配置 baseURL 和 API Key 即可。 |
 | ⭐ 1 | [ylwl1997/dshbase](https://github.com/ylwl1997/dshbase) | DSH base: guides and plugin ecosystem index for DeepSeek Harness. / DSH 基础指南与插件生态索引。 |
+
+| ⭐ 9 | [LaplaceYoung/dsh-directorx](https://github.com/LaplaceYoung/dsh-directorx) | DirectorX as a DeepSeek Harness plugin — AI video/image/audio skills, knowledge corpus, configurable vision/image/video/audio model tools. / DirectorX DSH 插件：AI 视频/图片/音频技能、知识库、可配置视听模型工具。 |
 
 ---
 
@@ -1431,15 +1450,15 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~1015+** |
+| Curated & validated entries / 精选收录 | **~1035+** |
 | Highest-starred plugin / 最高 Star 插件 | [nexu-io/open-design](https://github.com/nexu-io/open-design) ⭐ 88k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-17 · +3 new resources added across 3 categories, ~9 star counts refreshed · Source: GitHub Search API + gh CLI verified · dsh-plugin topic contains 2,700+ repos, curated ~1015+*
-*最后更新：2026-08-17 · 本轮新增 3 个资源（3 个类目），~9 个 Star 数刷新 · 数据来源：GitHub Search API + gh CLI 验证 · dsh-plugin topic 共 2,700+ 仓库，精选收录约 1012+ 个*
+*Last updated: 2026-08-17 · Cycle 56 — +20 new resources across 7 categories, curated count ~1035+*
+*最后更新：2026-08-17 · Cycle 56 — 本轮新增 20 个资源（7 个类目），精选收录约 1035+ 个*
 
 ---
 
