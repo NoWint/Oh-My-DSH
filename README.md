@@ -1,7 +1,7 @@
 # Oh-My-DSH — DeepSeek Harness Plugin Ecosystem
 
 > **Data source:** GitHub `dsh-plugin` topic + `deepseek-harness` keyword search, as of 2026-08-17
-> **数据来源：** GitHub `dsh-plugin` topic + `deepseek-harness` 关键词搜索，截至 2026-08-17
+> **数据来源：** GitHub `dsh-plugin` topic + `deepseek-harness` 关键词搜索，截至 2026-08-20
 > The `dsh-plugin` topic contains **2,700+** repositories; this is a curated subset organized by category and stars.
 > `dsh-plugin` topic 共 **2,700+** 个仓库，以下为按类别和 Star 精选的子集。
 
@@ -45,7 +45,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Highest-starred plugin / 最高 Star 插件 | [nexu-io/open-design](https://github.com/nexu-io/open-design) ⭐ 88k |
 | Primary languages / 主要语言 | TypeScript · JavaScript · Python |
 | Categories covered / 覆盖类目 | **20** (see Table of Contents) |
-| Last full scan / 最近扫描 | 2026-08-17 · **+27 new** resources across **9** categories, **~15** star counts refreshed |
+| Last full scan / 最近扫描 | 2026-08-20 · **+2 new** resources across **1** category, **~3** star counts refreshed |
 
 ---
 
@@ -1175,6 +1175,8 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 4 | [dhicoc/dsh-reverse-skill](https://github.com/dhicoc/dsh-reverse-skill) | Complete reverse-skill (85 SKILL.md) as a DSH Cordis plugin — offline/air-gapped skill pack for any DSH environment. / DSH Cordis 插件版逆向技能：85 个 SKILL.md，离线可用，适配任意 DSH 环境。 |
 | ⭐ 4 | [dhicoc/dsh-chinese-traditional-wisdom-skill](https://github.com/dhicoc/dsh-chinese-traditional-wisdom-skill) | Chinese traditional wisdom AI skill bundle for DSH: 八字/紫微/六爻/梅花/奇门/风水/五运六气/体质 with local deterministic engine + visualization dashboard. / DSH 中华传统智慧技能包：八字/紫微/六爻/梅花/奇门/风水/五运六气/体质，本地确定性引擎 + 可视化 Dashboard。 |
 | ⭐ 1 | [Bcy2020/dsh-cc-ecosystem](https://github.com/Bcy2020/dsh-cc-ecosystem) | Let DSH use the full Claude Code suite: skills, commands, rules, permissions, sub-agents, hooks — .claude/ assets loaded as-is, full compatibility in progress. / DSH 接入 Claude Code 全家桶：技能/命令/规则/权限/子代理/hooks，.claude/ 资产原样加载，全兼容进行中。 |
+| ⭐ 41705 | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | Write HTML. Render video. Built for agents — agent-native video framework: HTML → MP4 with GSAP animations, Puppeteer, FFmpeg. Integrated by open-design as DSH MCP skill. / Agent 原生视频框架：HTML 生成 + GSAP 动画 + Puppeteer + FFmpeg 输出 MP4，被 open-design 作为 MCP Skill 集成。 |
+| ⭐ 27339 | [Tiger3807861189/J-Space-Cognition-Suite-V3.6](https://github.com/Tiger3807861189/J-Space-Cognition-Suite-V3.6) | J-Space Cognition Suite: AI cognitive-enhancement Skills based on Anthropic's J-space global workspace research — inference-time control, cognitive activation, structured reasoning boost. DSH-compatible. / J-Space 认知增强技能：基于 Anthropic J-space 全局工作空间研究，推理时控制+认知激活+结构化推理增强，DSH 兼容。 |
 | ⭐ 2 | [wellorbetter/dsh-product-delivery-workflow](https://github.com/wellorbetter/dsh-product-delivery-workflow) | 100% AI-native product delivery workflow: research → PRD → OpenSpec → parallel multi-agent → review loops → tests → release audit, fully closed-loop. / 100% AI 原生产品交付工作流：从研究到发布全流程闭环，自带闭环验证。 |
 | ⭐ 3 | [Relistencode/dsh-extension-hub](https://github.com/Relistencode/dsh-extension-hub) | CLI + settings-page UI for managing DSH skills and MCP servers with zh/en i18n and Claude/Codex import compatibility. / DSH 技能与 MCP 服务器管理面板：CLI + 设置页 UI，中英双语，支持 Claude/Codex 导入。 |
 | ⭐ 4 | [minivv/dsh-agent-skills](https://github.com/minivv/dsh-agent-skills) | Discover and manage Agent Skills inside DeepSeek Harness Web UI. / 在 DSH Web UI 中发现和管理 Agent 技能。 |
