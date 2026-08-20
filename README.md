@@ -38,14 +38,14 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | `dsh-plugin` topic total / 话题总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~1043+** |
+| Curated & validated entries / 精选收录 | **~1058+** |
 | Data sources scanned / 扫描数据源 | **6** (GitHub · GitLab · Hacker News · Lobsters · Stack Exchange · Reddit) |
 | Update frequency / 更新频率 | **Hourly** (LaunchAgent, 3600s interval) |
 | Validation classification / 验证分级 | **4-tier**: validated · probable · lead · rejected |
 | Highest-starred plugin / 最高 Star 插件 | [nexu-io/open-design](https://github.com/nexu-io/open-design) ⭐ 88k |
 | Primary languages / 主要语言 | TypeScript · JavaScript · Python |
 | Categories covered / 覆盖类目 | **20** (see Table of Contents) |
-| Last full scan / 最近扫描 | 2026-08-20 · **+8 new** resources across **4** categories, **~6** star counts refreshed |
+| Last full scan / 最近扫描 | 2026-08-20 · **+15 new** resources across **3** categories, **~6** star counts refreshed |
 
 ---
 
@@ -840,6 +840,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 138 | [humblebanana/open-record-replay](https://github.com/humblebanana/open-record-replay) | Open-source macOS record-and-replay framework for computer-use agents: captures mouse/keyboard/UI as structured traces so agents can learn and replay real desktop tasks. / 开源 macOS 录制回放框架：结构化捕获鼠标/键盘/UI 事件，供 Agent 学习与重放真实桌面任务。 |
 | ⭐ 5 | [KirschBluteX/engineer-software](https://github.com/KirschBluteX/engineer-software) | Runtime-neutral, evidence-driven software engineering workflow for Codex and DeepSeek Harness. / 运行时中立的证据驱动软件工程工作流，支持 Codex 与 DSH。 |
 | ⭐ 1 | [fangweixuan26-hash/dsh-a2a-agent](https://github.com/fangweixuan26-hash/dsh-a2a-agent) | Expose a DeepSeek Harness agent over the Agent2Agent (A2A) protocol: agent card, JSON-RPC, LLM replies. / 将 DSH Agent 暴露为 A2A 协议服务：agent card、JSON-RPC、LLM 回复。 |
+| ⭐ 5 | [dpskh/dsh-a2a](https://github.com/dpskh/dsh-a2a) | Agent2Agent mesh for DeepSeek Harness — connect multiple DSH agents into a peer-to-peer task-delegation network. / DSH A2A 网络：多 DSH Agent 点对点任务委托网络。 |
 | ⭐ 2 | [LomoMao/delegate-to-deepseek-harness](https://github.com/LomoMao/delegate-to-deepseek-harness) | Codex Agent Skill: delegate bounded coding work to DeepSeek Harness, then continue independently — cross-agent handoff with session isolation. / Codex Agent 技能：将有限编码任务委托给 DSH，完成后独立继续——跨 Agent 交接与会话隔离。 |
 | ⭐ 8 | [cosyncing/cosyncing](https://github.com/cosyncing/cosyncing) | Synchronize and orchestrate agents from CLI to GUI, across desktop to phone. / 跨桌面到手机同步编排 Agent：CLI 到 GUI 的 Agent 协同。 |
 | ⭐ 0 | [CriscolTheCoder/dsh-workflow-groups](https://github.com/CriscolTheCoder/dsh-workflow-groups) | Workflow groups kanban: each grouped workflow gets an independent tab showing status/stage/subagent/logs in real time. / 分组工作流看板：每个分组 workflow 独立标签页实时展示状态/阶段/子 agent/日志。 |
@@ -857,6 +858,10 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 2 | [dingzhenyao/dsh-plugin-directory](https://github.com/dingzhenyao/dsh-plugin-directory) | DSH Web GUI plugin: browsable, searchable, stats-driven directory of GitHub dsh-plugin topic plugins with CDN hot update and live search. / DSH Web GUI 插件：可浏览、可搜索、带统计的 GitHub DSH 插件目录，CDN 热更新与实时搜索。 |
 | ⭐ 0 | [goesByhc/dsh-unity-debug-bridge](https://github.com/goesByhc/dsh-unity-debug-bridge) | DSH ↔ Unity Editor breakpoint debugging bridge — MCP server (stdio) exposes Unity Editor managed-code debugging to DSH agents. / DSH ↔ Unity 编辑器断点调试桥：MCP server（stdio）把 Unity 托管代码调试能力暴露给 DSH Agent。 |
 | ⭐ 1 | [openma-ai/dsh-agents-plugins](https://github.com/openma-ai/dsh-agents-plugins) | Bridge your Codex or Claude Code plugin to DeepSeek Harness. / 将 Codex 或 Claude Code 插件桥接到 DSH。 |
+| ⭐ 0 | [satan9394/dsh-workflow-loop](https://github.com/satan9394/dsh-workflow-loop) | Delegatable workflow design skill: loop perspective and specs for complex task orchestration inspired by mattpocock/skills. / 可委托工作流设计技能：复杂任务编排的循环视角与规格说明。 |
+| ⭐ 0 | [Linxiushen/dsh-workflow-isolate](https://github.com/Linxiushen/dsh-workflow-isolate) | QuickJS/WASM-isolated workflow engine for DSH: bounded resource controls for running untrusted agent code safely. / DSH QuickJS/WASM 隔离工作流引擎：为安全运行不可信 Agent 代码提供 bounded 资源控制。 |
+| ⭐ 1 | [hccccc01333/dsh-eval](https://github.com/hccccc01333/dsh-eval) | Agent evaluation platform for DSH: benchmark YAML, headless DSH orchestration, trace-based metrics, LLM judge, paired A/B replay. / DSH Agent 评测平台：benchmark YAML、headless 编排、基于 trace 的指标、LLM 评判、配对 A/B 回放。 |
+| ⭐ 0 | [usersx/dsh-automation-center](https://github.com/usersx/dsh-automation-center) | Global Automation Center for DeepSeek Harness: manage scheduled and event-triggered automation tasks from a unified UI. / DSH 全局自动化中心：统一 UI 管理定时和事件触发的自动化任务。 |
 
 ---
 
@@ -1015,6 +1020,15 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 60 | [JingbiaoMei/Tokdash](https://github.com/JingbiaoMei/Tokdash) | Agent Dashboard: visualization and analytics for Sessions and Quota Usage — token heatmaps, cost tracking, per-model breakdown, quota resets. Day 1 DSH support. / Agent 仪表板：会话与配额用量的可视化分析，token 热力图、成本追踪、按模型明细、额度重置，首日支持 DSH。 |
 | ⭐ 0 | [Anlushu/hkinsure](https://github.com/Anlushu/hkinsure) | Hong Kong insurance data MCP: 260+ real products, 17 insurers, dividend realization rates calibrated by industry experience. / 香港保险数据 MCP：260+ 真实产品、17 家保司、分红实现率行业校准。适用于 Hermes/dsh/Claude Code。 |
 | ⭐ 63 | [Vladimir-Human/ru-marketplace-mcp](https://github.com/Vladimir-Human/ru-marketplace-mcp) | Nine Russian marketplaces + Taobao as MCP servers: Wildberries, Ozon, Yandex Market, Avito, Lamoda etc. Price comparison built-in. / 九俄罗斯电商+淘宝 MCP 服务器：Wildberries/Ozon/Avito 等，内置比价。读权限，无需 key。 |
+| ⭐ 0 | [gitsang/dsh-game](https://github.com/gitsang/dsh-game) | Texas Hold'em poker game for DSH Web: token-to-chip exchange, WebSocket room server, AI opponents via ctx.llm.stream(). / DSH Web 德州扑克：Token换筹码、WebSocket房间服务器、AI对手。 |
+| ⭐ 6 | [ForgeaX-Games/forgeax-dsh-game-plugin](https://github.com/ForgeaX-Games/forgeax-dsh-game-plugin) | Game development bundle plugin for DSH: @forgeax/game MCP server + bundled ForgeaX Skills + workspace guard for game dev workflows. Published as @forgeax/dsh-game on npm. / DSH 游戏开发 bundle：@forgeax/game MCP server + ForgeaX Skills + 工作区守卫，npm 发布。 |
+| ⭐ 2 | [hackerFish/dsh-video-studio](https://github.com/hackerFish/dsh-video-studio) | 鲸影 DSH Video Studio: six-stage director pipeline, multi-provider free quota scheduling, four-layer prompt self-optimization for video/animation generation. / 六段导演流水线、多供应商免费额度调度、四层提示词自优化的视频/动画生成插件。 |
+| ⭐ 2 | [zimai233/dsh-video-downloader](https://github.com/zimai233/dsh-video-downloader) | Media downloader plugin for DSH: detect and download video/audio from Bilibili, YouTube, Douyin, Xiaohongshu. / DSH 媒体下载插件：检测并下载 B 站、YouTube、抖音、小红书的视频/音频。 |
+| ⭐ 0 | [ilps2/dsh-video-understand](https://github.com/ilps2/dsh-video-understand) | Low-cost video understanding for DSH: Bilibili/local video → AVIS info layer → summary + Q&A with 99.95%+ token compression. / 低成本视频理解：B站/本地视频 → AVIS信息层 → 摘要+Q&A，Token压缩率99.95%+。 |
+| ⭐ 0 | [1090826715/dsh-video-digest](https://github.com/1090826715/dsh-video-digest) | Video URL to structured Markdown notes: yt-dlp download → ffmpeg keyframes → SenseVoice transcription → Qwen3-VL visual → LLM summary. / 视频URL转结构化Markdown笔记：yt-dlp下载 → ffmpeg关键帧 → SenseVoice转写 → Qwen3-VL视觉 → LLM摘要。 |
+| ⭐ 0 | [chuankris/dsh-video-factory](https://github.com/chuankris/dsh-video-factory) | Vertical science video full-production pipeline: expert copywriting, TTS, infographic animation, Live2D avatar, sound effects, Douyin cover/text. / 垂直科普视频全流程生产线：专家文案、TTS、信息图动画、Live2D形象、音效、抖音封面/文案。 |
+| ⭐ 1 | [swhje/dsh-video-wallpaper](https://github.com/swhje/dsh-video-wallpaper) | DSH Web UI dynamic wallpaper plugin: 44 built-in MP4 loops + 5 wallpaper backgrounds + dark mode auto-switch + preference persistence. / DSH Web UI 动态壁纸插件：44个内置MP4循环 + 5个壁纸背景 + 暗色模式自动切换 + 偏好持久化。 |
+| ⭐ 13 | [dundunhan/dsh-video-lens](https://github.com/dundunhan/dsh-video-lens) | Multi-format video understanding for DSH: extract structured insights, frame analysis, and Q&A from video files and streams. / DSH 多格式视频理解：从视频文件和流中提取结构化洞察、帧分析和问答。 |
 
 ---
 
@@ -1126,6 +1140,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 7 | [hyqhyq3/dsh-mcp-manager](https://github.com/hyqhyq3/dsh-mcp-manager) | Settings → MCP page with OAuth PKCE + dynamic client registration for DSH MCP servers — full server CRUD and tool testing from GUI. / Settings → MCP 管理页：OAuth PKCE + 动态客户端注册，完整服务器 CRUD 与工具测试。 |
 | ⭐ 2 | [KYinCode/dsh-project-mcp-bridge](https://github.com/KYinCode/dsh-project-mcp-bridge) | Per-project MCP loading: drop a .dsh/mcp.json into a project and its sessions get MCP tools automatically with live config reload. / 按项目加载 MCP：在项目目录放置 .dsh/mcp.json 即可自动注入 MCP 工具并实时重载配置。 |
 | ⭐ 0 | [863683348/dsh-need-finder](https://github.com/863683348/dsh-need-finder) | Requirement-driven DSH plugin discovery (点菜, not 逛超市): plugin_guide tool matches natural-language needs to a curated plugin directory with reasons and install commands. / 需求驱动 DSH 插件发现：plugin_guide 工具将自然语言需求匹配到精选插件目录，附推荐理由和安装命令。 |
+| ⭐ 25 | [Mr-potato-123/dsh-mcp](https://github.com/Mr-potato-123/dsh-mcp) | Turn DSH into an MCP server: expose agent tools and context so Claude Code, Codex, or any MCP client can use DSH-native tools and skills. / 将 DSH 变为 MCP 服务器：向 Claude Code、Codex 或任意 MCP 客户端暴露 DSH 原生工具和技能。 |
 
 ---
 
@@ -1471,14 +1486,14 @@ Discovery is intentionally bounded to the configured source adapters and their r
 | Metric / 指标 | Value / 数值 |
 |---|---|
 | Total dsh-plugin repos / 总仓库数 | **2,700+** |
-| Curated & validated entries / 精选收录 | **~1043+** |
+| Curated & validated entries / 精选收录 | **~1058+** |
 | Highest-starred plugin / 最高 Star 插件 | [nexu-io/open-design](https://github.com/nexu-io/open-design) ⭐ 88k |
 | Primary languages / 主要语言 | TypeScript / JavaScript / Python |
 | Most active maintainers / 核心维护者 | [omdsh-dev](https://github.com/omdsh-dev), [vlln](https://github.com/vlln), [Anionex](https://github.com/Anionex), [Nagi-ovo](https://github.com/Nagi-ovo) |
 
 ---
 
-*Last updated: 2026-08-17 · Cycle 56 — +20 new resources across 7 categories, curated count ~1035+*
+*Last updated: 2026-08-20 · Cycle 57 — +15 new resources across 3 categories (Infrastructure/MCP, Multi-Agent & Workflows, Entertainment), curated count ~1058+*
 *最后更新：2026-08-17 · Cycle 56 — 本轮新增 20 个资源（7 个类目），精选收录约 1035+ 个*
 
 ---
