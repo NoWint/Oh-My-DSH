@@ -45,7 +45,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | Highest-starred plugin / 最高 Star 插件 | [nexu-io/open-design](https://github.com/nexu-io/open-design) ⭐ 88k |
 | Primary languages / 主要语言 | TypeScript · JavaScript · Python |
 | Categories covered / 覆盖类目 | **20** (see Table of Contents) |
-| Last full scan / 最近扫描 | 2026-08-20 · **+15 new** resources across **3** categories, **~6** star counts refreshed |
+| Last full scan / 最近扫描 | 2026-08-20 · **+20 new** resources across **5** categories, **~6** star counts refreshed |
 
 ---
 
@@ -300,6 +300,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 1 | [iluluyu/dsh-plugin-outline](https://github.com/iluluyu/dsh-plugin-outline) | ChatGPT-style right-edge turn navigation plugin for DeepSeek Harness web — swipe-like navigation between turns. / DSH Web ChatGPT 风格右边缘回合导航插件：类滑动切换对话回合。 |
 | ⭐ 16 | [ht426/deepseek-harness-tui](https://github.com/ht426/deepseek-harness-tui) | Terminal TUI for DeepSeek Harness — convenient for developers to use directly in terminal. / 为 DeepSeek Harness 打造的终端 TUI，方便开发者直接在终端使用。 |
 | ⭐ 0 | [omdsh-dev/dsh-tui](https://github.com/omdsh-dev/dsh-tui) | Terminal UI front door for DeepSeek Harness (dsh) — Cordis plugin over pi-tui: transcript, tool cards, overlays, slash commands, agent presets, themes. / DSH 终端 UI 入口：基于 pi-tui 的 Cordis 插件，含会话记录、工具卡片、覆盖层、斜杠命令、Agent 预设和主题。 |
+| ⭐ 1 | [dsh-tui-ecosystem/dsh-tui-ecosystem](https://github.com/dsh-tui-ecosystem/dsh-tui-ecosystem) | dsh-TUI community ecosystem — plugin templates, catalog, and shared tooling for building DSH terminal interfaces. / dsh-TUI 社区生态：插件模板、目录与共享工具，赋能 DSH 终端界面构建。 |
 
 ---
 
@@ -565,11 +566,13 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 8 | [DDDMUC/dsh-free-search](https://github.com/DDDMUC/dsh-free-search) | Free web search provider for DeepSeek Harness — DuckDuckGo backend, no API key needed. / DSH 免费网页搜索提供者，DuckDuckGo 后端，无需 API Key。 |
 | ⭐ 15 | [omdsh-dev/dsh-toolkit](https://github.com/omdsh-dev/dsh-toolkit) | Zero-dependency toolkit: time / encoding / json / calculator / csv / regex / markdown / diff / stat / schema. / 零依赖工具包：time/encoding/json/calculator/csv/regex/markdown/diff/stat/schema。 |
 | ⭐ 17 | [omdsh-dev/dsh-plugin-check](https://github.com/omdsh-dev/dsh-plugin-check) | Plugin health check: scan manifest protocol / patch format / build traps / hub listing status. / 插件健康检查：扫描清单协议/patch格式/构建陷阱/hub收录状态。 |
+| ⭐ 24 | [omdsh-dev/dsh-custom-tool](https://github.com/omdsh-dev/dsh-custom-tool) | Create/sandbox JavaScript tools with Monaco editor and model-driven lifecycle. / Monaco 编辑器创建/沙箱化 JavaScript 工具，模型驱动生命周期。 |
 | ⭐ 4 | [Airmetro/dsh-update-checker](https://github.com/Airmetro/dsh-update-checker) | Whole-stack update management for DeepSeek Harness: dual-source semver checks, locale-aware GUI banner, one-click updates with backup/rollback and watchdog-guarded restart. / DSH 全栈更新管理：双源 semver 比对、本地化 GUI 横幅、一键更新含备份回滚与看门狗重启。 |
 | ⭐ 2 | [GHJIVHIDD/dsh-plugin-vm-sandbox](https://github.com/GHJIVHIDD/dsh-plugin-vm-sandbox) | VM sandbox plugin for DSH Web: per-session isolated debian/alpine VMs via OrbStack with vm_list/vm_create/vm_exec/vm_delete tools, idle auto-sleep and auto-cleanup. / DSH Web 虚拟机沙盒插件：基于 OrbStack 的会话级隔离 VM，含管理工具与自动休眠清理。 |
 | ⭐ 4 | [Luke-Yong/dsh-plugin-knowledge-graph](https://github.com/Luke-Yong/dsh-plugin-knowledge-graph) | DSH knowledge graph plugin — visualizes project context as an interactive graph with fact/inference/concept nodes and two-way linking. / DSH 知识图谱插件：可视化项目上下文为交互式图谱，支持事实/推论/概念节点双向链接。 |
 | ⭐ 50 | [vlln/plugin-registry](https://github.com/vlln/plugin-registry) | Plugin ecosystem infrastructure: browser panel for official repo plugins + make-dsh-plugin skill. / 插件生态基建：浏览器面板管理官方 repo 插件 + make-dsh-plugin skill。 |
 | ⭐ 9 | [omdsh-dev/dsh-session-health](https://github.com/omdsh-dev/dsh-session-health) | Frame-level zstd scan for DSH session files — detects torn/damaged/empty sessions; zero-dependency read-only tool registration. / DSH 会话文件帧级扫描：检测破损/空会话，零依赖只读工具。 |
+| ⭐ 11 | [omdsh-dev/dsh-llm-fallbacks](https://github.com/omdsh-dev/dsh-llm-fallbacks) | Role-based LLM retry/fallback strategy plugin — configure per-role model hierarchies with automatic fallback on errors/timeouts. / 基于角色的 LLM 重试/降级策略插件：配置每个角色对应的模型层级，支持错误/超时自动降级。 |
 | ⭐ 7 | [Zephyr-vibe/dsh-archived-sessions](https://github.com/Zephyr-vibe/dsh-archived-sessions) | DSH Session Manager: manage conversations, archive/restore, delete safely, open record folders from the Web UI. / DSH 会话管理：归档/恢复/安全删除、打开记录文件夹。 |
 | ⭐ 5 | [fakechris/dsh-harness-ops](https://github.com/fakechris/dsh-harness-ops) | DSH ops toolbox: A/B dual-slot upgrades, guardian daemon, one-command self-healing doctor. / DSH 运维工具箱：A/B 双槽升级、守护进程、一键自愈。 |
 | ⭐ 3 | [omdsh-dev/dsh-tool-turbo](https://github.com/omdsh-dev/dsh-tool-turbo) | Per-round reasoning_effort optimizer: auto-downgrades tool-call reasoning for simple chains. / Per-round reasoning_effort 优化器：简单工具链自动降级思考。 |
@@ -1011,6 +1014,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 22 | [feiyang-dev/dsh-usage-plugin](https://github.com/feiyang-dev/dsh-usage-plugin) | DeepSeek Harness usage & cost plugin — per-call token count, cache-hit stats, peak/off-peak billing, balance check, CSV/JSON/PNG export. Desktop one-click install. / DSH 用量消耗插件：逐次调用 token 统计、缓存命中、峰谷计费、余额查询，支持 CSV/JSON/PNG 导出。 |
 | ⭐ 6 | [Nanki-nn/dsh-answer-pet](https://github.com/Nanki-nn/dsh-answer-pet) | Answer pet: animated companion that responds to DSH agent interactions with contextual feedback. / 回答宠物：随 DSH Agent 交互做出响应反馈的动画陪伴。 |
 | ⭐ 4 | [Smalldy/godot-bridge](https://github.com/Smalldy/godot-bridge) | DSH plugin that launches and drives a running Godot 4.x game through it — agent-controlled game automation. / DSH 与 Godot 4.x 游戏桥接：通过 DSH Agent 启动并控制运行中的 Godot 游戏。 |
+| ⭐ 2 | [Fromlan/dsh-godot-tool](https://github.com/Fromlan/dsh-godot-tool) | TCP JSON-lines bridge to Godot 4.x Editor TCP server — 27 godot_* RPC tools for scene control, node traversal, and script evaluation. / DSH 到 Godot 4.x 编辑器 TCP 服务器的 JSON-lines 桥接，提供 27 个 godot_* RPC 工具用于场景控制、节点遍历和脚本执行。 |
 | ⭐ 2 | [LemCAE/dsh-balance](https://github.com/LemCAE/dsh-balance) | Account balance + session cost estimation for DeepSeek Harness. / DSH 账户余额与会话费用估算插件。 |
 | ⭐ 17 | [Francis-Xavier-code/dsh-balance-plugin](https://github.com/Francis-Xavier-code/dsh-balance-plugin) | Dynamic Cordis plugin: balance monitoring · official recharge portal · usage statistics · third-party plugin management. / DSH 动态余额监控插件：余额监控、官方充值入口、用量统计与三方插件管理。 |
 | ⭐ 1 | [ArcanePivot/dsh-api-balance](https://github.com/ArcanePivot/dsh-api-balance) | DeepSeek API balance widget for DSH Web UI — view balance from the host side. / DSH Web UI API 余额组件：从主机侧查看 DeepSeek API 余额。 |
@@ -1299,6 +1303,7 @@ That's it. Every hour the pipeline scans 6 data sources, validates plugins again
 | ⭐ 3 | [renat3u/dsh-web-archive](https://github.com/renat3u/dsh-web-archive) | Collapse "useless messages" (Think, Bash, etc.) in conversations. / 折叠"无用消息"（Think/Bash 等）。 |
 | ⭐ 3 | [icodesign/orbis](https://github.com/icodesign/orbis) | Mobile client for DeepSeek Harness remote control. / DeepSeek Harness 远程控制移动客户端。 |
 | ⭐ 3 | [btspoony/dsh-advisor](https://github.com/btspoony/dsh-advisor) | Pair a second model that passively reviews each turn and injects notes. / 第二模型配对：每轮被动注入见解与审查。 |
+| ⭐ 13 | [omdsh-dev/dsh-advisor](https://github.com/omdsh-dev/dsh-advisor) | Pair a second model that passively reviews each turn and injects notes — version with configurable model tiers and automatic turn sampling. / 第二模型配对插件，可配置模型层级与自动轮次采样。 |
 | ⭐ 3 | [SnowCrescenter-tech/dsh-milestone](https://github.com/SnowCrescenter-tech/dsh-milestone) | Git-style milestone timeline: hover for metadata, click to jump to any message. / Git 风格里程碑时间线：悬停看元数据，点击跳转。 |
 | ⭐ 3 | [HuanLinOTO/dsh-plugin-sleep](https://github.com/HuanLinOTO/dsh-plugin-sleep) | sleep tool: pause for specified ms then return, with cancellation/clamping support. / sleep 工具：指定毫秒暂停后返回，支持取消。 |
 | ⭐ 3 | [HuanLinOTO/dsh-plugin-interpreters](https://github.com/HuanLinOTO/dsh-plugin-interpreters) | run_python/run_node tools that execute code via stdin, with interpreter-path config. / run_python/run_node 工具，stdin 执行代码。 |
